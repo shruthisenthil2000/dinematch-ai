@@ -12,7 +12,7 @@ _SRC = _REPO / "src"
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
-from phase2.app import create_app  # noqa: E402
+from app import create_app  # noqa: E402
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5050"))
