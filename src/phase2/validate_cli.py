@@ -12,7 +12,7 @@ _SRC = _REPO / "src"
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
-from preferences.schema_validate import validate_preferences  # noqa: E402
+from src.phase2.preferences.schema_validate import validate_preferences  # noqa: E402
 
 
 def main() -> int:
