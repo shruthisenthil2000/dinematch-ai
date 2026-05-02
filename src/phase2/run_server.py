@@ -12,7 +12,7 @@ _SRC = _REPO / "src"
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
-from app import create_app  # noqa: E402
+from src.phase2.app import create_app  # noqa: E402
 
 app = create_app()
 
