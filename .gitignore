@@ -11,3 +11,5 @@ phase1/output/
 
 phase2/.venv/
 phase2/__pycache__/
+node_modules/
+.next/
