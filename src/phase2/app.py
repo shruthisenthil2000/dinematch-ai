@@ -6,8 +6,8 @@ from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request, url_for
 
-from preferences.form_parse import build_preferences_from_form
-from preferences.schema_validate import validate_preferences
+from src.phase2.preferences.form_parse import build_preferences_from_form
+from src.phase2.preferences.schema_validate import validate_preferences
 
 _PHASE2_ROOT = Path(__file__).resolve().parent
 
