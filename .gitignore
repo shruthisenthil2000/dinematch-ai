@@ -15,3 +15,7 @@ node_modules/
 .next/
 node_modules/
 phase7-nextjs/node_modules/
+node_modules/
+.next/
+.env
+.DS_Store
