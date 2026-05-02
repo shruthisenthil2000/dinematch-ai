@@ -14,6 +14,13 @@ if str(_SRC) not in sys.path:
 
 from app import create_app  # noqa: E402
 
+app = create_app()
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5050"))
-    create_app().run(host="127.0.0.1", port=port, debug=os.environ.get("FLASK_DEBUG") == "1")
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=False,
+        use_reloader=False,
+    )
