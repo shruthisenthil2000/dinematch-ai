@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Restaurant Recommendations</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #4b5563;
+      --border: #d1d5db;
+      --primary: #1d4ed8;
+      --primary-soft: #dbeafe;
+      --success-soft: #ecfdf5;
+      --danger-soft: #fef2f2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1.25rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    h1 { margin: 0 0 0.25rem; }
+    p { margin: 0.25rem 0; color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+    label { font-weight: 600; font-size: 0.95rem; }
+    input, select, textarea {
+      margin-top: 0.35rem;
+      width: 100%;
+      padding: 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font: inherit;
+      background: #fff;
+    }
+    .inline { display: flex; gap: 0.65rem; align-items: center; }
+    .actions { margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      cursor: pointer;
+      font-weight: 600;
+      background: var(--primary);
+      color: #fff;
+    }
+    button.secondary { background: #374151; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .msg {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: none;
+      white-space: pre-wrap;
+    }
+    .msg.show { display: block; }
+    .msg.error { background: var(--danger-soft); border-color: #fecaca; }
+    .msg.ok { background: var(--success-soft); border-color: #a7f3d0; }
+    .summary {
+      padding: 0.75rem;
+      background: var(--primary-soft);
+      border: 1px solid #93c5fd;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      display: none;
+    }
+    .cards { display: grid; gap: 0.75rem; }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem;
+      background: #fff;
+    }
+    .card h3 { margin: 0 0 0.35rem; }
+    .meta { color: var(--muted); font-size: 0.92rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.45rem 0; }
+    .chip {
+      font-size: 0.82rem;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      background: #eff6ff;
+      border-radius: 999px;
+      padding: 0.15rem 0.55rem;
+    }
+    .obs {
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    code { background: #f3f4f6; padding: 0.1rem 0.3rem; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel">
+      <h1>Phase 6 Frontend</h1>
+      <p>Collects preferences and calls same-origin <code>/api/recommend</code> (proxied to <code>{{ api_base }}/api/recommend</code>).</p>
+      <p>Shows loading, validation errors, empty results, and ranked recommendation cards.</p>
+    </section>
+
+    <section class="panel">
+      <form id="prefs-form">
+        <div class="grid">
+          <div>
+            <label for="location">Location</label>
+            <input id="location" name="location" required placeholder="e.g. Bellandur" />
+          </div>
+          <div>
+            <label for="budget">Budget</label>
+            <select id="budget" name="budget" required>
+              <option value="low">low</option>
+              <option value="medium">medium</option>
+              <option value="high">high</option>
+            </select>
+          </div>
+          <div>
+            <label for="min_rating">Min rating (0-5)</label>
+            <input id="min_rating" name="min_rating" type="number" min="0" max="5" step="0.1" value="4.0" required />
+          </div>
+          <div>
+            <label for="top_n">Top N</label>
+            <input id="top_n" name="top_n" type="number" min="1" max="20" value="5" required />
+          </div>
+          <div>
+            <label for="cap">Candidate cap</label>
+            <input id="cap" name="cap" type="number" min="1" max="100" value="25" required />
+          </div>
+          <div>
+            <label for="cuisines">Cuisines (comma separated)</label>
+            <input id="cuisines" name="cuisines" placeholder="Italian, Chinese" />
+          </div>
+        </div>
+
+        <div style="margin-top:0.75rem;">
+          <label for="optional_constraints">Optional constraints</label>
+          <textarea id="optional_constraints" name="optional_constraints" rows="3" placeholder="e.g. around INR 2000 for two"></textarea>
+        </div>
+
+        <div class="inline" style="margin-top:0.65rem;">
+          <input id="use_llm" name="use_llm" type="checkbox" checked style="width:auto; margin:0;" />
+          <label for="use_llm" style="font-weight:500;">Use live LLM (uncheck for deterministic fallback)</label>
+        </div>
+
+        <div class="actions">
+          <button id="submit-btn" type="submit">Get recommendations</button>
+          <button class="secondary" type="button" id="demo-btn">Load Bellandur demo</button>
+        </div>
+      </form>
+      <div id="message" class="msg"></div>
+    </section>
+
+    <section class="panel">
+      <div id="summary" class="summary"></div>
+      <div id="cards" class="cards"></div>
+      <div id="obs" class="obs"></div>
+    </section>
+  </main>
+
+  <script>
+    const API_BASE = "";
+    const form = document.getElementById('prefs-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const demoBtn = document.getElementById('demo-btn');
+    const messageEl = document.getElementById('message');
+    const cardsEl = document.getElementById('cards');
+    const summaryEl = document.getElementById('summary');
+    const obsEl = document.getElementById('obs');
+
+    function setMessage(text, kind) {
+      if (!text) {
+        messageEl.className = 'msg';
+        messageEl.textContent = '';
+        return;
+      }
+      messageEl.className = `msg show ${kind === 'error' ? 'error' : 'ok'}`;
+      messageEl.textContent = text;
+    }
+
+    function clearResults() {
+      cardsEl.innerHTML = '';
+      summaryEl.style.display = 'none';
+      summaryEl.textContent = '';
+      obsEl.textContent = '';
+    }
+
+    function csvToList(raw) {
+      const t = (raw || '').trim();
+      if (!t) return [];
+      return t.split(',').map(x => x.trim()).filter(Boolean);
+    }
+
+    function buildBody() {
+      const prefs = {
+        location: form.location.value.trim(),
+        budget: form.budget.value,
+        cuisines: csvToList(form.cuisines.value),
+        min_rating: Number(form.min_rating.value)
+      };
+
+      const optionalConstraints = form.optional_constraints.value.trim();
+      if (optionalConstraints) prefs.optional_constraints = optionalConstraints;
+
+      return {
+        preferences: prefs,
+        cap: Number(form.cap.value),
+        top_n: Number(form.top_n.value),
+        use_llm: form.use_llm.checked
+      };
+    }
+
+    function renderRecommendations(payload) {
+      clearResults();
+
+      const response = payload.response || {};
+      const recs = Array.isArray(response.recommendations) ? response.recommendations : [];
+      const obs = payload.observability || {};
+
+      if (response.comparative_summary) {
+        summaryEl.textContent = response.comparative_summary;
+        summaryEl.style.display = 'block';
+      }
+
+      if (!recs.length) {
+        setMessage('No recommendations matched the current filters. Try lowering min rating or relaxing cuisines.', 'ok');
+      }
+
+      recs.forEach((rec) => {
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        const title = document.createElement('h3');
+        title.textContent = `#${rec.rank} ${rec.name}`;
+        card.appendChild(title);
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = `${rec.cuisine} | Rating ${rec.rating} | ${rec.estimated_cost}`;
+        card.appendChild(meta);
+
+        const chips = document.createElement('div');
+        chips.className = 'chips';
+
+        const idChip = document.createElement('span');
+        idChip.className = 'chip';
+        idChip.textContent = `id: ${rec.restaurant_id}`;
+        chips.appendChild(idChip);
+
+        card.appendChild(chips);
+
+        const rationale = document.createElement('p');
+        rationale.textContent = rec.ai_rationale || '';
+        card.appendChild(rationale);
+
+        cardsEl.appendChild(card);
+      });
+
+      const latency = typeof obs.latency_ms === 'number' ? `${obs.latency_ms.toFixed(1)} ms` : 'n/a';
+      obsEl.textContent = `Observability: candidates=${obs.candidate_count ?? 'n/a'}, recommendations=${obs.recommendation_count ?? recs.length}, latency=${latency}, notes=${obs.outcome_notes ?? 'n/a'}, cache_hit=${obs.cache_hit ?? 'n/a'}`;
+    }
+
+    async function submitForm(ev) {
+      ev.preventDefault();
+      clearResults();
+      setMessage('Loading recommendations...', 'ok');
+      submitBtn.disabled = true;
+
+      try {
+        const body = buildBody();
+        const resp = await fetch(`${API_BASE}/api/recommend`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        const data = await resp.json().catch(() => ({}));
+        if (!resp.ok) {
+          const errText = data?.errors?.join('\n') || data?.detail || data?.error || `Request failed (${resp.status})`;
+          setMessage(errText, 'error');
+          return;
+        }
+
+        setMessage('Recommendations loaded.', 'ok');
+        renderRecommendations(data);
+      } catch (err) {
+        setMessage(`Unable to reach Phase 6 API proxy. Ensure Phase 6 and Phase 5 servers are running.\n${String(err)}`, 'error');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    }
+
+    function loadDemo() {
+      form.location.value = 'Bellandur';
+      form.budget.value = 'high';
+      form.min_rating.value = '4.0';
+      form.top_n.value = '5';
+      form.cap.value = '25';
+      form.cuisines.value = '';
+      form.optional_constraints.value = 'Approximate budget around INR 2000 for two.';
+      form.use_llm.checked = true;
+      setMessage('Bellandur demo loaded.', 'ok');
+    }
+
+    form.addEventListener('submit', submitForm);
+    demoBtn.addEventListener('click', loadDemo);
+  </script>
+</body>
+</html>

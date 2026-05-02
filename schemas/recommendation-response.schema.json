@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cursor-proj-1.local/schemas/recommendation-response.schema.json",
+  "title": "RecommendationResponse",
+  "description": "Output contract for ranked recommendations (Phase 0). Each item must correspond to a row from the candidate set in later phases; restaurant_id enables verification.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "recommendations": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "restaurant_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Stable identifier from cleaned data (or canonical key) for grounding checks."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cuisine": {
+            "type": "string",
+            "description": "Primary or joined cuisine labels for display."
+          },
+          "rating": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "estimated_cost": {
+            "type": "string",
+            "description": "Human-readable cost (e.g. price band or currency range) copied from data when available."
+          },
+          "ai_rationale": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Short explanation tied to user preferences and visible attributes; must not invent facts not in data."
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "1-based rank within this response."
+          }
+        },
+        "required": [
+          "restaurant_id",
+          "name",
+          "cuisine",
+          "rating",
+          "estimated_cost",
+          "ai_rationale",
+          "rank"
+        ]
+      }
+    },
+    "comparative_summary": {
+      "type": "string",
+      "description": "Optional short comparison of top choices (problemstatement.md §4)."
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional diagnostics: dataset_version, candidate_count, model id, etc.",
+      "properties": {
+        "dataset_version": { "type": "string" },
+        "candidate_count": { "type": "integer", "minimum": 0 },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+  "required": ["recommendations"]
+}

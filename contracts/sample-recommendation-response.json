@@ -1,0 +1,28 @@
+{
+  "recommendations": [
+    {
+      "restaurant_id": "example-row-001",
+      "name": "Example Trattoria",
+      "cuisine": "Italian",
+      "rating": 4.1,
+      "estimated_cost": "₹₹ (medium)",
+      "ai_rationale": "Matches your Italian preference and medium budget; rating meets your minimum.",
+      "rank": 1
+    },
+    {
+      "restaurant_id": "example-row-002",
+      "name": "Example Bistro",
+      "cuisine": "Italian, Continental",
+      "rating": 4.0,
+      "estimated_cost": "₹₹ (medium)",
+      "ai_rationale": "Strong cuisine overlap and similar price band to your stated budget.",
+      "rank": 2
+    }
+  ],
+  "comparative_summary": "Both options fit Italian dining in your budget; the first has a slightly higher rating.",
+  "meta": {
+    "dataset_version": "not-yet-pinned",
+    "candidate_count": 12,
+    "notes": "Illustrative sample for Phase 0 schema validation only."
+  }
+}

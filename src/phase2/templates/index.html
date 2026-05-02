@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Restaurant preferences</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 36rem; margin: 2rem auto; padding: 0 1rem; }
+    label { display: block; margin-top: 0.75rem; font-weight: 600; }
+    input, select, textarea { width: 100%; margin-top: 0.25rem; box-sizing: border-box; }
+    button { margin-top: 1rem; padding: 0.5rem 1rem; }
+    .errors { background: #fee; border: 1px solid #c00; padding: 0.75rem; margin-bottom: 1rem; border-radius: 4px; }
+    .success { background: #efe; border: 1px solid #080; padding: 0.75rem; margin-bottom: 1rem; border-radius: 4px; white-space: pre-wrap; font-family: monospace; font-size: 0.85rem; }
+    .hint { font-size: 0.85rem; color: #444; font-weight: normal; }
+  </style>
+</head>
+<body>
+  <h1>Restaurant preferences</h1>
+  <p>Fields match <code>schemas/user-preferences.schema.json</code> (Phase 0 / Phase 2).</p>
+
+  {% if errors %}
+  <div class="errors">
+    <strong>Please fix the following:</strong>
+    <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+  </div>
+  {% endif %}
+
+  {% if payload and not errors %}
+  <div class="success"><strong>Valid preferences</strong></div>
+  <pre class="success">{{ payload | tojson(indent=2) }}</pre>
+  {% endif %}
+
+  <form method="post" action="{{ url_for('submit_form') }}">
+    <label for="location">Location <span class="hint">(required)</span></label>
+    <input id="location" name="location" type="text" required
+           value="{{ payload.location if payload else '' }}" placeholder="e.g. Bangalore" />
+
+    <label for="budget">Budget</label>
+    <select id="budget" name="budget" required>
+      {% for b in ['low', 'medium', 'high'] %}
+      <option value="{{ b }}" {% if payload and payload.budget == b %}selected{% endif %}>{{ b }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="cuisines">Cuisines <span class="hint">(comma-separated; leave empty = any)</span></label>
+    <input id="cuisines" name="cuisines" type="text"
+           value="{{ (payload.cuisines | join(', ')) if payload and payload.cuisines is defined and payload.cuisines else '' }}"
+           placeholder="Italian, Chinese" />
+
+    <label for="min_rating">Minimum rating <span class="hint">(0–5, inclusive; empty = 0)</span></label>
+    <input id="min_rating" name="min_rating" type="number" min="0" max="5" step="0.1"
+           value="{{ payload.min_rating if payload and payload.min_rating is not none else '' }}" />
+
+    <label for="optional_constraints">Optional constraints</label>
+    <textarea id="optional_constraints" name="optional_constraints" rows="3" placeholder="e.g. family-friendly">{{ payload.optional_constraints if payload and payload.optional_constraints else '' }}</textarea>
+
+    <button type="submit">Validate &amp; preview JSON</button>
+  </form>
+</body>
+</html>

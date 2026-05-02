@@ -1,0 +1,4 @@
+# Phase 5 — orchestration + API (see docs/phase-wise-architecture.md)
+# Includes Phase 2 (validate prefs), Phase 3–4 (retrieval + Groq path).
+-r ../phase4/requirements.txt
+flask>=3.0.0

@@ -1,0 +1,2 @@
+# Phase 6 — frontend web app (calls Phase 5 API)
+flask>=3.0.0

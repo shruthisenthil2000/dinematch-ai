@@ -1,0 +1,3 @@
+# Phase 3 — structured retrieval (see docs/phase-wise-architecture.md)
+pandas>=2.0.0
+pyarrow>=14.0.0

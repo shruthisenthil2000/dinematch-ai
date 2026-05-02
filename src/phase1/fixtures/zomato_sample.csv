@@ -1,0 +1,4 @@
+url,address,name,online_order,book_table,rate,votes,phone,location,rest_type,dish_liked,cuisines,approx_cost(for two people),reviews_list,menu_item,listed_in(type),listed_in(city)
+https://z.example/a,"1 Main St",Alpha Kitchen,Yes,No,4.2/5,120,999,Indiranagar,Casual Dining,"Pasta",Italian,600,[],[],Delivery,Bangalore
+https://z.example/b,"2 Side Rd",Alpha Kitchen,Yes,No,3.8/5,40,998,Indiranagar,Casual Dining,"Pizza","Italian, Continental",650,[],[],Delivery,Bangalore
+https://z.example/c,"9 Park Ave",Beta Diner,No,Yes,NEW,5,997,Koramangala,Quick Bites,,Chinese,350,[],[],Dineout,Bangalore

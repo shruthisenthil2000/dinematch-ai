@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cursor-proj-1.local/schemas/user-preferences.schema.json",
+  "title": "UserPreferences",
+  "description": "Input contract for restaurant recommendation requests (Phase 0). Primary source: basic web UI forms that submit this JSON shape; optional API/CLI may reuse it. Location is required; other fields follow problemstatement.md §2.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "location": {
+      "type": "string",
+      "minLength": 1,
+      "description": "City or region the user wants to dine in (e.g. Delhi, Bangalore). Normalization rules are implementation-defined in later phases."
+    },
+    "budget": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Budget band; must map consistently to dataset cost fields in Phase 1+."
+    },
+    "cuisines": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": [],
+      "description": "Preferred cuisine labels. Empty array means no cuisine filter (any)."
+    },
+    "min_rating": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "description": "Minimum acceptable rating; inclusive lower bound (>=). Use 0 for no minimum if the product allows."
+    },
+    "optional_constraints": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Free-text preferences (e.g. family-friendly). May be soft constraints for the LLM only unless mapped to structured fields later."
+    }
+  },
+  "required": ["location", "budget", "min_rating"]
+}

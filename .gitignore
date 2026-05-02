@@ -1,0 +1,13 @@
+# Local secrets (never commit)
+.env
+
+.venv/
+__pycache__/
+*.pyc
+
+phase1/.venv/
+phase1/.hf_cache/
+phase1/output/
+
+phase2/.venv/
+phase2/__pycache__/

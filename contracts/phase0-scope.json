@@ -1,0 +1,41 @@
+{
+  "$schema": "Phase 0 scope manifest (informal JSON; not JSON Schema)",
+  "phase": 0,
+  "title": "Scope, success criteria, and non-goals",
+  "references": {
+    "problem_statement": "docs/problemstatement.md",
+    "architecture": "docs/phase-wise-architecture.md",
+    "phase0_implementation": "docs/phase0_implementation.md",
+    "dataset_contract": "contracts/dataset_contract.md"
+  },
+  "primary_input_source": "Basic web UI: forms and controls collect preferences and submit a payload matching schemas/user-preferences.schema.json (Phase 2+). Optional REST or CLI may reuse the same contract later.",
+  "user_inputs": [
+    "location (string)",
+    "budget band: low | medium | high",
+    "cuisines (0..n strings; empty = any)",
+    "min_rating (0..5, inclusive filter in later phases)",
+    "optional_constraints (free text, length-capped in schema)"
+  ],
+  "output": {
+    "description": "Top N recommendations; each with name, cuisine, rating, estimated_cost, ai_rationale; optional comparative_summary.",
+    "schema": "schemas/recommendation-response.schema.json"
+  },
+  "quality_bar": {
+    "hard_filters": "Final list must satisfy structured filters (location, budget, cuisine overlap policy, min_rating) defined in Phase 3+.",
+    "grounding": "Every recommendation must map to an allowed restaurant_id from the candidate set; no invented venues.",
+    "explanations": "ai_rationale must cite alignment with user preferences using attributes present in data."
+  },
+  "success_criteria": [
+    "Preference payloads validate against schemas/user-preferences.schema.json",
+    "The basic web UI is the primary input source and submits the same preference shape as golden-queries examples (optional API/CLI may mirror it)",
+    "Response payloads validate against schemas/recommendation-response.schema.json",
+    "Golden queries document manual evaluation intent for demos and regression checks"
+  ],
+  "non_goals": [
+    "Live Zomato or third-party restaurant API integration (static Hugging Face dataset only unless explicitly added later)",
+    "Payments, reservations, or checkout",
+    "Maps, routing, or real-time availability",
+    "User accounts, auth, or saved profiles (unless added in a later phase)",
+    "Guaranteed global coverage or freshness of restaurant data"
+  ]
+}
