@@ -1,0 +1,2 @@
+# Streamlit Community Cloud / single-command install for Phase 8 (repo root)
+-r src/phase8/requirements.txt

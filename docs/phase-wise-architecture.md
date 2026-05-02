@@ -223,6 +223,22 @@ flowchart TB
 
 ---
 
+## Phase 8 — Deployment (Streamlit)
+
+**Goal:** Publish a **hosted demo** of the recommendation flow using **Streamlit**, so stakeholders can try the system without running Flask, Next.js, or CLIs locally. Complements Phase 6/7 UIs by optimizing for fast iteration and free managed hosting.
+
+**Components**
+
+- **Streamlit app:** Preference inputs (`st.form` / widgets) aligned with `schemas/user-preferences.schema.json`; display top N results, comparative summary, and clear empty/error states—either by **importing** `phase5.run_recommendation` (same process as the backend) or by **HTTP `POST /api/recommend`** to a separately deployed Phase 5 service (useful when the API is already public).
+- **Secrets and config:** API keys, dataset path, and model settings via `st.secrets` and environment variables—**never** committed to the repo.
+- **Hosting (free tier):** [Streamlit Community Cloud](https://streamlit.io/cloud) — connect the GitHub repository, set the main file to your Streamlit entrypoint (e.g. `streamlit run src/phase8/app.py`), and configure secrets in the app dashboard. Alternatives in the same spirit: self-host Streamlit behind a reverse proxy on Render/Fly if you outgrow Community Cloud limits.
+
+**Exit criteria:** Stable public URL for the demo app; secrets only in Streamlit Cloud (or host) secret stores; README documents local `streamlit run …` and deploy steps.
+
+**Implementation:** [`src/phase8/README.md`](../src/phase8/README.md) — Streamlit app (`streamlit run src/phase8/app.py`, `PYTHONPATH=src`); in-process orchestration or `PHASE8_API_BASE` HTTP mode; depends on Phases 1–5 for data and orchestration (and optionally Phase 5 deployed separately when using HTTP mode). Optional root file [`requirements-streamlit.txt`](../requirements-streamlit.txt) for Streamlit Cloud dependency resolution.
+
+---
+
 ## Phase-to-Problem-Statement Traceability
 
 | Problem statement section | Primary phases |
@@ -233,6 +249,7 @@ flowchart TB
 | §4 Recommendation generation | Phases 4–5 (backend) |
 | §5 Output display | Phase 6 (frontend) |
 | Expected outcome (trust, relevance) | Phases 3–7 |
+| Hosted demo / sharing | Phase 8 (Streamlit deployment) |
 
 ---
 
@@ -244,5 +261,6 @@ flowchart TB
 4. Phase 4 → add LLM ranking and explanations  
 5. Phase 6 → **frontend** calling Phase 5 (`POST /api/recommend`), cards + empty/error states  
 6. Phase 7 → tests and evals  
+7. Phase 8 → Streamlit packaging + Streamlit Community Cloud (or equivalent) for a **shareable hosted demo**
 
-This order delivers a working **backend** early, then a proper **frontend** on top, then hardening.
+This order delivers a working **backend** early, then a proper **frontend** on top, then hardening, then optional **managed deployment** of a lightweight UI.

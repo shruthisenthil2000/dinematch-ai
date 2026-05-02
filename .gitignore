@@ -1,5 +1,6 @@
 # Local secrets (never commit)
 .env
+.streamlit/secrets.toml
 
 .venv/
 __pycache__/

@@ -1,0 +1,3 @@
+# Phase 8 — Streamlit app (orchestrator in-process or Phase 5 HTTP); see README.md
+-r ../phase5/requirements.txt
+streamlit>=1.40.0
