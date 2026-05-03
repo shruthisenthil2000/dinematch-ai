@@ -22,7 +22,7 @@ export function safetyWarnings(optionalConstraints: string): string[] {
 
   const warnings: string[] = [];
   if (PROMPT_INJECTION_HINTS.some((k) => text.includes(k))) {
-    warnings.push("Possible prompt-injection text detected. We'll still enforce backend filters and schema.");
+    warnings.push("That wording looks unusual for a dining request. We’ll still apply your preferences safely.");
   }
   if (HARMFUL_HINTS.some((k) => text.includes(k))) {
     warnings.push("Potential harmful/abusive content detected. Please keep constraints restaurant-focused.");

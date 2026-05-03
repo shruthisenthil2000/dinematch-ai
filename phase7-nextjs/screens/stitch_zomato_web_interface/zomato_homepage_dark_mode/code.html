@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,900;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #131313;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#c6c6c7",
+                    "on-primary-container": "#5b000e",
+                    "surface-variant": "#353534",
+                    "on-secondary-fixed-variant": "#454747",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-secondary-container": "#b4b5b5",
+                    "inverse-on-surface": "#313030",
+                    "tertiary": "#c8c6c5",
+                    "on-tertiary": "#313030",
+                    "secondary-container": "#454747",
+                    "on-error": "#690005",
+                    "inverse-primary": "#bb162c",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-surface": "#e5e2e1",
+                    "on-primary": "#680011",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "tertiary-container": "#929090",
+                    "on-background": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "outline": "#ab8987",
+                    "background": "#131313",
+                    "primary-fixed": "#ffdad8",
+                    "on-primary-fixed": "#410007",
+                    "surface-tint": "#ffb3b1",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-container": "#2a2a29",
+                    "surface-container-highest": "#353534",
+                    "surface": "#131313",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary": "#2f3131",
+                    "outline-variant": "#5b403f",
+                    "primary": "#ffb3b1",
+                    "on-surface-variant": "#e4bebc",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "surface-dim": "#131313",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-bright": "#3a3939",
+                    "on-primary-fixed-variant": "#92001c",
+                    "tertiary-fixed": "#e5e2e1",
+                    "primary-container": "#ff535a",
+                    "tertiary-fixed-dim": "#c8c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "margin": "20px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Be Vietnam Pro"],
+                    "h1": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "h2": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "h3": ["Be Vietnam Pro"],
+                    "body-sm": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["20px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-neutral-900/90 backdrop-blur-md border-b border-white/10 shadow-2xl shadow-black/50 font-['Be_Vietnam_Pro'] antialiased">
+<div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-3xl font-black italic text-white cursor-pointer">Zomato</span>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 active:scale-95 transition-transform" href="#">Add restaurant</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 active:scale-95 transition-transform" href="#">Log in</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 active:scale-95 transition-transform" href="#">Sign up</a>
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-white/10 transition-colors text-white">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[550px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="" class="w-full h-full object-cover brightness-[0.4]" data-alt="A high-end cinematic close-up of a steaming gourmet Italian pasta dish with rich red tomato sauce and fresh basil, set against a dark, moody background with atmospheric lighting. The scene is illuminated with deep red and amber tones, emphasizing a premium late-night dining aesthetic. Soft highlights catch the textures of the porcelain plate and silverware, creating a sophisticated and appetizing visual for a luxury food discovery platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABbeJ1EBNMJCEemS20vQa64LfxfZixfNGoRFwfYcqBDDOMgBOnFuyX2zMxZGMjY5QkqyGScRtBh-G8xNDCDXSiPt7rPSh7nGmR_3iLgbF4NAWMf4pms5RWPRhY7YFJ7oYTt5dXAvWpKEBuLTWOG6ZXa5u2l2I_eeIo_pXpuHgLL6umiFeFO24tHWHCwGtJOiOpR2QbFa12JMRbCufx9okOpU9zNO4DfABfzOcsGx71U8-zWOsNaSS0fqEXRacuYzD6_7mxUtxWAJsl"/>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background"></div>
+</div>
+<div class="relative z-10 w-full max-w-4xl px-margin text-center">
+<h1 class="font-h1 text-h1 text-white mb-lg md:text-[56px] leading-tight">Find the best food &amp; drinks</h1>
+<div class="flex flex-col md:flex-row items-center gap-base bg-surface-container-high p-base rounded-xl border border-white/10 shadow-2xl">
+<!-- Location Search -->
+<div class="flex items-center gap-base px-md w-full md:w-1/3 border-b md:border-b-0 md:border-r border-white/10 py-2">
+<span class="material-symbols-outlined text-primary" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<input class="bg-transparent border-none focus:ring-0 text-white w-full placeholder:text-neutral-500 font-body-md text-body-md" placeholder="Mumbai" type="text"/>
+<span class="material-symbols-outlined text-neutral-500 cursor-pointer" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+<!-- Cuisine Search -->
+<div class="flex items-center gap-base px-md w-full md:flex-1 py-2">
+<span class="material-symbols-outlined text-neutral-400" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-white w-full placeholder:text-neutral-500 font-body-md text-body-md" placeholder="Search for restaurant, cuisine or a dish" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Bento Grid -->
+<section class="max-w-7xl mx-auto px-6 py-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Order Online -->
+<div class="group relative h-48 rounded-xl overflow-hidden border border-white/10 bg-surface-container cursor-pointer transition-transform hover:scale-[1.02]">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" data-alt="A fast-paced evening city scene showing a food delivery rider with a glowing red thermal bag, moving through blurred urban lights. The atmosphere is energetic and modern, using a cool blue and deep grey palette contrasted by sharp red accents. The lighting is low-key with neon highlights, symbolizing quick and efficient late-night food delivery services in a sophisticated metropolis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxvG9HmzXRA57pzcNuMekdToVX9sy2nOUaq23uCpFcdcoHCsMbd1gu0S3twD6H49n8IgzaOIsCkvufN3PGigpSQkTDFdIS3flzsI9YZlCVn7HOjjtNnFc82wwidDRWQaDk5Cqt8kkJ69REaAyA6iXw5meTlzvCnSSvsZ7bLC_YzJvuV1SDyynWDxPKh3IKaWB8qP-5_POdN9e0WkY4CDA7b-MQAHhTKPAZbPq_LcUN29YsdsnqFoBd5OpHBhtYnHeQ35WA3jo_bZ4S"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg">
+<h3 class="font-h3 text-h3 text-white mb-xs">Order Online</h3>
+<p class="font-body-sm text-body-sm text-neutral-400">Stay home and order to your doorstep</p>
+</div>
+</div>
+<!-- Dining Out -->
+<div class="group relative h-48 rounded-xl overflow-hidden border border-white/10 bg-surface-container cursor-pointer transition-transform hover:scale-[1.02]">
+<img alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" data-alt="The interior of a premium, dimly lit fine-dining restaurant at night. Elegant wooden tables are set with crystal glassware and minimalist tableware, illuminated by soft golden pendant lights. The color scheme is dominated by rich charcoals and warm ambers, creating an atmosphere of exclusivity and sophistication. The mood is intimate and tranquil, inviting guests for a luxurious night out." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuL9L3qe3v_lLTDs1JRVqI0D1mHFMpGxUzeQP6PYi031Txs6njz2wC4H5jZ9jIidAoMpNlA9OW3b5Lz8C50SiBVRhFdBpcvxACjl457drltYo59l62eYgR_Vc1N9qeDVRIVAenbyRfPbPKmk6wQGyjSAGnCKCWiXl6eAp2sawoajDnHvPXm56J492dYdWOMAGOAkGvUcNWQ2EHSSmra6DruIODVqqJeiQ5PDawBRZVX2pm1SGlEDwUb_icqSIUPfHS5fLdjYsy5e61"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg">
+<h3 class="font-h3 text-h3 text-white mb-xs">Dining Out</h3>
+<p class="font-body-sm text-body-sm text-neutral-400">View the city's favourite dining venues</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Collections Section -->
+<section class="max-w-7xl mx-auto px-6 py-xl">
+<div class="flex items-end justify-between mb-lg">
+<div>
+<h2 class="font-h2 text-h2 text-white mb-xs">Collections</h2>
+<p class="font-body-md text-body-md text-neutral-400">Explore curated lists of top restaurants, cafes, pubs, and bars in Mumbai, based on trends</p>
+</div>
+<a class="hidden md:flex items-center gap-xs font-label-caps text-label-caps text-primary hover:underline" href="#">
+                    All collections in Mumbai
+                    <span class="material-symbols-outlined text-[14px]" data-icon="arrow_right">arrow_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Collection Card 1 -->
+<div class="relative group h-80 rounded-xl overflow-hidden border border-white/08 cursor-pointer shadow-lg">
+<img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A vibrant and busy nightlife scene at a rooftop bar overlooking a city skyline. The focus is on a collection of artistic cocktails with citrus garnishes, glowing under soft purple and red ambient lights. The background shows the blurred bokeh of city buildings at dusk. The overall aesthetic is upscale, trendy, and full of life, perfectly matching the theme of curated social hotspots." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNWYb-Io2kYscoO1GtaxGwqyxpU130sPwTduMzhFGZ7nYHvWfipE3yc3KcpvOolOGnasjC09vfs0GDVJX3Ejhy0IbopFtwja4cChPqqhLoLpxNjVtPDbalPXAtifVlxpq53ZwZyioP1QPAHUAF6oT6o9L0bHKjjuCnpYZTf5bXcCS737ZeEecjn85tY6QAaW2MhKIDWvXB_NhiMXejaCdQu65jUo5FxECwMEu7dpdXGi8inT9o9FwxX0s3bO0QnZ9N6P4mDpFi17ga"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md">
+<p class="font-body-md text-white font-bold mb-xs">Trending This Week</p>
+<div class="flex items-center gap-xs text-body-sm text-neutral-300">
+<span>30 Places</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_right">arrow_right</span>
+</div>
+</div>
+</div>
+<!-- Collection Card 2 -->
+<div class="relative group h-80 rounded-xl overflow-hidden border border-white/08 cursor-pointer shadow-lg">
+<img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A minimalist and serene rooftop setting during the golden hour. A single table is set with a cold beverage and a light snack, facing a breathtaking view of a modern cityscape. The lighting is warm and natural, transitioning into a cool evening sky. The style is clean and sophisticated, emphasizing peaceful urban escapes and scenic dining locations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM1KHJjnC_A8GvGz0Wrq5Vek1MgDGEKzsSl4RqM6G5ZIltfKGJN7tWKioP0KQ34PCwuvGSNWWzqG5kRWdqX7Pa6ojDYky3xgmwI9jSdowlYtJ3nDRMCkXIXX3jLJRJGF06sGXKNtPD2o5GHMVHHbNS9uxa3GK0oWmYVYeqsMGGkklblNrlOSWpYMckFqSYrXRsqJelg9SRJxY5zlXWXNHa50CUoj1D1Hmp-62okVWARpga0TNlJM_4dHFqLWjuzZ2hMieATW3005aJ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md">
+<p class="font-body-md text-white font-bold mb-xs">Top Rooftops</p>
+<div class="flex items-center gap-xs text-body-sm text-neutral-300">
+<span>15 Places</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_right">arrow_right</span>
+</div>
+</div>
+</div>
+<!-- Collection Card 3 -->
+<div class="relative group h-80 rounded-xl overflow-hidden border border-white/08 cursor-pointer shadow-lg">
+<img alt="" class="w-full h-full object-crop transition-transform duration-500 group-hover:scale-105" data-alt="An authentic, high-end Japanese sushi counter where a chef is meticulously preparing nigiri. The lighting is focused and dramatic, highlighting the fresh textures of the seafood and the clean lines of the wooden counter. The color palette features deep browns, black, and the vibrant coral of the fish, creating a sense of tradition meets modern luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwM3XpvsitRQXng3G1Nrc_DT8qUFYMXHonlo2xCVy-6Ze3mdx_mTTLZdc7RdX2O8VGo9_kuj2h4skXEGmi0RxoMVBiMpql-JG72JvG8vAWQhASjFo2LHz0ii037tiQg8Se_WvTKyHM0dzR_hMwY3wMTDrWwcw9AywyIh0LbLRTlbtDex3YCWg0x02aO8d5BdUTl20tDdZL7TTk-eg_clFIzPVV3xX2Hz38YWKgTIioJwX0vWmIAXy_QoywfZaIV9es7iELf09a0d1G"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md">
+<p class="font-body-md text-white font-bold mb-xs">Newly Opened</p>
+<div class="flex items-center gap-xs text-body-sm text-neutral-300">
+<span>12 Places</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_right">arrow_right</span>
+</div>
+</div>
+</div>
+<!-- Collection Card 4 -->
+<div class="relative group h-80 rounded-xl overflow-hidden border border-white/08 cursor-pointer shadow-lg">
+<img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A cozy, moody speakeasy interior with velvet armchairs and dim lamp lighting. The bar in the background is stocked with premium bottles that reflect the soft, warm light. The atmosphere is quiet, mysterious, and highly exclusive. Deep reds and dark shadows dominate the visual, suggesting a hidden gem perfect for late-night cocktails and conversations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp1Nj3SqqvWcVsB2fmCxQawRZy-ZK3RnJte8VhipPPVJ9FykSxegyczRZuuIApnqeAuiDAU0NegNs99yQAkxkWbDgDKTBxPxgKRZPt-BhCRHU-k71Okd22IQ8dHK69cHXwdkCtdBBLt8uxdFwcq7GQPQ_6ejzrn0QxAmfLdOL1XdH2VGpjd_8mQCkngELZ0jOl0BD45cSKtXXEzi5DhzwHDIE-iBBPAP0dbfB9CA8JGIDs4eZcevYlze8f3DDrVLK6f_HJsHxNCIJE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-md">
+<p class="font-body-md text-white font-bold mb-xs">Legends of Mumbai</p>
+<div class="flex items-center gap-xs text-body-sm text-neutral-300">
+<span>22 Places</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_right">arrow_right</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-6 py-xl">
+<div class="bg-surface-container rounded-xl border border-white/10 p-xl flex flex-col md:flex-row items-center gap-xl">
+<div class="w-full md:w-1/2">
+<img alt="" class="rounded-lg shadow-2xl border border-white/5" data-alt="A sleek, modern smartphone displaying a food delivery app with high-resolution food photography. The phone is held against a background of a modern, well-lit kitchen. The scene is shot with a shallow depth of field, focusing on the phone's interface. The overall lighting is crisp and clean, emphasizing a seamless and technologically advanced user experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR7HWAozEjKuxEd3B4KhVpSbVw01NZngEBdeg67UPFAlRXy7naAGgbjmCYljLV3zAXaL0tgS4WVFFTIkeRHrVar06youMr74WMqGxxUJt0B2wfdMoYQPzd4jLOpA3UajB4fRx6T_kn17LXrk_lZ1PAZz7lxoUzksbsofYmTOu9iT-foBUCUSElqz6LTk9ATSX_HjS3bPvxy_EAUaXxcphYILTns5vK8FUbmCsj7ebI0ptIUAm2i4iOXmAfwlRuzWcmnXDjp8wS6r45"/>
+</div>
+<div class="w-full md:w-1/2 space-y-md">
+<h2 class="font-h1 text-h1 text-white">Get the Zomato app</h2>
+<p class="font-body-md text-body-md text-neutral-400">We will send you a link, open it on your phone to download the app</p>
+<div class="flex items-center gap-md py-base">
+<label class="flex items-center gap-xs cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary bg-transparent border-neutral-600" name="delivery" type="radio"/>
+<span class="text-on-surface">Email</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer">
+<input class="text-primary focus:ring-primary bg-transparent border-neutral-600" name="delivery" type="radio"/>
+<span class="text-on-surface">Phone</span>
+</label>
+</div>
+<div class="flex flex-col sm:flex-row gap-base">
+<input class="flex-1 bg-surface-container-low border border-white/10 rounded-lg px-md py-3 text-white placeholder:text-neutral-500 focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="Email" type="text"/>
+<button class="bg-primary-container text-on-primary-container font-bold px-xl py-3 rounded-lg hover:brightness-110 transition-all active:scale-95">Share App Link</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 w-full pt-12 pb-8 border-t border-white/5 font-['Be_Vietnam_Pro'] text-sm text-neutral-400">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+<span class="text-2xl font-black italic text-white mb-4 md:mb-0">Zomato</span>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-lg cursor-pointer hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="public">public</span>
+<span>English</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-lg cursor-pointer hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="flag">flag</span>
+<span>India</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+<div class="flex flex-col gap-2">
+<p class="text-white font-bold uppercase tracking-wider mb-2 text-[12px]">About Zomato</p>
+<a class="hover:text-red-500 transition-colors" href="#">Who We Are</a>
+<a class="hover:text-red-500 transition-colors" href="#">Blog</a>
+<a class="hover:text-red-500 transition-colors" href="#">Work With Us</a>
+<a class="hover:text-red-500 transition-colors" href="#">Investor Relations</a>
+<a class="hover:text-red-500 transition-colors" href="#">Contact Us</a>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-white font-bold uppercase tracking-wider mb-2 text-[12px]">Zomaverse</p>
+<a class="hover:text-red-500 transition-colors" href="#">Zomato</a>
+<a class="hover:text-red-500 transition-colors" href="#">Blinkit</a>
+<a class="hover:text-red-500 transition-colors" href="#">Feeding India</a>
+<a class="hover:text-red-500 transition-colors" href="#">Hyperpure</a>
+<a class="hover:text-red-500 transition-colors" href="#">Zomaland</a>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-white font-bold uppercase tracking-wider mb-2 text-[12px]">For Restaurants</p>
+<a class="hover:text-red-500 transition-colors" href="#">Partner With Us</a>
+<a class="hover:text-red-500 transition-colors" href="#">Apps For You</a>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-white font-bold uppercase tracking-wider mb-2 text-[12px]">Learn More</p>
+<a class="hover:text-red-500 transition-colors" href="#">Privacy</a>
+<a class="hover:text-red-500 transition-colors" href="#">Security</a>
+<a class="hover:text-red-500 transition-colors" href="#">Terms</a>
+<a class="hover:text-red-500 transition-colors" href="#">Sitemap</a>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-white font-bold uppercase tracking-wider mb-2 text-[12px]">Social Links</p>
+<div class="flex gap-3 mt-1">
+<span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" data-icon="language">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" data-icon="alternate_email">alternate_email</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" data-icon="hub">hub</span>
+</div>
+</div>
+</div>
+<div class="border-t border-white/5 pt-8 text-neutral-500 text-[12px]">
+                © 2024 Zomato™ Ltd. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

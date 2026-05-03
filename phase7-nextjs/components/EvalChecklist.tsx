@@ -1,15 +1,15 @@
 export function EvalChecklist() {
   return (
-    <div className="panel">
-      <h2>Phase 7 eval checklist</h2>
-      <ul>
-        <li>Correctness: rankings obey top_n, no duplicate IDs, and rating threshold is not violated.</li>
-        <li>Relevance: rationales mention user preferences and avoid invented facts.</li>
-        <li>Safety: constraints with injection-like or harmful terms are soft-flagged before submit.</li>
-        <li>Ops: API base URL and runtime model behavior controlled by environment config.</li>
+    <div className="glass-panel rounded-2xl border border-white/10 p-6 text-sm text-zinc-300">
+      <h2 className="mb-3 text-lg font-semibold text-white">What we verify for you</h2>
+      <ul className="list-inside list-disc space-y-2 text-zinc-400">
+        <li>Your shortlist respects the number of picks you asked for, without repeats, and honors your minimum rating.</li>
+        <li>Each explanation reflects your preferences and avoids invented details.</li>
+        <li>Unusual or off-topic wording in your notes is flagged gently before you search.</li>
       </ul>
-      <p className="meta">
-        Known limitation: strict proof that all recommendations are subset of candidate IDs requires backend exposing candidate IDs in evaluation mode.
+      <p className="mt-4 text-xs leading-relaxed text-zinc-500">
+        We keep improving how personalized dining matches are ranked and explained—your feedback shapes what we build
+        next.
       </p>
     </div>
   );

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | Zomato</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#684a00",
+                    "on-primary-fixed-variant": "#92001c",
+                    "surface-tint": "#bb162c",
+                    "on-tertiary-fixed": "#00174a",
+                    "surface-dim": "#dcd9d9",
+                    "outline": "#8f6f6e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "inverse-primary": "#ffb3b1",
+                    "on-secondary-fixed-variant": "#5d4200",
+                    "surface-container-high": "#eae7e7",
+                    "surface": "#fcf9f8",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#271900",
+                    "inverse-surface": "#313030",
+                    "tertiary": "#0051d4",
+                    "surface-container-highest": "#e5e2e1",
+                    "background": "#fcf9f8",
+                    "secondary-fixed": "#ffdea6",
+                    "outline-variant": "#e4bebc",
+                    "on-tertiary-fixed-variant": "#003ea7",
+                    "on-primary-fixed": "#410007",
+                    "surface-container": "#f0eded",
+                    "tertiary-container": "#2f6bf3",
+                    "primary": "#b7122a",
+                    "secondary-container": "#f9b500",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffdad8",
+                    "on-background": "#1b1b1b",
+                    "tertiary-fixed-dim": "#b3c5ff",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-container": "#fefcff",
+                    "surface-container-low": "#f6f3f2",
+                    "tertiary-fixed": "#dbe1ff",
+                    "secondary-fixed-dim": "#ffbb0c",
+                    "on-surface": "#1b1b1b",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#db313f",
+                    "surface-bright": "#fcf9f8",
+                    "secondary": "#7b5800",
+                    "on-surface-variant": "#5b403f",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "20px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "80px",
+                    "md": "24px",
+                    "margin": "24px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Be Vietnam Pro"],
+                    "display-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "label-sm": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "body-sm": ["Be Vietnam Pro"],
+                    "display-lg": ["Be Vietnam Pro"],
+                    "label-lg": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-sm": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "label-sm": ["10px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-md": ["22px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-zinc-950 sticky top-0 w-full z-50 border-b border-zinc-100 dark:border-zinc-800 shadow-sm">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto px-10 h-18 py-4">
+<div class="text-3xl font-black text-zinc-900 dark:text-white italic font-['Be_Vietnam_Pro'] tracking-tight">Zomato</div>
+<div class="hidden md:flex flex-1 max-w-xl mx-8">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-red-600 transition-colors">search</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-lg bg-surface-container border-none focus:ring-2 focus:ring-primary-container text-body-md shadow-sm transition-all" placeholder="Search for restaurant, cuisine or a dish" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-zinc-600 dark:text-zinc-400 font-medium hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 flex items-center gap-1">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="text-zinc-600 dark:text-zinc-400 font-medium hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-px bg-zinc-200 dark:bg-zinc-800"></div>
+<button class="text-zinc-600 dark:text-zinc-400 font-medium hover:text-red-600 transition-colors">Log in</button>
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-container transition-all active:scale-95">Sign up</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-10 py-12">
+<h1 class="font-display-md text-display-md text-on-background mb-8">Checkout</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Delivery & Payment -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Section 1: Delivery Address -->
+<section class="bg-white p-8 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] border border-outline-variant/30">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<h2 class="font-headline-md text-headline-md">Delivery Address</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="relative rounded-xl overflow-hidden h-[240px] border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A detailed aerial satellite map view of a metropolitan urban neighborhood in Mumbai. The map shows clear street layouts, green parks, and building footprints in a high-contrast modern UI style. A bright red pin sits in the center of the frame, indicating the delivery location. The lighting is bright and clean, mimicking a professional GPS navigation interface." data-location="Mumbai, India" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTrQife4m4U5i9Y812oAfNTc6EZIEQFW81XyrhJO0RMJz2wD-TTG6MFIhkOQm-JEoE1ORj9kREaFUrPcInoGwbL310U-3PRP4DGFFtHB3c6SRu2xiqLYjy0Cd56lUdtGLSaOSjIT85pKxKXC1ApHa1VGoZqkyiaZGZEu_v6nUSwl--IgRzI8N9LWLfV2l4hQV-1E3KGNGwSBX3hUWdPEoS2zh3_IuvXe5e9kOy3gE-TYZcFcZEJzaq2WmbVrpr9Qyq7Mbeuel1wQ3o"/>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-full px-4">
+<button class="w-full bg-white text-on-background py-2 rounded-lg font-label-lg shadow-lg flex items-center justify-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">my_location</span>
+                                        Detect Current Location
+                                    </button>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block font-label-md text-on-surface-variant mb-1">House / Flat No.</label>
+<input class="w-full p-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all" placeholder="e.g. 402, Sea View Apartments" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-1">Landmark (Optional)</label>
+<input class="w-full p-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all" placeholder="e.g. Near HDFC Bank" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-center justify-center p-3 border-2 border-primary bg-primary/5 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm mt-1">HOME</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 border border-outline-variant rounded-lg text-on-surface-variant hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">work</span>
+<span class="text-label-sm mt-1">WORK</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Payment Method -->
+<section class="bg-white p-8 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] border border-outline-variant/30">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h2 class="font-headline-md text-headline-md">Payment Method</h2>
+</div>
+<div class="space-y-4">
+<!-- UPI -->
+<div class="flex items-center justify-between p-4 border-2 border-primary bg-primary/5 rounded-xl cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-tertiary">qr_code_2</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm">UPI (Google Pay, PhonePe)</p>
+<p class="text-body-sm text-on-surface-variant">Instant payment with 256-bit encryption</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+</div>
+<!-- Card -->
+<div class="flex items-center justify-between p-4 border border-outline-variant rounded-xl cursor-pointer hover:bg-surface transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-zinc-600">credit_card</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm">Credit / Debit Cards</p>
+<p class="text-body-sm text-on-surface-variant">Visa, Mastercard, RuPay, Amex</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-zinc-300">radio_button_unchecked</span>
+</div>
+<!-- Cash -->
+<div class="flex items-center justify-between p-4 border border-outline-variant rounded-xl cursor-pointer hover:bg-surface transition-colors opacity-50">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-zinc-600">payments</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm">Cash on Delivery</p>
+<p class="text-body-sm text-on-surface-variant">Temporarily unavailable for this order</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-zinc-300">block</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary & Bill -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Order Summary -->
+<section class="bg-white p-6 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] border border-outline-variant/30 sticky top-24">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-sm text-headline-sm">Order Summary</h2>
+<span class="text-label-md bg-green-100 text-green-700 px-2 py-1 rounded">2 ITEMS</span>
+</div>
+<!-- Items -->
+<div class="space-y-6 mb-8">
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A gourmet artisan beef burger with melting cheddar cheese, fresh lettuce, and ripe tomatoes on a toasted brioche bun. The shot is high-key with soft professional food photography lighting, emphasizing the vibrant colors and juicy texture. Set against a clean, minimalist white background to align with a food-first modern UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9blh4uIBSUvAEP3fgfLEOLRkxbWYAG22f43St9YjRdEduoLj6nsgNF3vtAi7FqkxbPxCv9AvgNTasZLCUGK9NA1YpwlT-3jxAe5WSfrZYAUGWml-cJXOd3MN2YH95qE4LLcetXYwth2xacL_GgtYXXuyH7FicvNh7an7T_Bzum2NMyoCS2bPXShG4koFbN7Rfk2-qTNwYZYX3LKeVcdvouYBRMNdJTEMsadM6_nxi2XAs1ceKIDd2VU-d4T_WoCT1UTy3ozRyWJ7_"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="font-label-lg">Classic Truffle Burger</p>
+<p class="font-label-lg">₹549</p>
+</div>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center border border-outline-variant rounded-lg overflow-hidden h-8">
+<button class="px-2 hover:bg-surface-variant transition-colors text-zinc-400">-</button>
+<span class="px-3 text-label-md">1</span>
+<button class="px-2 hover:bg-surface-variant transition-colors text-primary">+</button>
+</div>
+<span class="text-body-sm text-on-surface-variant">Medium Rare</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Crispy golden sweet potato fries served in a minimalist ceramic bowl. The lighting is bright and warm, highlighting the salty crystalline texture on the fries. The setting is clean and modern, following the Zomato high-energy food discovery aesthetic with a vibrant red accent in the periphery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDezRf042VpKa2PK8ObZN_0chEmbeeNUxPqkw7FDaS2ist5fLlhwLpGN7bN5RbziXuB6wPS43ZxhLYcD6lQHezFvZs5NpbgQ7p7HKkwQo-l6qBr7dUnIPjWNY2Pe3fF8NBCwnqIrPmEaenLMWy4YmVuVSJojQt4WMg00JORSLMVRep63jfzfpmhLvF-U5fb3xo_nAMcjA8L6uo0rcyvdYYhe3beAC59bQ36M78JqDv8HxLI3D-y9OxOE5BSnRUJFXMde4OZblFMoRUU"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<p class="font-label-lg">Peri Peri Fries</p>
+<p class="font-label-lg">₹199</p>
+</div>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center border border-outline-variant rounded-lg overflow-hidden h-8">
+<button class="px-2 hover:bg-surface-variant transition-colors text-zinc-400">-</button>
+<span class="px-3 text-label-md">1</span>
+<button class="px-2 hover:bg-surface-variant transition-colors text-primary">+</button>
+</div>
+<span class="text-body-sm text-on-surface-variant">Large</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="mb-8 p-4 bg-zinc-50 rounded-xl border border-dashed border-outline">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary">sell</span>
+<span class="font-label-lg">Apply Promo Code</span>
+</div>
+<div class="flex gap-2">
+<input class="flex-1 bg-white border border-outline-variant rounded-lg px-3 py-2 text-body-sm focus:ring-1 focus:ring-primary outline-none" placeholder="ZOMATONEW" type="text"/>
+<button class="text-primary font-bold text-label-lg px-2 hover:bg-primary/5 rounded transition-colors">APPLY</button>
+</div>
+</div>
+<!-- Bill Breakdown -->
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-body-md text-on-surface-variant">
+<span>Item Total</span>
+<span>₹748.00</span>
+</div>
+<div class="flex justify-between text-body-md text-on-surface-variant">
+<span>Delivery Partner Fee</span>
+<span>₹45.00</span>
+</div>
+<div class="flex justify-between text-body-md text-on-surface-variant">
+<span>Restaurant Charges &amp; Taxes</span>
+<span>₹58.40</span>
+</div>
+<div class="flex justify-between text-body-md text-green-600">
+<span>Promo Discount (WELCOME50)</span>
+<span>-₹100.00</span>
+</div>
+<div class="pt-3 border-t border-zinc-100 flex justify-between">
+<span class="font-headline-sm">Total Payble</span>
+<span class="font-headline-sm text-primary">₹751.40</span>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-4 rounded-xl font-headline-sm shadow-lg shadow-primary/20 hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        Place Order
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-center text-label-sm text-on-surface-variant mt-4">
+                        By placing this order, you agree to our Terms of Service
+                    </p>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-50 dark:bg-zinc-900 w-full pt-16 pb-12 mt-20 border-t border-zinc-200 dark:border-zinc-800">
+<div class="max-w-[1280px] mx-auto px-10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 font-['Be_Vietnam_Pro'] text-sm leading-6">
+<div>
+<span class="text-2xl font-black text-zinc-900 dark:text-white mb-4 block">Zomato</span>
+<p class="text-zinc-500 dark:text-zinc-400 mb-6">Discovery and delivery across 10,000 cities worldwide.</p>
+</div>
+<div>
+<h4 class="font-semibold text-zinc-900 dark:text-white mb-4 uppercase tracking-wider text-xs">About Zomato</h4>
+<ul class="space-y-3">
+<li><a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">About Zomato</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Zomaland</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Feeding India</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-zinc-900 dark:text-white mb-4 uppercase tracking-wider text-xs">For Restaurants</h4>
+<ul class="space-y-3">
+<li><a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Work With Us</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Report Fraud</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-zinc-900 dark:text-white mb-4 uppercase tracking-wider text-xs">Social Links</h4>
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center cursor-pointer hover:bg-primary hover:text-white transition-all text-zinc-600 dark:text-zinc-400">
+<span class="material-symbols-outlined text-sm">public</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center cursor-pointer hover:bg-primary hover:text-white transition-all text-zinc-600 dark:text-zinc-400">
+<span class="material-symbols-outlined text-sm">share</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+<p class="text-zinc-500 dark:text-zinc-400 text-xs text-center">© 2024 Zomato™ Ltd. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>

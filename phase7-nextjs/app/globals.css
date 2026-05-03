@@ -1,34 +1,56 @@
-:root {
-  --bg: #f8fafc;
-  --panel: #ffffff;
-  --text: #0f172a;
-  --muted: #475569;
-  --border: #d1d5db;
-  --primary: #1d4ed8;
-  --warn: #b45309;
-  --bad: #b91c1c;
-  --ok: #047857;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --color-dm-bg: #0f0f0f;
+  --color-dm-surface: #1e1e1e;
+  --color-dm-rose: #e23744;
+  --color-dm-rose-soft: #ff535a;
 }
-* { box-sizing: border-box; }
-body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); }
-main { max-width: 1040px; margin: 0 auto; padding: 1.25rem; display: grid; gap: 1rem; }
-.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
-label { font-size: 0.92rem; font-weight: 600; display: block; }
-input, select, textarea { width: 100%; margin-top: 0.35rem; padding: 0.55rem; border: 1px solid var(--border); border-radius: 8px; font: inherit; }
-button { border: 0; border-radius: 8px; padding: 0.6rem 0.9rem; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; }
-button.secondary { background: #334155; }
-button:disabled { opacity: 0.6; cursor: not-allowed; }
-.row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
-.msg { padding: 0.7rem; border-radius: 8px; border: 1px solid var(--border); white-space: pre-wrap; }
-.msg.error { background: #fef2f2; border-color: #fecaca; color: var(--bad); }
-.msg.ok { background: #ecfeff; border-color: #bae6fd; }
-.msg.warn { background: #fffbeb; border-color: #fde68a; color: var(--warn); }
-.card { border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem; background: #fff; }
-.cards { display: grid; gap: 0.7rem; }
-.meta { color: var(--muted); font-size: 0.9rem; }
-.bad { color: var(--bad); }
-.good { color: var(--ok); }
-a { color: var(--primary); text-decoration: none; }
-a:hover { text-decoration: underline; }
-code { background: #f1f5f9; padding: 0.1rem 0.3rem; border-radius: 4px; }
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply overflow-x-hidden bg-[#0F0F0F] text-zinc-100;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .glass-card {
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .accent-gradient {
+    background: linear-gradient(135deg, #e23744 0%, #ff535a 100%);
+  }
+  .hero-bg {
+    background-image: radial-gradient(circle at 50% 50%, rgba(226, 55, 68, 0.08) 0%, transparent 50%),
+      url("https://lh3.googleusercontent.com/aida-public/AB6AXuC857iwVoE065OYuBd30GIm-EcXvzMbXpONaSbMfTel77FkN0S91-fQ7brOuj_A4CULvr5kPtDyyXfqzmiUcHVZH45XnQ1UfF0AgKlcjGgaAkXlUR9CnhnnZ6ASILKYiIkrDpAUHfVmL--Esd07ZD4IjbC3DW0B6ljlUeKU6tJQgMMwpDPtdZPQjjOy_EBnD-DyfVBUoePPv461ScVoqqkt45e3d0LysgUJH7WgjDxQGa_3efNH0wcDKbqFG37lgdZ3ET8wND35pzW4");
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+  }
+  @media (min-width: 768px) {
+    .hero-bg {
+      background-attachment: fixed;
+    }
+  }
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(15, 15, 15, 0.4) 0%, #0f0f0f 100%);
+  }
+  .ai-glow {
+    box-shadow: 0 0 20px rgba(226, 55, 68, 0.1);
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}

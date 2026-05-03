@@ -11,8 +11,9 @@ Implements Phase 7 from `docs/phase-wise-architecture.md` in **Next.js**.
 
 ## App pages
 
-- `/` — main recommendation UI with safety hints + integrity checks + observability display
-- `/eval` — runs golden-query evaluation using `public/golden-queries.json`
+- `/` — Stitch-inspired **landing_preferences** dark UI: preference form, safety soft-checks in the insights rail, `POST /api/recommend`, then navigate to results
+- `/recommendations` — **AI recommendations grid** populated from the latest successful response (sessionStorage); refresh re-calls the API with the same payload
+- `/eval` — golden-query evaluation using `public/golden-queries.json` (same API proxy)
 
 ## API routes
 

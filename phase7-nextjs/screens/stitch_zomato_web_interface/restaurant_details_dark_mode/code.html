@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#c6c6c7",
+                    "on-primary-container": "#5b000e",
+                    "surface-variant": "#353534",
+                    "on-secondary-fixed-variant": "#454747",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-secondary-container": "#b4b5b5",
+                    "inverse-on-surface": "#313030",
+                    "tertiary": "#c8c6c5",
+                    "on-tertiary": "#313030",
+                    "secondary-container": "#454747",
+                    "on-error": "#690005",
+                    "inverse-primary": "#bb162c",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-surface": "#e5e2e1",
+                    "on-primary": "#680011",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "tertiary-container": "#929090",
+                    "on-background": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "outline": "#ab8987",
+                    "background": "#131313",
+                    "primary-fixed": "#ffdad8",
+                    "on-primary-fixed": "#410007",
+                    "surface-tint": "#ffb3b1",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-container": "#2a2a29",
+                    "surface-container-highest": "#353534",
+                    "surface": "#131313",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary": "#2f3131",
+                    "outline-variant": "#5b403f",
+                    "primary": "#ffb3b1",
+                    "on-surface-variant": "#e4bebc",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "surface-dim": "#131313",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-bright": "#3a3939",
+                    "on-primary-fixed-variant": "#92001c",
+                    "tertiary-fixed": "#e5e2e1",
+                    "primary-container": "#ff535a",
+                    "tertiary-fixed-dim": "#c8c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "margin": "20px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Be Vietnam Pro"],
+                    "h1": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "h2": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "h3": ["Be Vietnam Pro"],
+                    "body-sm": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["20px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .nocturnal-gradient {
+            background: linear-gradient(180deg, rgba(19,19,19,0) 0%, rgba(19,19,19,0.9) 70%, rgba(19,19,19,1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-neutral-900/90 backdrop-blur-md border-b border-white/10 shadow-2xl shadow-black/50 font-['Be_Vietnam_Pro'] antialiased">
+<div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+<div class="text-3xl font-black italic text-white">Zomato</div>
+<div class="hidden md:flex items-center gap-lg">
+<nav class="flex items-center gap-md">
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 active:scale-95" href="#">Add restaurant</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 active:scale-95" href="#">Log in</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 active:scale-95" href="#">Sign up</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="p-2 rounded-full hover:bg-white/5 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-white" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-lg">
+<!-- Photo Gallery Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-md h-[400px] md:h-[550px] mb-lg overflow-hidden rounded-xl">
+<div class="md:col-span-2 md:row-span-2 relative group cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A cinematic, wide-angle shot of the opulent interior of The Copper Chimney restaurant. Deep crimson velvet booths are nestled against dark mahogany walls, illuminated by warm, hanging copper lanterns that cast a soft glow. The floor is polished dark stone, reflecting the subtle lighting. The atmosphere is sophisticated and premium, adhering to a nocturnal crimson dark theme with high-end textures and moody lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUN4XOpoc_nz7fn306QJfTHSMsRKnjS8_SUkYl4d-4Rnr4z7sY_ahqUhnRRPuuCCtJUApb3DrGNnrhj8NLAFCVfeGEZx_OIfATXogAxdymveYIcigmwVLbQX-Y8532NKR1mVttLH0DoFPVsXk82kFyxt0K3ZjQAgRefQx4mmiEt6hkrHyuqhxO4COpioJxSEeqRy2z9HOxdy6f8vd_2Ui5QsR0hZZlkesjX_Vz4WqoZhD8gZmdfuu3k64mDpVVFkJnX543nV8PNlAX"/>
+<div class="absolute inset-0 nocturnal-gradient"></div>
+</div>
+<div class="hidden md:block md:col-span-1 md:row-span-1 relative group cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A close-up shot of a signature North Indian dish, slow-cooked dal makhani garnished with a swirl of fresh cream and cilantro, served in a heavy copper bowl. The lighting is focused and dramatic, highlighting the rich textures and deep colors of the food. The background is a dark, moody restaurant setting that complements the brand's nocturnal crimson aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSR97MSJvnDmLgiXOwxCcf3hUIrF4uHRKYVuJHFVS0VFSUVgmHMGk7_3R_vCDWFdqQWxSbVNOKGqngjahm2_F52oWsL9Ww_dn6jDd5eCKdzqQV3pZw4QJjoUX98OUR5HkESqOp5BGJBYrBrsLGz0x3LaMcq3OW2ENpdZMPLP4HRXAF_m-LyZk6MNuwMBMoWiI6QHhzv6LYeedI3da9M5rVIh8wjLT1L4_gWGvvRvm2gty5BXzXi7fkgmxrGF2cGWczUyzvke1DEV29"/>
+</div>
+<div class="hidden md:block md:col-span-1 md:row-span-1 relative group cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A luxurious dark cocktail served in a crystal glass with a single large ice cube and a twist of citrus. The glass sits on a dark slate coaster. The surrounding lighting is dim with red accents, creating a moody, high-end lounge vibe. The focus is sharp on the condensation of the glass and the deep amber hue of the liquid." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBomHAmZX0AqZPc5qkXiqr96tKiLz_6oKffn3ZQbYxTEKlMvSlmb0x9UHEuW2ZBA6QJEbPz3aRnnr7BCnSKCyWAIIwZJ4slwg9tfWUDtRBx1e5fjYqMFUcwy-fKoFXpH7g6RoCa2gtBJN7y-usMhhFsrGbEqDViBfNN-ICVwCjPoz2yHT7SeXkE4R8lSBEXXWlbmKTz07b-d9gpX4MyrrCrC3B2w-4EX2eXxIbbfsy_DOb4k5_vcmAWASbdOsxRSgIHAK39QE1Bu4S6"/>
+</div>
+<div class="hidden md:block md:col-span-2 md:row-span-1 relative group cursor-pointer overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An artisanal tandoori platter featuring succulent kebabs and freshly baked naan arranged on a dark, textured plate. Steam rises gently from the food, caught in a sliver of warm light. The setting is a minimalist, dark-themed restaurant table with subtle red highlights. The image conveys a sense of high-quality, authentic gourmet dining." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBCS-hCj2KzcPEXxpX_LOLoD_-NQAc8pLlYsXOQDDG-GVWI778okTJerd8g5h8TKynTEYPqjdkImpKq83tZUtTA6Uf7DO2jqSkEBdFkRaHoVTwu23qaulSpO_dfsOdzn7jpSXKAbByq5C24A7fXbMKLtL4QrV9_LVLzfrNbDx8hvp8eKsRMo79u9IW6cr2SlktT2ys7x5rMPdFwMn0AdBv6J-DVL0nMdrBN-LVUFyqQrOL6httFePJ-NxQCd8zVa6w-niF1we1NZGW"/>
+<div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-lg text-sm font-label-caps text-white border border-white/10">
+                    View 42+ Photos
+                </div>
+</div>
+</section>
+<!-- Info & Actions Header -->
+<section class="flex flex-col md:flex-row justify-between items-start gap-lg mb-xl">
+<div class="flex-1">
+<h1 class="font-h1 text-h1 text-on-surface mb-xs">The Copper Chimney</h1>
+<p class="font-body-lg text-body-lg text-neutral-400 mb-base">North Indian • Mughlai • Desserts</p>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-xs">
+<span class="bg-primary-container text-white px-2 py-1 rounded flex items-center gap-1 font-bold">
+                            4.8 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span class="text-body-sm text-neutral-500 underline decoration-neutral-700 underline-offset-4">12k Delivery Reviews</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="bg-green-600 text-white px-2 py-1 rounded flex items-center gap-1 font-bold">
+                            4.5 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span class="text-body-sm text-neutral-500 underline decoration-neutral-700 underline-offset-4">8.5k Dining Reviews</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-md">
+<button class="flex items-center gap-base px-6 py-3 border border-white/10 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors active:scale-95 group">
+<span class="material-symbols-outlined text-primary" data-icon="directions">directions</span>
+<span class="font-h3 text-body-md">Direction</span>
+</button>
+<button class="flex items-center gap-base px-6 py-3 border border-white/10 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors active:scale-95 group">
+<span class="material-symbols-outlined text-primary" data-icon="bookmark">bookmark</span>
+<span class="font-h3 text-body-md">Bookmark</span>
+</button>
+<button class="flex items-center gap-base px-6 py-3 border border-white/10 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors active:scale-95 group">
+<span class="material-symbols-outlined text-primary" data-icon="share">share</span>
+<span class="font-h3 text-body-md">Share</span>
+</button>
+</div>
+</section>
+<!-- Main Content Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Left: Menu & Info -->
+<div class="lg:col-span-8">
+<!-- Navigation Tabs -->
+<div class="flex gap-lg border-b border-white/5 mb-lg overflow-x-auto whitespace-nowrap">
+<button class="pb-md font-h3 text-body-md border-b-2 border-primary-container text-primary-container">Overview</button>
+<button class="pb-md font-h3 text-body-md text-neutral-500 hover:text-on-surface transition-colors">Order Online</button>
+<button class="pb-md font-h3 text-body-md text-neutral-500 hover:text-on-surface transition-colors">Reviews</button>
+<button class="pb-md font-h3 text-body-md text-neutral-500 hover:text-on-surface transition-colors">Menu</button>
+<button class="pb-md font-h3 text-body-md text-neutral-500 hover:text-on-surface transition-colors">Photos</button>
+</div>
+<!-- About & Menu Sections -->
+<div class="space-y-xl">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface mb-md">About this place</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="p-lg rounded-xl glass-panel">
+<h3 class="font-h3 text-h3 text-on-surface mb-base">Average Cost</h3>
+<p class="font-body-md text-body-md text-neutral-400">₹1,800 for two people (approx.)</p>
+<p class="text-[12px] text-neutral-500 mt-xs">Exclusive of taxes and charges, if any</p>
+</div>
+<div class="p-lg rounded-xl glass-panel">
+<h3 class="font-h3 text-h3 text-on-surface mb-base">Popular Dishes</h3>
+<p class="font-body-md text-body-md text-neutral-400">Reshmi Kebab, Roomali Roti, Chelo Kebab, Dal Maharaja</p>
+</div>
+</div>
+</div>
+<!-- Recommended Section -->
+<div>
+<div class="flex justify-between items-end mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface">Recommended</h2>
+<span class="text-primary text-body-sm cursor-pointer hover:underline">View Full Menu</span>
+</div>
+<div class="space-y-md">
+<!-- Menu Item Card -->
+<div class="flex flex-col sm:flex-row gap-md p-md rounded-xl bg-surface-container-low border border-white/5 hover:border-white/20 transition-all">
+<div class="w-full sm:w-32 h-32 flex-shrink-0 relative">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A detailed macro shot of a single perfectly charred seekh kebab on a dark plate, garnished with thin rings of red onion and a wedge of lemon. The lighting emphasizes the glistening spices and the smoky texture. The background is pitch black, keeping the focus entirely on the culinary craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYr7qm4U9cRKC2J2BqoCBNzcnUC0q1j3rXgpTxdztIrSLmeV3cYg9b9mFOf1r1zZKziMY0A85xCctBzVNDGVxb_gmpzPXZE18CljsOUYppGGpNgqtdjv2toMyGu9qxvSEoUjYimSZLGlsVVQqxPdy1p9bZm9PKmP6tfkSdZoUz7Lkm7pQeiawImtSUxdB76QkYrqYRY62U2hI2fNJN16QGbeFQE7Ht1LJOLPiJ2VHjbONsnM9SqoiZgI7vjI2AExx-VhF_l2zODBz5"/>
+<button class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-surface-container-high border border-primary-container text-primary px-4 py-1 rounded-md text-sm font-bold shadow-lg shadow-black/40 hover:bg-primary-container hover:text-white transition-colors">ADD</button>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<span class="material-symbols-outlined text-green-600 text-sm" style="font-variation-settings: 'FILL' 1;">circle</span>
+<h3 class="font-h3 text-h3 text-on-surface">Burrah Kebab</h3>
+<p class="font-body-sm text-body-sm text-neutral-500 line-clamp-2">Prime lamb chops marinated in a secret blend of spices and slow-cooked in a traditional tandoor until tender.</p>
+</div>
+<span class="font-h3 text-on-surface">₹695</span>
+</div>
+<div class="mt-base flex items-center gap-xs">
+<span class="bg-primary/10 text-primary-container text-[10px] px-2 py-0.5 rounded-full border border-primary/20">BESTSELLER</span>
+<span class="text-[12px] text-neutral-500">Votes 842</span>
+</div>
+</div>
+</div>
+<!-- Menu Item Card 2 -->
+<div class="flex flex-col sm:flex-row gap-md p-md rounded-xl bg-surface-container-low border border-white/5 hover:border-white/20 transition-all">
+<div class="w-full sm:w-32 h-32 flex-shrink-0 relative">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A gourmet presentation of Paneer Tikka, featuring large cubes of marinated cheese with grilled bell peppers and onions. The vibrant orange marinade contrasts beautifully with the dark charcoal background. The dish is presented on a minimalist dark ceramic platter with a side of mint chutney." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsdc5wUKhtGbwedKlMUd2R4ET-c4ewEVkJaL5KeweDX-ANVLKK96OZ9YAB_QIOxNXq8cPW57RCZ0ouw08X1K9Q2pkVPcPaT9S-YuRG8Cz0B3S2LzlXPmAYqnu3-5iy4jmqserrU60_D0AoJpvLxqM_yWzlNfFUy8DKM7ozEoRNxYDBRCZNH8ZBlY4E2cHW8cD06-ScoN6_IfVDPJasKlLGXABauBKbWlH3c-Vu3igvThf9BYpmEceOjAXFVOOk1k_tOYB2tjp-hfgF"/>
+<button class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-surface-container-high border border-primary-container text-primary px-4 py-1 rounded-md text-sm font-bold shadow-lg shadow-black/40 hover:bg-primary-container hover:text-white transition-colors">ADD</button>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<span class="material-symbols-outlined text-green-600 text-sm" style="font-variation-settings: 'FILL' 1;">circle</span>
+<h3 class="font-h3 text-h3 text-on-surface">Achari Paneer Tikka</h3>
+<p class="font-body-sm text-body-sm text-neutral-500 line-clamp-2">Fresh cottage cheese cubes marinated with tangy pickle spices and grilled to perfection.</p>
+</div>
+<span class="font-h3 text-on-surface">₹425</span>
+</div>
+<div class="mt-base flex items-center gap-xs">
+<span class="text-[12px] text-neutral-500">Votes 510</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Reviews Snippet -->
+<div class="mt-xl">
+<h2 class="font-h2 text-h2 text-on-surface mb-lg">Recent Reviews</h2>
+<div class="space-y-lg">
+<div class="p-lg rounded-xl glass-panel border-l-4 border-l-primary-container">
+<div class="flex justify-between items-start mb-md">
+<div class="flex gap-md items-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a smiling man in his 30s with a clean-cut look, used as a user profile avatar. The lighting is soft and neutral, with a blurred dark-themed background that fits the application's overall nocturnal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPAR9g_k72imwLAFhMFJ4Xv6lyCbxic7KJ1Knbkx-o6piVlYV18lwzl0UhOlMGylQaNnv_ZqkoORY5WluFGUF6J12T9qkTdhWqvuo3HLYIHKxGefslD9UrgZgOsla0VCONJY-536jyg7JujZAvedCuACv8VZjNZ39Mwr9VTiIdqXvUxgTm4EZ-yjCkf6ja3qsvvR8NvB2C73nff1PVmqI-DoWAXgv9FVNpVxZihk9FWoW1LpM6hWMhy-beRT0WsgkRzzX3nX45e8lw"/>
+</div>
+<div>
+<p class="font-h3 text-body-md text-on-surface">Arjun Mehta</p>
+<p class="text-[12px] text-neutral-500">42 Reviews • 1.2k Followers</p>
+</div>
+</div>
+<div class="flex items-center gap-1 bg-green-600 text-white px-2 py-0.5 rounded text-sm font-bold">
+                                        5 <span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-neutral-300">The Burrah Kebab here is legendary. The meat literally falls off the bone. Perfect ambiance for a late-night dinner. Highly recommended for family gatherings.</p>
+<div class="mt-md flex gap-md">
+<button class="flex items-center gap-xs text-neutral-500 hover:text-primary transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="thumb_up">thumb_up</span> Helpful (24)
+                                    </button>
+<button class="flex items-center gap-xs text-neutral-500 hover:text-primary transition-colors text-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat_bubble">chat_bubble</span> Comment
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Widgets & Contact -->
+<div class="lg:col-span-4 space-y-lg">
+<!-- Book a Table Widget -->
+<div class="p-lg rounded-xl glass-panel shadow-2xl shadow-black/20 sticky top-24">
+<h2 class="font-h2 text-h3 text-on-surface mb-md">Book a Table</h2>
+<div class="space-y-md">
+<div>
+<label class="block text-label-caps font-label-caps text-neutral-500 mb-xs">SELECT DATE</label>
+<div class="flex items-center justify-between p-md bg-surface-container-low border border-white/10 rounded-lg cursor-pointer hover:border-white/30 transition-colors">
+<span class="text-on-surface">Today, 24 Oct</span>
+<span class="material-symbols-outlined text-neutral-500" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+<div>
+<label class="block text-label-caps font-label-caps text-neutral-500 mb-xs">GUESTS</label>
+<div class="flex items-center justify-between p-md bg-surface-container-low border border-white/10 rounded-lg cursor-pointer hover:border-white/30 transition-colors">
+<span class="text-on-surface">2 People</span>
+<span class="material-symbols-outlined text-neutral-500" data-icon="group">group</span>
+</div>
+</div>
+<button class="w-full py-4 bg-primary-container text-white font-h2 text-body-lg rounded-xl shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all">Book Table</button>
+<p class="text-center text-[12px] text-neutral-500">Free cancellation available until 2 hours before the booking.</p>
+</div>
+<div class="mt-xl pt-lg border-t border-white/5">
+<h2 class="font-h3 text-h3 text-on-surface mb-md">Order Online</h2>
+<div class="flex items-center gap-md mb-md">
+<span class="material-symbols-outlined text-green-500" data-icon="timer">timer</span>
+<div>
+<p class="text-body-sm text-on-surface">Delivery in 35-40 mins</p>
+<p class="text-[12px] text-neutral-500">Live tracking available</p>
+</div>
+</div>
+<button class="w-full py-4 border border-primary-container text-primary-container font-h2 text-body-lg rounded-xl hover:bg-primary-container/10 active:scale-[0.98] transition-all">Order Now</button>
+</div>
+<div class="mt-xl pt-lg border-t border-white/5">
+<h2 class="font-h3 text-h3 text-on-surface mb-md">Location &amp; Contact</h2>
+<div class="rounded-lg overflow-hidden h-32 mb-md">
+<img class="w-full h-full object-cover" data-alt="A stylized digital map interface showing a dark-themed street grid of a modern urban neighborhood. A bright crimson pin marker indicates the location of The Copper Chimney restaurant. The map uses a sophisticated charcoal and deep gray color palette with glowing red accents for landmarks, fitting the premium nocturnal crimson theme." data-location="Mumbai, India" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqVy7P0oTHiAhZvCw5ceNAbdtY00ClW42Eg_madA7nQY2Q1jlk1hsxkPhydoD-vvVYQSGuBin0eZ9CPH6qtKJrRoJamDptUtg3GNi2HmgXn4vUd0eC37uWBbeiA4j9nLzpswtAdu-d29mzv1r_8p-kac0sEBCDQDhkIp11m-wSNPIryQ9xnWWOQaspk8DDBZqmg5VLI-gAgjovKfWVl4siflx2KGWy5Sxkey5sFkVezzQlFvM6DPpFOaD-AMpxUpYIZhGKRkq5KsCR"/>
+</div>
+<p class="text-body-sm text-neutral-400 mb-base">Lotus Court, Dr Annie Besant Rd, Worli, Mumbai, Maharashtra 400018</p>
+<div class="flex gap-md">
+<button class="flex-1 flex items-center justify-center gap-xs py-2 bg-surface-container-high rounded-lg text-sm text-on-surface border border-white/5">
+<span class="material-symbols-outlined text-[18px]" data-icon="call">call</span> Call
+                            </button>
+<button class="flex-1 flex items-center justify-center gap-xs py-2 bg-surface-container-high rounded-lg text-sm text-on-surface border border-white/5">
+<span class="material-symbols-outlined text-[18px]" data-icon="content_copy">content_copy</span> Copy
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full pt-12 pb-8 bg-neutral-950 border-t border-white/5 font-['Be_Vietnam_Pro'] text-sm text-neutral-400">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-2xl font-black italic text-white mb-4">Zomato</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+<div>
+<h4 class="text-white font-bold mb-4 uppercase tracking-widest text-[11px]">About Zomato</h4>
+<ul class="space-y-2">
+<li class="cursor-pointer hover:text-red-500 transition-colors">Who We Are</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Blog</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Work With Us</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Investor Relations</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Report Fraud</li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-4 uppercase tracking-widest text-[11px]">Zomaverse</h4>
+<ul class="space-y-2">
+<li class="cursor-pointer hover:text-red-500 transition-colors">Zomato</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Blinkit</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Feeding India</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Hyperpure</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Zomaland</li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-4 uppercase tracking-widest text-[11px]">For Restaurants</h4>
+<ul class="space-y-2">
+<li class="cursor-pointer hover:text-red-500 transition-colors">Partner With Us</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Apps For You</li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-4 uppercase tracking-widest text-[11px]">Learn More</h4>
+<ul class="space-y-2">
+<li class="cursor-pointer hover:text-red-500 transition-colors">Privacy</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Security</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Terms</li>
+<li class="cursor-pointer hover:text-red-500 transition-colors">Sitemap</li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-4 uppercase tracking-widest text-[11px]">Social Links</h4>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">public</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">mail</span>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 text-center md:text-left">
+<p>© 2024 Zomato™ Ltd. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>

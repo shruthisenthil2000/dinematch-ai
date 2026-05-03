@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DineMatch AI - Restaurant Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#bb162c",
+            "on-secondary": "#303030",
+            "on-primary-container": "#5b000e",
+            "surface-bright": "#473534",
+            "error": "#ffb4ab",
+            "tertiary": "#71d7cf",
+            "on-surface": "#f9dcda",
+            "on-primary-fixed": "#410007",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#474746",
+            "on-secondary-container": "#b7b5b4",
+            "surface-container": "#2c1b1b",
+            "primary-fixed": "#ffdad8",
+            "on-tertiary-container": "#00302d",
+            "secondary-fixed-dim": "#c8c6c5",
+            "surface": "#1e0f0f",
+            "secondary-fixed": "#e5e2e1",
+            "error-container": "#93000a",
+            "outline-variant": "#5b403f",
+            "on-tertiary": "#003734",
+            "on-surface-variant": "#e4bebc",
+            "surface-container-high": "#372625",
+            "secondary-container": "#474746",
+            "surface-variant": "#423030",
+            "surface-dim": "#1e0f0f",
+            "surface-tint": "#ffb3b1",
+            "on-tertiary-fixed": "#00201e",
+            "on-error": "#690005",
+            "surface-container-lowest": "#180a0a",
+            "on-tertiary-fixed-variant": "#00504c",
+            "secondary": "#c8c6c5",
+            "surface-container-low": "#271717",
+            "tertiary-container": "#32a099",
+            "primary": "#ffb3b1",
+            "on-background": "#f9dcda",
+            "on-primary": "#680011",
+            "surface-container-highest": "#423030",
+            "outline": "#ab8987",
+            "background": "#1e0f0f",
+            "primary-fixed-dim": "#ffb3b1",
+            "inverse-surface": "#f9dcda",
+            "on-secondary-fixed": "#1b1b1c",
+            "on-primary-fixed-variant": "#92001c",
+            "tertiary-fixed-dim": "#71d7cf",
+            "tertiary-fixed": "#8ef4eb",
+            "primary-container": "#ff535a",
+            "inverse-on-surface": "#3e2c2b"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "sm": "16px",
+            "container-max": "1200px",
+            "xl": "64px",
+            "md": "24px",
+            "unit": "4px",
+            "xs": "8px",
+            "lg": "40px",
+            "gutter": "24px"
+          },
+          "fontFamily": {
+            "headline-md": ["Be Vietnam Pro"],
+            "label-sm": ["Be Vietnam Pro"],
+            "display-lg": ["Be Vietnam Pro"],
+            "ai-reasoning": ["Be Vietnam Pro"],
+            "body-base": ["Be Vietnam Pro"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "ai-reasoning": ["15px", {"lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "body-base": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-panel {
+      background: rgba(30, 30, 30, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .ai-border {
+      border-left: 2px solid #E23744;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-base selection:bg-primary-container selection:text-on-primary-container">
+<!-- Immersive Hero Section -->
+<header class="relative w-full h-[530px] overflow-hidden">
+<img alt="L'Eclat de Paris Interior" class="absolute inset-0 w-full h-full object-cover" data-alt="A high-end restaurant interior with dim, moody atmospheric lighting. The design features sleek obsidian tables, plush deep red velvet seating, and warm amber glow from minimalist pendant lights. Large floor-to-ceiling windows reflect the city lights of Paris at night. The aesthetic is sophisticated and exclusive, using a palette of deep blacks and vibrant red accents to create a luxurious dark-mode atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANBxPlBe5vNOLyMWs3RxIxdDpdHPbXG33LsxgQBKWi03hPta3hvHSqyLz76OtsNvF2T4tpm_VUaATbRdwTnwcPCRvSfmyz1wsJ0TbZW9g7J4okFrm-r8prS4sxxt_cEe6G37ynynDTwc88HPT87xJxhyXASUM9x0tpeouwMHbxxKok8pyRHxZkVrPFN3DxkoSWh6yyvSR-AVe6z7UZhDsDUZ3BaUcZHMDhKQxaSmIdSSDgizRpiqlmnfTvUZBmo9zaUrdIyo_-bY_t"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<!-- Top Action Bar -->
+<nav class="absolute top-0 left-0 w-full px-sm py-md flex justify-between items-center z-20">
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex gap-xs">
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-white">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-white">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</nav>
+<!-- Header Content -->
+<div class="absolute bottom-0 left-0 w-full p-sm space-y-unit">
+<div class="flex items-center gap-xs">
+<span class="bg-[#E23744] text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">98% Match</span>
+<div class="flex items-center text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold ml-1">4.9 (1.2k Reviews)</span>
+</div>
+</div>
+<h1 class="text-display-lg font-display-lg text-white leading-tight">L'Éclat de Paris</h1>
+<p class="text-on-surface-variant font-body-base">Contemporary French • 8th Arrondissement</p>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="px-sm py-lg space-y-lg max-w-container-max mx-auto relative z-10 -mt-8">
+<!-- AI Insights Section (SideNav inspired logic) -->
+<section class="space-y-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[#E23744]">psychology</span>
+<h2 class="text-headline-md font-headline-md">AI Insights</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Pros Card -->
+<div class="glass-panel p-md rounded-xl ai-border">
+<h3 class="text-primary font-label-sm uppercase mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+            Why you'll love it
+          </h3>
+<ul class="space-y-sm text-ai-reasoning font-ai-reasoning text-on-surface">
+<li class="flex gap-xs">
+<span class="text-[#E23744] font-bold">•</span>
+              Matches your preference for molecular gastronomy and intimate settings.
+            </li>
+<li class="flex gap-xs">
+<span class="text-[#E23744] font-bold">•</span>
+              Predicted wait time is 15 mins lower than your average evening outing.
+            </li>
+<li class="flex gap-xs">
+<span class="text-[#E23744] font-bold">•</span>
+              Known for their vintage wine cellar, a key interest in your profile.
+            </li>
+</ul>
+</div>
+<!-- Cons/Considerations Card -->
+<div class="glass-panel p-md rounded-xl border-l-2 border-outline-variant">
+<h3 class="text-outline font-label-sm uppercase mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">info</span>
+            Points to note
+          </h3>
+<ul class="space-y-sm text-ai-reasoning font-ai-reasoning text-on-surface-variant">
+<li class="flex gap-xs">
+<span class="text-outline font-bold">•</span>
+              High acoustic energy during peak hours (8 PM - 10 PM).
+            </li>
+<li class="flex gap-xs">
+<span class="text-outline font-bold">•</span>
+              Limited vegan options compared to your usual favorites.
+            </li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Best Dishes (Bento Layout) -->
+<section class="space-y-md">
+<div class="flex justify-between items-end">
+<h2 class="text-headline-md font-headline-md">Signature Creations</h2>
+<a class="text-primary text-label-sm hover:underline" href="#">Full Menu</a>
+</div>
+<div class="grid grid-cols-2 grid-rows-2 gap-sm h-[400px]">
+<div class="col-span-1 row-span-2 relative rounded-xl overflow-hidden group">
+<img alt="Truffle Risotto" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A gourmet presentation of creamy truffle risotto in a minimalist black stoneware bowl. The dish is topped with delicate gold leaf and thinly sliced black truffles. The lighting is focused and dramatic, highlighting the rich textures against a dark, moody background. The overall style is luxurious and culinary-focused, fitting the DineMatch AI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdaATlpm--kAzjxvI_tRM4fTC7wLvsyXcjzPaPJdjeTTytmwZVDnvNGZYNheDEs8-X0RMNEqCFe8GcDP2jFqBFBK0IX5mRnt_IpxPJQkVXT6vSXYWi-TND7_d-6Tn62ug1WXrpsLRXZSNU5c9YTsd8l_-TjcllFKEVbQkXWZvlMTftxtsVgV6aBhsUM3vZNmhRo_rm1cI7fA1HfkPh-RgzF75zXWp0fDoSVxat4Tv0W1QKka02AKrIQ_5G_mJY4XfVoQOgZ2kDTwWv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-sm">
+<span class="bg-[#E23744]/20 text-[#E23744] text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-sm border border-[#E23744]/30">AI Choice</span>
+<p class="text-white font-bold mt-1">Truffle Velouté</p>
+</div>
+</div>
+<div class="col-span-1 row-span-1 relative rounded-xl overflow-hidden group">
+<img alt="Roasted Lamb" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A close-up shot of perfectly seared lamb cutlets served with a vibrant beet reduction and microgreens. The plate is artisanal ceramic, set on a dark slate surface. Warm, localized lighting creates deep shadows and emphasizes the tender texture of the meat. A professional culinary photograph with a high-end, premium dark-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKQ_d4iZKwqhTPlxvsp5Pynp7yP4PsaKIeZyUYSV3Su6E3GQKMLTtQ_kNPYMCS_iGTrFJqfiJuZFFrI2vBVrMvpq65ASEIcF0KeCKuJibmSmQ-LslVZLYn6_YgJn2F14fczwfZtaxxv8xuBwO1LbjeyCXU6GiFcR3jxTdpJWqX_LZYBexH7kaQxwS4OthbGNH5WJS73KorAJM3Pf9955TeXrt4swSWK1qgEALkLCHoeruJCEz8g8c14uCtEF8l-3glnSSi202ThgiK"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-sm">
+<p class="text-white font-bold">Heritage Lamb</p>
+</div>
+</div>
+<div class="col-span-1 row-span-1 relative rounded-xl overflow-hidden group">
+<img alt="Chocolate Souffle" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A decadent dark chocolate soufflé dusting with powdered sugar, being served in a polished silver ramekin. Steam is rising delicately from the center. The background is a blurred high-end restaurant scene with red accents and soft bokeh. The lighting is cinematic and high-contrast, evoking a sense of effortless luxury and indulgence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxrU97tGDoCUDnfGeHoSQgKXucYAfGwN-SJ6PWLbAJxulPpO2ZdSBF3GVGStY2yNlVPxkNiSZYKuuYXV_CFnKP7W2OewThPfLO4RWoYPq7EWjs8It1zOFuHSH05WIj2TWYuwGGT88QterY316-0zQN1g59PS1-bXUkILqE1U-Yx_b6RkfrvbV9iaW1JRnvK0YxUhJEDsT0MzlmfBSDwF5abAbnmyOBeC00ePg8arsEM_8tjVOcl8BR6wRsMPTNzzEOIhUZbXml8b_O"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-sm">
+<p class="text-white font-bold">Noir Soufflé</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews Bottom-Sheet Style Section -->
+<section class="glass-panel rounded-t-3xl p-md pb-xl space-y-md">
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mb-sm"></div>
+<div class="flex justify-between items-center">
+<h2 class="text-headline-md font-headline-md">Diner Voices</h2>
+<button class="text-primary text-label-sm flex items-center gap-xs">
+          Recent
+          <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<div class="space-y-md">
+<!-- Review 1 -->
+<div class="space-y-sm pb-md border-b border-white/5">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline/20 flex items-center justify-center overflow-hidden">
+<img alt="Reviewer Avatar" class="w-full h-full object-cover" data-alt="Portrait of a sophisticated woman with a friendly smile, set against a blurred urban background. The lighting is soft and natural. The image style is clean and professional, matching the premium user profile aesthetic for the DineMatch AI platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr2W73HkjgbejttOjPeWSe5GN-Gaf3HS3y30w616o4UH7q0yGOuwX5aQVoDpaG9qsKL2MfIFRHgQ6Rg5hAYjcU4HRFk_ZqvpkE5K8GWiTAvtIQraz-STimpyw1gz7JV_PObsNm1EuYLgT6NHS3r0ftpZNJd4BW1gYvPdKP0x4x62Zznnz8sP3Y4y-uVK7ewG2SBpeEv8YCHV3FGfjUxzstijD_XnLXrEViYuDDZjGOWa3Z1J9CLM54-OKiz4eNyi7CQMBx2ZHdwKS-"/>
+</div>
+<div>
+<p class="text-white font-bold text-sm">Elena Valance</p>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-wider">Level 5 Critic</p>
+</div>
+</div>
+<div class="flex text-[#E23744] scale-75 origin-right">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="text-on-surface text-sm leading-relaxed italic">
+            "The AI's suggestion for the wine pairing was flawless. The Truffle Velouté is a mandatory experience. Impeccable service."
+          </p>
+</div>
+<!-- Review 2 -->
+<div class="space-y-sm pb-md border-b border-white/5">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline/20 flex items-center justify-center overflow-hidden">
+<img alt="Reviewer Avatar" class="w-full h-full object-cover" data-alt="Portrait of a stylish man in a dark turtleneck, looking thoughtfully into the camera. The background is a minimalist dark studio setting with subtle warm backlighting. A high-end, premium aesthetic suitable for an AI-powered concierge app user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQF_19bo2ElljyTHccIqG6zEyF1CS3JuXN3ISPtm3uD8xdJGuO3JI5lQAy97525mvZoV8DcPRmdJypqYo_HnyJt0gYhqUqSqfFCfUYRddalvA0jg5rrms76dhuwOSngU5A62pRrToeollV0i9WCnP-rTjuDunSWUyodWEK--L_Km5XD_PXmrpYS5kmR6q6BCXHjM-V477aMlyhzIwraGNmk8YSAQOIX5Wgvi2xGfkNcL0EYE4f_cWn3OimIOgZpMzpUk3VFrfI8KmH"/>
+</div>
+<div>
+<p class="text-white font-bold text-sm">Marcus Chen</p>
+<p class="text-on-surface-variant text-[10px] uppercase tracking-wider">Gourmet Explorer</p>
+</div>
+</div>
+<div class="flex text-[#E23744] scale-75 origin-right">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+</div>
+<p class="text-on-surface text-sm leading-relaxed">
+            "Bit noisy on Friday nights, but the food quality is unmatched in the district. The Heritage Lamb was cooked to perfection."
+          </p>
+</div>
+</div>
+<button class="w-full py-md text-primary font-bold text-sm border border-primary/20 rounded-xl hover:bg-primary/5 transition-colors">
+        Read All 1,240 Reviews
+      </button>
+</section>
+</main>
+<!-- Floating Action Button (Mandated by Task) -->
+<div class="fixed bottom-gutter left-0 w-full px-sm z-50 pointer-events-none">
+<button class="w-full h-16 bg-[#E23744] text-white rounded-2xl shadow-[0_12px_24px_rgba(226,55,68,0.4)] flex items-center justify-center gap-sm pointer-events-auto active:scale-[0.97] transition-all duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-bold text-body-base uppercase tracking-widest">Book a Table</span>
+</button>
+</div>
+<!-- Footer (As defined in JSON) -->
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/5 bg-[#0F0F0F] mb-24">
+<div class="text-xs text-zinc-500 font-['Be_Vietnam_Pro'] space-y-2 text-center md:text-left">
+<div class="font-black text-[#E23744] text-lg">DineMatch AI</div>
+<p>© 2024 DineMatch AI. The Discerning Concierge.</p>
+</div>
+<div class="flex gap-md">
+<a class="font-['Be_Vietnam_Pro'] text-xs text-zinc-600 hover:text-[#E23744] transition-colors" href="#">Support</a>
+<a class="font-['Be_Vietnam_Pro'] text-xs text-zinc-600 hover:text-[#E23744] transition-colors" href="#">Concierge API</a>
+<a class="font-['Be_Vietnam_Pro'] text-xs text-zinc-600 hover:text-[#E23744] transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Be_Vietnam_Pro'] text-xs text-zinc-600 hover:text-[#E23744] transition-colors" href="#">Terms</a>
+</div>
+</footer>
+</body></html>

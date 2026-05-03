@@ -1,12 +1,13 @@
-"""Deterministic preference filters on canonical restaurant rows (Phase 3)."""
+"""Deterministic preference filters on canonical restaurant rows."""
 
 from __future__ import annotations
 
+import os
+import re
 from typing import Any, Mapping
 
 import pandas as pd
 
-# Columns required for Phase 3 filtering (Phase 1 canonical output).
 REQUIRED_COLUMNS = frozenset(
     {
         "restaurant_id",
@@ -19,6 +20,25 @@ REQUIRED_COLUMNS = frozenset(
     }
 )
 
+# Friendly copy surfaced to clients when metro-wide broadening is applied (no technical jargon).
+DINING_MATCH_EXPANSION_NOTE = (
+    "We expanded the search slightly to find more great matches nearby."
+)
+
+# When primary (area-flex) matches fall below this count, eligible Bengaluru queries widen to metro city.
+_DEFAULT_MIN_PRIMARY = 5
+
+
+def _min_primary_before_broaden() -> int:
+    raw = (os.environ.get("PHASE3_MIN_CANDIDATES_BEFORE_BROADEN") or "").strip()
+    if not raw:
+        return _DEFAULT_MIN_PRIMARY
+    try:
+        n = int(raw)
+        return max(1, min(n, 50))
+    except ValueError:
+        return _DEFAULT_MIN_PRIMARY
+
 
 def validate_canonical_frame(df: pd.DataFrame) -> None:
     missing = REQUIRED_COLUMNS - set(df.columns)
@@ -26,12 +46,211 @@ def validate_canonical_frame(df: pd.DataFrame) -> None:
         raise ValueError(f"canonical table missing columns: {sorted(missing)}")
 
 
-def _normalize_city(value: str) -> str:
-    return str(value).strip().casefold()
+def normalize_location_input(raw: str) -> str:
+    """Collapse whitespace, strip, lowercase for comparisons."""
+    s = re.sub(r"\s+", " ", str(raw).strip()).casefold()
+    return s
+
+
+def _alias_groups() -> tuple[frozenset[str], ...]:
+    """Synonymous / typo variants for Bengaluru localities (all normalized)."""
+    return (
+        frozenset(
+            {
+                "hsr",
+                "hsr layout",
+                "hsr layout sector 1",
+                "hsr layout sector 2",
+                "hsr layout sector 3",
+                "hsr layout sector 4",
+                "hsr layout sector 5",
+                "hsr layout sector 6",
+                "hsr layout sector 7",
+            }
+        ),
+        frozenset(
+            {
+                "ec",
+                "electronic city",
+                "electronics city",
+                "e city",
+                "electronic city phase 1",
+                "electronic city phase 2",
+                "electronic city phase ii",
+                "electronic city phase iii",
+                "electronic city phase 3",
+                "electronic city phase i",
+            }
+        ),
+        frozenset(
+            {
+                "koramangala",
+                "koramangala 1st block",
+                "koramangala 2nd block",
+                "koramangala 3rd block",
+                "koramangala 4th block",
+                "koramangala 5th block",
+                "koramangala 6th block",
+                "koramangala 7th block",
+                "koramangala 8th block",
+            }
+        ),
+        frozenset(
+            {
+                "whitefield",
+                "whitefield main road",
+                "brookefield",
+                "itpl",
+                "kadugodi",
+                "varthur",
+                "seegehalli",
+                "gunjur",
+                "graphite india",
+            }
+        ),
+        frozenset(
+            {
+                "indiranagar",
+                "indira nagar",
+                "100 feet road",
+                "indiranagar 100 feet road",
+            }
+        ),
+        frozenset(
+            {
+                "bellandur",
+                "bellandur gate",
+                "bellandur lake",
+                "bellandur outer ring road",
+            }
+        ),
+        frozenset(
+            {
+                "marathahalli",
+                "marathahalli bridge",
+                "marathahalli junction",
+            }
+        ),
+        frozenset(
+            {
+                "mg road",
+                "mahatma gandhi road",
+                "trinity",
+                "trinity circle",
+                "commercial street",
+                "church street",
+            }
+        ),
+        frozenset(
+            {
+                "jayanagar",
+                "jayanagar 3rd block",
+                "jayanagar 4th block",
+                "jayanagar 7th block",
+                "jayanagar 9th block",
+                "jp nagar",
+                "j p nagar",
+            }
+        ),
+    )
+
+
+def expand_location_needles(norm: str) -> frozenset[str]:
+    """
+    Build a set of normalized substrings for flexible locality / city matching.
+
+    Includes the raw normalized input plus any alias group that overlaps the query
+    (exact, substring either direction).
+    """
+    needles: set[str] = set()
+    if norm:
+        needles.add(norm)
+    for group in _alias_groups():
+        hit = False
+        for member in group:
+            if norm == member or (norm and norm in member) or (norm and member in norm):
+                hit = True
+                break
+        if hit:
+            needles |= set(group)
+    # Drop unsafe ultra-short tokens except known abbreviations handled by groups.
+    safe: set[str] = set()
+    for n in needles:
+        if len(n) >= 3:
+            safe.add(n)
+        elif n in {"ec", "hsr"}:
+            safe.add(n)
+    return frozenset(safe)
+
+
+def _bengaluru_broaden_trigger_roots() -> frozenset[str]:
+    """If the query needles intersect this set, metro-wide broadening is allowed when primary is thin."""
+    parts: set[str] = set()
+    for g in _alias_groups():
+        parts |= set(g)
+    parts.update(
+        {
+            "bangalore",
+            "bengaluru",
+            "electronic city",
+            "electronics city",
+            "koramangala",
+            "whitefield",
+            "indiranagar",
+            "bellandur",
+            "marathahalli",
+            "jayanagar",
+            "mg road",
+            "hsr layout",
+        }
+    )
+    return frozenset(parts)
+
+
+def triggers_bengaluru_metro_broaden(needles: frozenset[str]) -> bool:
+    if not needles:
+        return False
+    roots = _bengaluru_broaden_trigger_roots()
+    if needles & roots:
+        return True
+    for n in needles:
+        for r in roots:
+            if len(n) >= 4 and (r in n or n in r):
+                return True
+    return False
+
+
+def metro_bangalore_city_mask(df: pd.DataFrame) -> pd.Series:
+    """Rows whose city reads as Bangalore / Bengaluru (handles minor spelling variants)."""
+    c = df["city"].astype(str).str.strip().str.casefold()
+    return c.isin({"bangalore", "bengaluru"}) | c.str.contains("bangalore", regex=False, na=False)
+
+
+def flexible_location_match_mask(df: pd.DataFrame, needles: frozenset[str]) -> pd.Series:
+    """
+    True when normalized city or locality matches any needle via equality or substring
+    (literal ``contains``, ``regex=False`` for safety).
+    """
+    city = df["city"].astype(str).str.strip().str.casefold()
+    if "locality" in df.columns:
+        loc_raw = df["locality"]
+        loc = (
+            loc_raw.where(loc_raw.notna(), "")
+            .astype(str)
+            .map(lambda x: re.sub(r"\s+", " ", str(x).strip()).casefold())
+        )
+    else:
+        loc = pd.Series("", index=df.index)
+    blob = city.str.cat(loc, sep="|")
+    m = pd.Series(False, index=df.index)
+    for needle in needles:
+        if len(needle) < 2:
+            continue
+        m = m | (city == needle) | (loc == needle) | blob.str.contains(needle, regex=False, na=False)
+    return m
 
 
 def cuisine_cell_to_sequence(cuisines: Any) -> list[Any]:
-    """Normalize list-like cells (including ndarray after Parquet) to a Python list."""
     if cuisines is None or (isinstance(cuisines, float) and pd.isna(cuisines)):
         return []
     if isinstance(cuisines, (list, tuple)):
@@ -57,7 +276,6 @@ def user_cuisine_tokens(preferences: Mapping[str, Any]) -> set[str]:
 
 
 def cuisine_overlap_mask(series: pd.Series, user_tokens: set[str]) -> pd.Series:
-    """True when user has no cuisine filter, else at least one overlapping token."""
     if not user_tokens:
         return pd.Series(True, index=series.index)
 
@@ -68,32 +286,67 @@ def cuisine_overlap_mask(series: pd.Series, user_tokens: set[str]) -> pd.Series:
     return series.map(hit)
 
 
-def preference_filter_mask(df: pd.DataFrame, preferences: Mapping[str, Any]) -> pd.Series:
-    """
-    Boolean mask: location (city), budget band, cuisine overlap, min rating.
-
-    Same semantics as ``retrieve_candidates`` in ``filter_engine``.
-    """
-    loc = _normalize_city(str(preferences["location"]))
+def non_location_preference_mask(df: pd.DataFrame, preferences: Mapping[str, Any]) -> pd.Series:
+    """Budget, cuisines, min_rating — same semantics as before."""
     budget = str(preferences["budget"]).strip().casefold()
-
-    city_match = df["city"].astype(str).str.strip().str.casefold() == loc
-    if "locality" in df.columns:
-        locality_match = df["locality"].astype(str).str.strip().str.casefold() == loc
-        city_ok = city_match | locality_match
-    else:
-        city_ok = city_match
     band_ok = df["cost_band"].notna() & (
         df["cost_band"].astype(str).str.strip().str.casefold() == budget
     )
-
     user_tokens = user_cuisine_tokens(preferences)
     cuisine_ok = cuisine_overlap_mask(df["cuisines"], user_tokens)
-
     min_rating = float(preferences["min_rating"])
     if min_rating <= 0:
         rating_ok = pd.Series(True, index=df.index)
     else:
         rating_ok = df["rating"].notna() & (df["rating"].astype(float) >= min_rating)
+    return band_ok & cuisine_ok & rating_ok
 
-    return city_ok & band_ok & cuisine_ok & rating_ok
+
+def preference_filter_mask(df: pd.DataFrame, preferences: Mapping[str, Any]) -> pd.Series:
+    """
+    Boolean mask: flexible location + budget + cuisine + rating.
+
+    Does **not** apply metro-wide broadening; use ``retrieve_candidates`` for that.
+    """
+    loc_norm = normalize_location_input(str(preferences["location"]))
+    needles = expand_location_needles(loc_norm)
+    loc_ok = flexible_location_match_mask(df, needles)
+    return non_location_preference_mask(df, preferences) & loc_ok
+
+
+def build_retrieval_location_mask(
+    df: pd.DataFrame,
+    preferences: Mapping[str, Any],
+    *,
+    retrieval_meta: dict[str, Any] | None = None,
+) -> tuple[pd.Series, pd.Series]:
+    """
+    Return ``(combined_mask, primary_location_mask)``.
+
+    When primary matches are fewer than ``PHASE3_MIN_CANDIDATES_BEFORE_BROADEN`` (default 5)
+    and the query looks like a Bengaluru area, the combined mask widens to all metro
+    Bangalore rows that still satisfy budget / cuisine / rating.
+
+    ``primary_location_mask`` is True only on rows matched by flexible area needles (used for ranking boost).
+    """
+    loc_norm = normalize_location_input(str(preferences["location"]))
+    needles = expand_location_needles(loc_norm)
+    nl = non_location_preference_mask(df, preferences)
+    loc_primary = flexible_location_match_mask(df, needles)
+    primary = nl & loc_primary
+    min_n = _min_primary_before_broaden()
+    expanded = False
+    if int(primary.sum()) < min_n and triggers_bengaluru_metro_broaden(needles):
+        bluru = metro_bangalore_city_mask(df)
+        combined = nl & (loc_primary | bluru)
+        if int(combined.sum()) > int(primary.sum()):
+            expanded = True
+        mask = combined
+    else:
+        mask = primary
+
+    if retrieval_meta is not None:
+        retrieval_meta["location_search_expanded"] = expanded
+        retrieval_meta["dining_match_note"] = DINING_MATCH_EXPANSION_NOTE if expanded else ""
+
+    return mask, loc_primary

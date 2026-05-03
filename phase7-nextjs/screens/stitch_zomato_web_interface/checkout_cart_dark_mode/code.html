@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#c6c6c7",
+                    "on-primary-container": "#5b000e",
+                    "surface-variant": "#353534",
+                    "on-secondary-fixed-variant": "#454747",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-secondary-container": "#b4b5b5",
+                    "inverse-on-surface": "#313030",
+                    "tertiary": "#c8c6c5",
+                    "on-tertiary": "#313030",
+                    "secondary-container": "#454747",
+                    "on-error": "#690005",
+                    "inverse-primary": "#bb162c",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-surface": "#e5e2e1",
+                    "on-primary": "#680011",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "tertiary-container": "#929090",
+                    "on-background": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "outline": "#ab8987",
+                    "background": "#131313",
+                    "primary-fixed": "#ffdad8",
+                    "on-primary-fixed": "#410007",
+                    "surface-tint": "#ffb3b1",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-container": "#2a2a29",
+                    "surface-container-highest": "#353534",
+                    "surface": "#131313",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary": "#2f3131",
+                    "outline-variant": "#5b403f",
+                    "primary": "#ffb3b1",
+                    "on-surface-variant": "#e4bebc",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "surface-dim": "#131313",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-bright": "#3a3939",
+                    "on-primary-fixed-variant": "#92001c",
+                    "tertiary-fixed": "#e5e2e1",
+                    "primary-container": "#ff535a",
+                    "tertiary-fixed-dim": "#c8c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "margin": "20px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Be Vietnam Pro"],
+                    "h1": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "h2": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "h3": ["Be Vietnam Pro"],
+                    "body-sm": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["20px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .tonal-layer {
+            background: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 16px 24px rgba(0, 0, 0, 0.4);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="dark bg-background text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 bg-neutral-900/90 backdrop-blur-md border-b border-white/10 shadow-2xl shadow-black/50">
+<div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+<div class="text-3xl font-black italic text-white">Zomato</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 font-label-caps text-label-caps" href="#">Add restaurant</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 font-label-caps text-label-caps" href="#">Log in</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors duration-200 font-label-caps text-label-caps" href="#">Sign up</a>
+<div class="relative active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-white" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-primary-container text-on-primary-container text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+</div>
+</div>
+<!-- Mobile Toggle -->
+<div class="md:hidden">
+<span class="material-symbols-outlined text-white" data-icon="menu">menu</span>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-6 py-12">
+<header class="mb-12">
+<h1 class="font-h1 text-h1 text-white mb-2">Secure Checkout</h1>
+<p class="font-body-md text-body-md text-secondary">Review your order and select a delivery destination.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Items & Address -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Order Items -->
+<section class="tonal-layer rounded-xl p-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-h2 text-h2 text-white">Your Order</h2>
+<span class="text-primary font-bold">2 Items</span>
+</div>
+<div class="space-y-6">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 pb-6 border-b border-white/5">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A gourmet classic truffle burger with a succulent beef patty, melted aged cheese, and dark truffle shavings, set against a moody dark atmospheric background with warm amber spotlights. The photography is high-contrast and professional, emphasizing textures of the brioche bun and the glossy finish of the ingredients, aligned with a premium late-night aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTcze6hmvvqvI_aZaCdswfokq2134L9LTHznqAd_QZNhD1ofk3Cyzgd5ZBdaf575O6KwgOfV1ikI2j4Fxw-jW402oJxY_y3wxJzkjh3TEPWs-u04i4Y2f6rSKIE2d994RREP0cRmRU1Mo8RgUpEe_V54z_MQylG3nh9jXt0CTu-_QF5tP48oRHNJ6q1PSmSKcCs4POUy6E2kZD-5q0w2j5y29q151xubBsD--xop-YlW_Qp8RnE0CFhMWPOAFv0C0_ema-Kzf-Jj3D"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-h3 text-h3 text-white">Classic Truffle Burger</h3>
+<p class="font-body-sm text-body-sm text-secondary">With Caramelized Onions &amp; Swiss</p>
+</div>
+<p class="font-h3 text-h3 text-white">$14.99</p>
+</div>
+<div class="flex items-center mt-4">
+<button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<span class="mx-4 font-bold">1</span>
+<button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Golden-brown Peri Peri fries seasoned with vibrant red spice dust, served in a rustic dark metal basket. The scene is lit with dramatic low-key lighting that creates deep shadows and highlights the crispy texture of the potato. The overall aesthetic is sophisticated, dark, and Appetizing, using the brand's signature crimson tones in the spice highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAM2U5Dej9KLw0o7bBoq0yh9CnjQEagx2p9BjtpksjRHB8pTqHkAhNylytFen_SiDqEFKh-kgJsSP8FrgH46mHgPixhuhz4W10b1LueKjwNn87WZt6F4rvXUn0nrl_8rmC0NR_oIgzF1WDB-Q1RtgmFph2P51850LgljcApQnI2Rwr8HHtwqPXZaK6Ccc7P-objUI6nb8oUN6QsrU1bdgHw9f9m84aYgcOmAtMKItAo42Lr-3bpuWg8CmrLoYirpmqtqSa5hjNevF9"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-h3 text-h3 text-white">Peri Peri Fries</h3>
+<p class="font-body-sm text-body-sm text-secondary">Large, Extra Spicy</p>
+</div>
+<p class="font-h3 text-h3 text-white">$5.50</p>
+</div>
+<div class="flex items-center mt-4">
+<button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<span class="mx-4 font-bold">1</span>
+<button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Delivery Address -->
+<section class="tonal-layer rounded-xl overflow-hidden">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-h2 text-h2 text-white">Delivery Address</h2>
+<button class="text-primary font-bold font-label-caps text-label-caps flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="edit">edit</span> EDIT
+                            </button>
+</div>
+<div class="flex items-start gap-4">
+<div class="p-3 bg-primary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div>
+<p class="font-h3 text-h3 text-white">Home</p>
+<p class="font-body-md text-body-md text-secondary">452 Nocturnal Avenue, Crimson District, NY 10012</p>
+</div>
+</div>
+</div>
+<!-- Map Component -->
+<div class="h-48 w-full bg-surface-container-highest relative">
+<div class="absolute inset-0 bg-black/40"></div>
+<img class="w-full h-full object-cover grayscale opacity-60" data-alt="A sleek, minimalist dark-mode map of a metropolitan urban area, featuring simplified streets in charcoal and deep grey tones. The map has a glowing red pin in the center indicating a specific delivery location. The lighting is digital and ambient, reflecting a high-end tech-focused aesthetic with subtle geometric details." data-location="New York" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-_XA_VqSU4lwPPv3UeRlWnrLKB6EJxT75MsR9bOWYuMbFGYiHyxRxuSGUoKGH6F3nblzvHSqkGrB69P04D98Hin18yxm5sxno_tq7e7amaJwUrtpamNPnChz5tZDv3WINs0wXpmNQQS7IZ67FO_L45b1umBtRo8AiNKnxOo7KJjlXrcGWIX8PrKRDMnaLXkAdDUy1eJ1Wr3LQkCuuYzuVbS5JP7pAqlKrXH6E51GDDPp3-582Lm36E5EuxW9VHMewZmFSa7ahw2dg"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/40">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="restaurant">restaurant</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Method -->
+<section class="tonal-layer rounded-xl p-6">
+<h2 class="font-h2 text-h2 text-white mb-6">Payment Method</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- UPI -->
+<div class="p-4 rounded-xl border-2 border-primary bg-primary/5 flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="account_balance">account_balance</span>
+<div>
+<p class="font-h3 text-h3 text-white">UPI</p>
+<p class="font-body-sm text-body-sm text-secondary">zomato@upi</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+</div>
+</div>
+<!-- Card -->
+<div class="p-4 rounded-xl border border-white/10 hover:border-white/20 transition-all flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="credit_card">credit_card</span>
+<div>
+<p class="font-h3 text-h3 text-white">Credit Card</p>
+<p class="font-body-sm text-body-sm text-secondary">Ending in 4242</p>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-white/10"></div>
+</div>
+</div>
+<button class="mt-6 w-full py-4 border-2 border-dashed border-white/10 rounded-xl text-secondary hover:text-white hover:border-white/20 transition-all font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="add">add</span> Add New Payment Method
+                    </button>
+</section>
+</div>
+<!-- Right Column: Summary -->
+<div class="lg:col-span-4">
+<div class="sticky top-28 space-y-6">
+<!-- Coupons -->
+<div class="tonal-layer rounded-xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-bold text-white">Apply Coupon</span>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Final Bill -->
+<div class="tonal-layer rounded-xl p-6">
+<h3 class="font-h3 text-h3 text-white mb-6">Order Summary</h3>
+<div class="space-y-4">
+<div class="flex justify-between">
+<span class="text-secondary font-body-md text-body-md">Subtotal</span>
+<span class="text-white font-body-md text-body-md">$20.49</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-body-md text-body-md">Delivery Charge</span>
+<span class="text-white font-body-md text-body-md">$2.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-body-md text-body-md">Restaurant Taxes</span>
+<span class="text-white font-body-md text-body-md">$1.84</span>
+</div>
+<div class="pt-4 border-t border-white/10 flex justify-between items-end">
+<div>
+<p class="text-white font-h2 text-h2">Total Bill</p>
+<p class="text-primary font-bold text-xs uppercase tracking-widest">Saved $5.00</p>
+</div>
+<span class="text-white font-h1 text-h1">$24.33</span>
+</div>
+</div>
+<button class="mt-8 w-full bg-primary-container text-on-primary-container font-h2 text-h2 py-5 rounded-xl shadow-lg shadow-primary-container/20 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+                            Place Order
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="mt-4 text-center text-xs text-secondary/60">
+                            By placing the order, you agree to Zomato's terms of service and privacy policy.
+                        </p>
+</div>
+<!-- Safety Badge -->
+<div class="tonal-layer rounded-xl p-4 bg-gradient-to-r from-emerald-900/20 to-transparent border-emerald-500/20 flex items-start gap-4">
+<span class="material-symbols-outlined text-emerald-500" data-icon="verified_user">verified_user</span>
+<div>
+<p class="text-emerald-500 font-bold text-sm">Safe &amp; Hygienic</p>
+<p class="text-secondary text-xs">All our delivery partners follow strict hygiene protocols.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 w-full pt-12 pb-8 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8">
+<div class="col-span-2">
+<div class="text-2xl font-black italic text-white mb-4">Zomato</div>
+<p class="text-sm font-['Be_Vietnam_Pro'] text-neutral-400 max-w-xs">
+                    The premium destination for the finest culinary experiences, delivered with precision to your doorstep.
+                </p>
+</div>
+<div>
+<p class="text-white font-bold mb-4 font-label-caps text-label-caps">About Zomato</p>
+<ul class="space-y-2 text-sm font-['Be_Vietnam_Pro'] text-neutral-400">
+<li class="hover:text-red-500 transition-colors cursor-pointer">Who We Are</li>
+<li class="hover:text-red-500 transition-colors cursor-pointer">Blog</li>
+<li class="hover:text-red-500 transition-colors cursor-pointer">Work With Us</li>
+</ul>
+</div>
+<div>
+<p class="text-white font-bold mb-4 font-label-caps text-label-caps">For Restaurants</p>
+<ul class="space-y-2 text-sm font-['Be_Vietnam_Pro'] text-neutral-400">
+<li class="hover:text-red-500 transition-colors cursor-pointer">Partner With Us</li>
+<li class="hover:text-red-500 transition-colors cursor-pointer">Apps For You</li>
+</ul>
+</div>
+<div>
+<p class="text-white font-bold mb-4 font-label-caps text-label-caps">Learn More</p>
+<ul class="space-y-2 text-sm font-['Be_Vietnam_Pro'] text-neutral-400">
+<li class="hover:text-red-500 transition-colors cursor-pointer">Privacy</li>
+<li class="hover:text-red-500 transition-colors cursor-pointer">Security</li>
+<li class="hover:text-red-500 transition-colors cursor-pointer">Terms</li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm font-['Be_Vietnam_Pro'] text-neutral-400">© 2024 Zomato™ Ltd. All rights reserved.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-neutral-400 hover:text-red-500 cursor-pointer" data-icon="public">public</span>
+<span class="material-symbols-outlined text-neutral-400 hover:text-red-500 cursor-pointer" data-icon="share">share</span>
+</div>
+</div>
+</footer>
+</body></html>

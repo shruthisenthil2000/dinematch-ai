@@ -310,6 +310,102 @@ def test_cap_limits_rows():
     assert len(out) == 2
 
 
+def test_hsr_alias_matches_hsr_layout_locality():
+    df = pd.DataFrame(
+        [
+            {
+                **_minimal_row(
+                    restaurant_id="1",
+                    name="Cafe",
+                    city="Bangalore",
+                    cuisines=["cafe"],
+                    rating=4.2,
+                    votes=5,
+                    cost_band="medium",
+                ),
+                "locality": "HSR Layout Sector 1",
+            },
+        ]
+    )
+    out = retrieve_candidates(
+        df,
+        _prefs(location="HSR", budget="medium", cuisines=[], min_rating=0.0),
+        cap=10,
+    )
+    assert len(out) == 1
+    assert out.iloc[0]["restaurant_id"] == "1"
+
+
+def test_electronics_city_typo_matches_electronic_city_locality():
+    df = pd.DataFrame(
+        [
+            {
+                **_minimal_row(
+                    restaurant_id="ec1",
+                    name="EC Diner",
+                    city="Bangalore",
+                    cuisines=["south indian"],
+                    rating=4.0,
+                    votes=12,
+                    cost_band="low",
+                ),
+                "locality": "Electronic City Phase 1",
+            },
+        ]
+    )
+    out = retrieve_candidates(
+        df,
+        _prefs(location="Electronics City", budget="low", cuisines=[], min_rating=0.0),
+        cap=10,
+    )
+    assert len(out) == 1
+    assert out.iloc[0]["restaurant_id"] == "ec1"
+
+
+def test_metro_broadening_adds_candidates_when_area_sparse(monkeypatch):
+    monkeypatch.setenv("PHASE3_MIN_CANDIDATES_BEFORE_BROADEN", "3")
+    rows = [
+        {
+            **_minimal_row(
+                restaurant_id="b1",
+                name="Bellandur Only",
+                city="Bangalore",
+                cuisines=["italian"],
+                rating=4.5,
+                votes=20,
+                cost_band="medium",
+            ),
+            "locality": "Bellandur",
+        },
+    ]
+    for i in range(4):
+        rows.append(
+            {
+                **_minimal_row(
+                    restaurant_id=f"o{i}",
+                    name=f"Other{i}",
+                    city="Bangalore",
+                    cuisines=["italian"],
+                    rating=4.0,
+                    votes=10 + i,
+                    cost_band="medium",
+                ),
+                "locality": "Marathahalli",
+            }
+        )
+    df = pd.DataFrame(rows)
+    meta: dict = {}
+    out = retrieve_candidates(
+        df,
+        _prefs(location="Bellandur", budget="medium", cuisines=["Italian"], min_rating=0.0),
+        cap=25,
+        retrieval_meta=meta,
+    )
+    assert len(out) >= 4
+    assert meta.get("location_search_expanded") is True
+    assert "nearby" in (meta.get("dining_match_note") or "").lower()
+
+
 def test_parquet_round_trip(tmp_path):
     df = pd.DataFrame(
         [

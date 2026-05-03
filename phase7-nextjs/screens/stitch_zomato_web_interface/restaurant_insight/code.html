@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "inverse-primary": "#bb162c",
+                  "on-secondary": "#303030",
+                  "on-primary-container": "#5b000e",
+                  "surface-bright": "#473534",
+                  "error": "#ffb4ab",
+                  "tertiary": "#71d7cf",
+                  "on-surface": "#f9dcda",
+                  "on-primary-fixed": "#410007",
+                  "on-error-container": "#ffdad6",
+                  "on-secondary-fixed-variant": "#474746",
+                  "on-secondary-container": "#b7b5b4",
+                  "surface-container": "#2c1b1b",
+                  "primary-fixed": "#ffdad8",
+                  "on-tertiary-container": "#00302d",
+                  "secondary-fixed-dim": "#c8c6c5",
+                  "surface": "#1e0f0f",
+                  "secondary-fixed": "#e5e2e1",
+                  "error-container": "#93000a",
+                  "outline-variant": "#5b403f",
+                  "on-tertiary": "#003734",
+                  "on-surface-variant": "#e4bebc",
+                  "surface-container-high": "#372625",
+                  "secondary-container": "#474746",
+                  "surface-variant": "#423030",
+                  "surface-dim": "#1e0f0f",
+                  "surface-tint": "#ffb3b1",
+                  "on-tertiary-fixed": "#00201e",
+                  "on-error": "#690005",
+                  "surface-container-lowest": "#180a0a",
+                  "on-tertiary-fixed-variant": "#00504c",
+                  "secondary": "#c8c6c5",
+                  "surface-container-low": "#271717",
+                  "tertiary-container": "#32a099",
+                  "primary": "#ffb3b1",
+                  "on-background": "#f9dcda",
+                  "on-primary": "#680011",
+                  "surface-container-highest": "#423030",
+                  "outline": "#ab8987",
+                  "background": "#1e0f0f",
+                  "primary-fixed-dim": "#ffb3b1",
+                  "inverse-surface": "#f9dcda",
+                  "on-secondary-fixed": "#1b1b1c",
+                  "on-primary-fixed-variant": "#92001c",
+                  "tertiary-fixed-dim": "#71d7cf",
+                  "tertiary-fixed": "#8ef4eb",
+                  "primary-container": "#ff535a",
+                  "inverse-on-surface": "#3e2c2b"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "sm": "16px",
+                  "container-max": "1200px",
+                  "xl": "64px",
+                  "md": "24px",
+                  "unit": "4px",
+                  "xs": "8px",
+                  "lg": "40px",
+                  "gutter": "24px"
+          },
+          "fontFamily": {
+                  "headline-md": ["Be Vietnam Pro"],
+                  "label-sm": ["Be Vietnam Pro"],
+                  "display-lg": ["Be Vietnam Pro"],
+                  "ai-reasoning": ["Be Vietnam Pro"],
+                  "body-base": ["Be Vietnam Pro"]
+          },
+          "fontSize": {
+                  "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "ai-reasoning": ["15px", {"lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                  "body-base": [" body-base px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-panel {
+      background: rgba(30, 30, 30, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .ai-border {
+      border-left: 2px solid #E23744;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-[#0F0F0F] text-on-surface font-body-base selection:bg-primary-container selection:text-white">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-[#0F0F0F]/70 backdrop-blur-2xl border-b border-white/5 shadow-2xl shadow-black/50">
+<div class="text-xl font-bold text-white tracking-tighter">DineMatch AI</div>
+<div class="hidden md:flex items-center gap-8 font-['Be_Vietnam_Pro'] text-sm tracking-tight">
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors" href="#">Home</a>
+<a class="text-[#E23744] font-semibold border-b-2 border-[#E23744] pb-1" href="#">Dining Out</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors" href="#">Delivery</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors" href="#">Favorites</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">search</span>
+<input class="bg-white/5 border-white/10 rounded-full pl-10 pr-4 py-1.5 text-sm focus:ring-1 focus:ring-primary outline-none w-64" placeholder="Search matches..." type="text"/>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs">P</button>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed right-0 top-16 h-[calc(100vh-64px)] z-40 flex flex-col p-6 bg-[#1E1E1E]/80 backdrop-blur-3xl border-l border-white/10 shadow-[-20px_0_30px_rgba(0,0,0,0.5)] w-80 hidden lg:flex">
+<div class="mb-8">
+<h3 class="text-lg font-bold text-white font-headline-md">AI Insights</h3>
+<p class="text-xs text-zinc-400">Why these matches?</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 p-3 bg-[#E23744]/10 text-[#E23744] border-l-2 border-[#E23744] font-medium font-['Be_Vietnam_Pro'] text-sm transition-all cursor-pointer">
+<span class="material-symbols-outlined">psychology</span>
+<span>Match Analysis</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-zinc-500 hover:text-zinc-300 hover:bg-white/5 transition-all cursor-pointer font-['Be_Vietnam_Pro'] text-sm">
+<span class="material-symbols-outlined">settings_heart</span>
+<span>Preferences</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-zinc-500 hover:text-zinc-300 hover:bg-white/5 transition-all cursor-pointer font-['Be_Vietnam_Pro'] text-sm">
+<span class="material-symbols-outlined">history</span>
+<span>History</span>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-white/5">
+<div class="glass-panel p-4 rounded-xl">
+<p class="text-[10px] uppercase tracking-widest text-zinc-500 mb-2 font-bold">Prediction confidence</p>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[94%] shadow-[0_0_10px_rgba(226,55,68,0.5)]"></div>
+</div>
+<p class="mt-2 text-xs text-zinc-400 italic">"Based on your recent preference for Umami flavors and quiet atmospheres."</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-16 lg:mr-80 min-h-screen">
+<!-- Hero Section -->
+<div class="relative h-[614px] w-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A high-end, contemporary restaurant interior with dramatic vaulted ceilings and large floor-to-ceiling windows overlooking a twilight cityscape. The lighting is intimate, with warm spotlighting on dark obsidian tables and sleek velvet chairs. The aesthetic is luxurious and tech-forward, featuring clean lines, a deep red and charcoal color palette, and a sophisticated atmosphere perfect for a discerning food enthusiast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq9DAmuXiKN4N1VQvUzH6GXeRMLFA778pNtME4VTEILiC2gE-AmEsJlHMc_cbh-cRB-bHZjuRiKSVXlJ8gYI5ODrawk5QjxM0oK5YKMNuBmut_FH8QJkqded5JBjBUBRwtsZ8RKisHhv8S0T27VJ6Mdpvmgc6Sc0mwSwBqGLyzOXxbMyMvCXHCj1EKvZRAuNV-02awNVJy0gsyIMy5vADduso-lOuw9U3uXlQO4Uz2lp0-w93IW84IhEA65JZWMjfjf5jb8VyH2vlh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 md:p-12 w-full max-w-4xl">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-xs">98% Match</span>
+<span class="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white font-label-sm text-xs">Michelin Guide 2024</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-white mb-2">L'Artiste de Obsidian</h1>
+<div class="flex items-center gap-6 text-zinc-300">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">location_on</span>
+<span class="text-sm">Upper East Side, New York</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">payments</span>
+<span class="text-sm">$$$$</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">restaurant</span>
+<span class="text-sm">Modern French Fusion</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="max-w-container-max mx-auto px-8 py-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: AI Analysis -->
+<div class="lg:col-span-8 space-y-8">
+<!-- AI Analysis Section -->
+<section class="glass-panel p-8 rounded-2xl ai-border">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+<h2 class="font-headline-md text-headline-md text-white">AI Analysis</h2>
+</div>
+<div class="text-right">
+<p class="text-zinc-500 font-label-sm text-[10px] uppercase">Reasoning Profile</p>
+<p class="text-primary font-bold">Predictive Gourmet</p>
+</div>
+</div>
+<p class="font-ai-reasoning text-ai-reasoning text-zinc-300 mb-8 leading-relaxed">
+              "Obsidian" aligns with your preference for <span class="text-primary">intimate lighting</span> and <span class="text-primary">high-protein savory profiles</span>. Our model predicts a high satisfaction score based on your 5-star rating of 'Le Dome' and your recent search for 'Truffle-infused charcoal pasta'. The service velocity is calibrated to your typical 90-minute dining window.
+            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<h3 class="text-white font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-green-400">check_circle</span>
+                  AI Strengths
+                </h3>
+<ul class="space-y-2 text-sm text-zinc-400">
+<li class="flex items-start gap-2">• Consistent 4.9/5 flavor profile for Truffles</li>
+<li class="flex items-start gap-2">• Acoustic level stays below 65dB (Your comfort zone)</li>
+<li class="flex items-start gap-2">• High availability of weekend corner tables</li>
+</ul>
+</div>
+<div class="space-y-4">
+<h3 class="text-white font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">warning</span>
+                  Considerations
+                </h3>
+<ul class="space-y-2 text-sm text-zinc-400">
+<li class="flex items-start gap-2">• Average wait for valet is 12 minutes</li>
+<li class="flex items-start gap-2">• Menu rotates weekly; signature dishes may vary</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Best Dishes Bento -->
+<section>
+<h2 class="font-headline-md text-headline-md text-white mb-6">Signature Selections</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="md:col-span-2 relative h-64 rounded-2xl overflow-hidden glass-panel group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A gourmet steak dish plated with architectural precision on a black slate plate. The meat is medium-rare with a rich glaze, accompanied by vibrant micro-greens and a decadent truffle-infused sauce. The lighting is cinematic, with high contrast highlighting the textures of the food against a dark, obsidian-style background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEKD_OEuekIneCuyctJc8TuN00eD4bWvkJNmvYjhttzXdf8k_R_ZY-EVdlzjI9B06kfAFL_OmHq27_OgFZ79SUaKQ8QPY6LJmWpWBYdJRiEPbVdFqjJWjBX67bLNGNcAYJSTS44Ry3VbzhA3Wg7oufhfzgjv1Ix0nGE4iuhhhfavhojlm0x220YvonRJiOpHkMiY8iiuI2NKksbH6sdBqH8Pw5KJuYrNfB8yydR8l578MmljVbWYZtUUxmVzaigr0dPmOrM-GXuq8Z"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+<div class="flex justify-between items-end">
+<div>
+<h4 class="text-white font-bold">Charcoal Smoked Ribeye</h4>
+<p class="text-xs text-zinc-400">Infused with applewood, gold-leaf butter</p>
+</div>
+<span class="text-primary font-bold">$68</span>
+</div>
+</div>
+</div>
+<div class="relative h-64 rounded-2xl overflow-hidden glass-panel group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A sophisticated lobster tail dish presented in a modern, artistic style. The lobster is perfectly poached, served with a delicate foam and edible flowers. The shot is a close-up with soft, shallow depth of field, set in a luxurious restaurant environment with warm amber lighting and deep red accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRP3DdHdmuoyXb7LmpAJ6dTdcCYVIHeTDvMUb7oRzl_8YurK7tEq7nuh_odQ6gPmm3nECa8A354krqWgD0Gkiiru02AvV65j7hWlqevPaHGDy0C7aRSxrlhe-PWEgOkykaT4-VaAypX3h8KQHzE56-07Kzp68WbWJkO1LIx8vnpcwXlGvQ71qjYJjt1FWysR160qxxPPHrNrnb5L87EXPyZiGjcDTfCnYVLzmZ4q5VdmokgSaVWnTsNmH4vlnQL60LU5NiGWHkqOn8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+<h4 class="text-white font-bold">Saffron Lobster</h4>
+<span class="text-primary font-bold text-sm">$54</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-white">Community Insights</h2>
+<button class="text-primary text-sm font-semibold hover:underline">View all 1,240 reviews</button>
+</div>
+<div class="space-y-4">
+<div class="glass-panel p-6 rounded-2xl">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-sm">JS</div>
+<div>
+<h5 class="text-white font-medium">Julian Sterling</h5>
+<p class="text-[10px] text-zinc-500 uppercase">Verified Diner • Elite Level 4</p>
+</div>
+<div class="ml-auto flex text-primary">
+<span class="material-symbols-outlined fill-1 text-sm">star</span>
+<span class="material-symbols-outlined fill-1 text-sm">star</span>
+<span class="material-symbols-outlined fill-1 text-sm">star</span>
+<span class="material-symbols-outlined fill-1 text-sm">star</span>
+<span class="material-symbols-outlined fill-1 text-sm">star</span>
+</div>
+</div>
+<p class="text-sm text-zinc-300 leading-relaxed">"The AI match was spot on. I usually struggle with noisy places, but the acoustic treatment here is incredible. The Smoked Ribeye is non-negotiable."</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar Widgets -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Pricing Widget -->
+<div class="glass-panel p-6 rounded-2xl border-t-2 border-primary/20">
+<h3 class="text-white font-bold mb-4">Price Insights</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-sm">
+<span class="text-zinc-400">Average Entree</span>
+<span class="text-white font-semibold">$45 - $80</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-zinc-400">Wine Pairing</span>
+<span class="text-white font-semibold">+$120</span>
+</div>
+<div class="h-px bg-white/5 w-full"></div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-zinc-400">Estimated Total (2 pax)</span>
+<span class="text-primary font-bold text-lg">$340</span>
+</div>
+<button class="w-full py-4 bg-primary-container text-on-primary-container rounded-xl font-bold transition-all hover:scale-[1.02] active:scale-[0.98]">
+                Book a Table
+              </button>
+</div>
+</div>
+<!-- Ambience & Tags -->
+<div class="glass-panel p-6 rounded-2xl">
+<h3 class="text-white font-bold mb-4">The Vibe</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-full bg-white/5 text-zinc-300 text-xs flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">volume_off</span> Quiet
+              </span>
+<span class="px-3 py-1.5 rounded-full bg-white/5 text-zinc-300 text-xs flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">lightbulb</span> Dimly Lit
+              </span>
+<span class="px-3 py-1.5 rounded-full bg-white/5 text-zinc-300 text-xs flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">styler</span> Dressy
+              </span>
+<span class="px-3 py-1.5 rounded-full bg-white/5 text-zinc-300 text-xs flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">favorite</span> Romantic
+              </span>
+<span class="px-3 py-1.5 rounded-full bg-white/5 text-zinc-300 text-xs flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">groups</span> Business
+              </span>
+</div>
+</div>
+<!-- Location Map Placeholder -->
+<div class="glass-panel p-2 rounded-2xl h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover rounded-xl grayscale contrast-125" data-alt="A high-contrast, dark-themed satellite map view of Manhattan's Upper East Side. The map uses a sophisticated obsidian and charcoal color palette with the restaurant location marked by a glowing red pulse. Street lines are subtle silver, emphasizing a premium, tech-focused navigation aesthetic." data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwTA2SsKWeTSO45uvvGKq7cbHATn-uOQtRPnGwJuWcXsFuNNtfvqHBatZWLVP0fPSE2OUByDCSXjXFkBByTTjWa6YstB6ivO5F2NrX9bjsBXpyqFqFWEUUjXLTzIN5dNcc1S2KoZwKMpEr7LwgueXUPS0lFJ3I-wjqgpUyryZ5PXM4zjw3G1Aq_qP5KhoPq87e4Z2npXmhmnFKgYU9vnCEiGu3Wk3hpff7unzwFfxj8y_MSl8w439eVkxaBq-EqjwVCYIC8v2jRVip"/>
+<div class="absolute bottom-4 left-4 right-4 glass-panel p-3 rounded-lg border-white/10">
+<p class="text-xs text-white font-medium">1242 Madison Ave, NY</p>
+<p class="text-[10px] text-zinc-400">3.2 miles from your location</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Similar Restaurants Carousel -->
+<section class="mt-16">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline-md text-headline-md text-white">Similar AI Matches</h2>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative h-48 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A sophisticated restaurant interior featuring dark wood textures, warm mood lighting, and an elegant bar area. The atmosphere is upscale and refined, using a palette of deep browns and amber tones to create a luxurious, inviting space for fine dining." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpYb5cy4C4kPZ9C2dPA7zJukTteNbRWPs75QR4-Ix4yMueWPC-l8SQx2Su8vB4QjHK-r2EB6rh1aHoxWs5S8F6ettLmy1M1H0PSM0MMa7QcroDBggvTpHBaedVudYPG74Lj6NeAX120gWG9VY8Ur4x4nwrrSPEXqsbB6oHFxN2gsPdv_XUPbZ7-iXaS0-BdLhFWB3G7j3U--G2AydG2FyRsOQNaic6M6f0W_H9f3EPzHN7nxkiLBno3Qq2PN5EW8m2iqzUPQWeODwa"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-[10px] text-white font-bold">92% Match</div>
+</div>
+<h4 class="text-white font-medium text-sm">The Gilded Clove</h4>
+<p class="text-xs text-zinc-500">Fine Dining • Midtown</p>
+</div>
+<!-- Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative h-48 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A contemporary bistro setting with minimalist decor, industrial-chic elements, and a vibrant open kitchen. The lighting is crisp and modern, highlighting clean architectural lines and a professional culinary environment with a touch of urban sophistication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeVRSkshwxTtoRvH1H72oR90-sJ0PGiB1cG0ksM_0hXxz6rclyukzpRPZ4T4zxHFxd7xiV7IXI6R1UnBdpkAsJTuBVgO9Wa4J7vP90y7UWG4FMLNzFDxQ8C4kb3RQSdP5IYazFoMDBtJ75SOMOpPPA30MDS5c3v0f12tbZeBipZVku_H_tyjQbu_ej_Hbh7_aS-NGPh5yyKCf_BNtSRdFpDv-qCRl5YlUrLTYKP-VupgnkxAnPs-syIc2Mor5PzRjoG9S5-tiktqk7"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-[10px] text-white font-bold">89% Match</div>
+</div>
+<h4 class="text-white font-medium text-sm">Vantablack Bistro</h4>
+<p class="text-xs text-zinc-500">Experimental • SoHo</p>
+</div>
+<!-- Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative h-48 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="An exclusive cocktail lounge with plush velvet seating, dark obsidian surfaces, and backlit shelves displaying premium spirits. The mood is sexy and intimate, with deep red accents and soft lighting creating a high-end night-life aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6_yq9cOAaOKXY4-Hqe2fhXW2eZHXnOgKAOnZrgS_mQK71RxV08rD956NlQV2X3qAYsV49FVTerdG6fwdWxKYYWNxO6-FnWWa1eZTI6XdpI2J0nCUIsZy5v7u2grK4mCKv2MufaOE3J-y4gzSvK09olN4cDZDn0_cMcj3HZMTTfcaqXqVROml0jEWit6vfLPLy06m1h124xbaqA2dceklbPEudoTt2E80WbEd8osLOoIn4FRBaOA92GaPczcZiX9_pCaqbsJ_EZFss"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-[10px] text-white font-bold">87% Match</div>
+</div>
+<h4 class="text-white font-medium text-sm">Liquid Velvet</h4>
+<p class="text-xs text-zinc-500">Cocktails &amp; Tapas • Chelsea</p>
+</div>
+<!-- Card 4 -->
+<div class="group cursor-pointer">
+<div class="relative h-48 rounded-xl overflow-hidden mb-3">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A bright yet moody fine dining room with white tablecloths contrasted against dark walls and modern art. The lighting is focused and elegant, creating a sophisticated gallery-like atmosphere for high-end culinary experiences." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf2MED2d87FbPzQbkQN7yWjwvEtoeSk2rXSQe4liZPrDA6VkcvYfF16zHtF_NMCsofxtAZAc5F1KtLbIyuqUEdTigAzMBkR3btPPsj83JRuCMqTTXgZuLgZZ-9LPaWNCVsL1hUcgSRwA6_5gDG99qwbpZKgJlAuxIHVupU3iA9tr09QMJuh3uiC8jBTFPPcH0Eh_ftsGYxrnOTD8-TFdk_E0LOH94eUlkbq9msm_ePiyo0q59_Ksx9VmSMS-qxAXAFuSUk58_31nWb"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-[10px] text-white font-bold">85% Match</div>
+</div>
+<h4 class="text-white font-medium text-sm">Noir Kitchen</h4>
+<p class="text-xs text-zinc-500">Minimalist French • West Village</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/5 bg-[#0F0F0F]">
+<div class="font-black text-[#E23744] font-['Be_Vietnam_Pro'] text-lg">DineMatch AI</div>
+<div class="flex gap-8">
+<a class="text-zinc-600 hover:text-[#E23744] transition-colors font-['Be_Vietnam_Pro'] text-xs" href="#">Support</a>
+<a class="text-zinc-600 hover:text-[#E23744] transition-colors font-['Be_Vietnam_Pro'] text-xs" href="#">Concierge API</a>
+<a class="text-zinc-600 hover:text-[#E23744] transition-colors font-['Be_Vietnam_Pro'] text-xs" href="#">Privacy Policy</a>
+<a class="text-zinc-600 hover:text-[#E23744] transition-colors font-['Be_Vietnam_Pro'] text-xs" href="#">Terms</a>
+</div>
+<div class="text-zinc-500 font-['Be_Vietnam_Pro'] text-xs">© 2024 DineMatch AI. The Discerning Concierge.</div>
+</footer>
+</body></html>

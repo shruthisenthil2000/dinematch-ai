@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#684a00",
+                    "on-primary-fixed-variant": "#92001c",
+                    "surface-tint": "#bb162c",
+                    "on-tertiary-fixed": "#00174a",
+                    "surface-dim": "#dcd9d9",
+                    "outline": "#8f6f6e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "inverse-primary": "#ffb3b1",
+                    "on-secondary-fixed-variant": "#5d4200",
+                    "surface-container-high": "#eae7e7",
+                    "surface": "#fcf9f8",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#271900",
+                    "inverse-surface": "#313030",
+                    "tertiary": "#0051d4",
+                    "surface-container-highest": "#e5e2e1",
+                    "background": "#fcf9f8",
+                    "secondary-fixed": "#ffdea6",
+                    "outline-variant": "#e4bebc",
+                    "on-tertiary-fixed-variant": "#003ea7",
+                    "on-primary-fixed": "#410007",
+                    "surface-container": "#f0eded",
+                    "tertiary-container": "#2f6bf3",
+                    "primary": "#b7122a",
+                    "secondary-container": "#f9b500",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffdad8",
+                    "on-background": "#1b1b1b",
+                    "tertiary-fixed-dim": "#b3c5ff",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-container": "#fefcff",
+                    "surface-container-low": "#f6f3f2",
+                    "tertiary-fixed": "#dbe1ff",
+                    "secondary-fixed-dim": "#ffbb0c",
+                    "on-surface": "#1b1b1b",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#db313f",
+                    "surface-bright": "#fcf9f8",
+                    "secondary": "#7b5800",
+                    "on-surface-variant": "#5b403f",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "20px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "80px",
+                    "md": "24px",
+                    "margin": "24px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "beVietnamPro": ["Be Vietnam Pro", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-800 shadow-sm">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto px-10 h-18 py-4">
+<div class="flex items-center gap-8">
+<span class="text-3xl font-black text-zinc-900 dark:text-white italic font-['Be_Vietnam_Pro'] tracking-tight">Zomato</span>
+<div class="hidden md:flex items-center bg-white border border-zinc-200 rounded-lg px-4 py-2 w-[500px] shadow-sm">
+<span class="material-symbols-outlined text-primary mr-2" data-icon="location_on">location_on</span>
+<input class="border-none focus:ring-0 text-sm w-1/3 text-on-surface-variant" placeholder="Yelahanka, Bengaluru" type="text"/>
+<div class="h-5 border-l border-zinc-300 mx-3"></div>
+<span class="material-symbols-outlined text-zinc-400 mr-2" data-icon="search">search</span>
+<input class="border-none focus:ring-0 text-sm flex-1 text-on-surface-variant" placeholder="Search for restaurant, cuisine or a dish" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-6 mr-4">
+<button class="text-zinc-600 dark:text-zinc-400 font-medium hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200">Log in</button>
+<button class="text-zinc-600 dark:text-zinc-400 font-medium hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200">Sign up</button>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-zinc-600 cursor-pointer" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined text-zinc-600 cursor-pointer" data-icon="notifications">notifications</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-10 pt-8 pb-20">
+<!-- Breadcrumbs & Toggle -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<nav class="flex text-xs text-on-surface-variant gap-2 mb-2">
+<span class="hover:text-primary cursor-pointer">Home</span>
+<span>/</span>
+<span class="hover:text-primary cursor-pointer">India</span>
+<span>/</span>
+<span class="font-medium text-on-surface">Bengaluru Restaurants</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Best Food in Yelahanka, Bengaluru</h1>
+</div>
+<button class="flex items-center gap-2 bg-white border border-zinc-200 px-4 py-2 rounded-lg shadow-sm hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="map">map</span>
+<span class="font-label-lg text-label-lg">Show Map</span>
+</button>
+</div>
+<div class="flex gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-64 flex-shrink-0">
+<div class="sticky top-24 space-y-8">
+<div>
+<h3 class="font-headline-sm text-headline-sm mb-4">Filters</h3>
+<div class="space-y-6">
+<!-- Sort -->
+<section>
+<p class="font-label-lg text-label-lg mb-3 text-on-surface-variant">Sort by</p>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="text-primary focus:ring-primary h-4 w-4" name="sort" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary">Popularity</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary focus:ring-primary h-4 w-4" name="sort" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary">Rating: High to Low</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary focus:ring-primary h-4 w-4" name="sort" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary">Delivery Time</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary focus:ring-primary h-4 w-4" name="sort" type="radio"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary">Cost: Low to High</span>
+</label>
+</div>
+</section>
+<!-- Quick Filters -->
+<section class="space-y-3 pt-4 border-t border-zinc-100">
+<label class="flex items-center justify-between cursor-pointer">
+<span class="font-body-md text-body-md">Pure Veg</span>
+<input class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between cursor-pointer">
+<span class="font-body-md text-body-md">Open Now</span>
+<input class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</label>
+</section>
+<!-- Cuisine -->
+<section class="pt-4 border-t border-zinc-100">
+<p class="font-label-lg text-label-lg mb-3 text-on-surface-variant">Cuisine</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary text-white rounded-full text-xs font-medium cursor-pointer">All</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">North Indian</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">Chinese</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">Biryani</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">South Indian</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">Pizza</span>
+</div>
+</section>
+<!-- Cost -->
+<section class="pt-4 border-t border-zinc-100">
+<p class="font-label-lg text-label-lg mb-3 text-on-surface-variant">Cost for two</p>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-md text-body-md">Less than ₹300</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-md text-body-md">₹300 - ₹600</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-md text-body-md">₹600+</span>
+</label>
+</div>
+</section>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A gourmet wood-fired pepperoni pizza resting on a rustic wooden table in a dimly lit, high-end restaurant atmosphere. The lighting is warm and dramatic, highlighting the melted mozzarella and crispy crust. The background is softly blurred with amber bokeh. The aesthetic is rich, appetizing, and sophisticated, dominated by warm earth tones and Zomato's signature red accents in the decor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOXOx_QG5BvA9Xza_YEJLSMyHUJ1sJyjtHo2F4ofWw4S686WWvrLyuHr0tLfAfxDZjUge4D67OvfdR7dV6sZaoL8oN3Fzwi4_TzNPlmtYQ1toyU9-KMgn3E3zZOP35A2hv59QLEzPt38Vrz6u1-6sXr9X9MXPp_4l__4cVhsL3eoFCmpo7ZSfzhkPejwQu3HFTmWfC5r1NoGbZfMhkakqKGUUZu_w0KAX2cOFI0snKxbkoaIwUtHSFJvfPT6ps46FfXO__sNu_HanQ"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.4</span>
+<span class="material-symbols-outlined text-[#f9b500] text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute bottom-3 left-3 bg-primary-container text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">
+                                40% OFF
+                            </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">The Pizza Loft</h3>
+<span class="text-xs font-semibold text-zinc-400">24 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Pizza, Italian, Pasta</p>
+<div class="flex justify-between items-center pt-3 border-t border-zinc-100">
+<span class="text-sm text-on-surface-variant">₹450 for two</span>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="delivery_dining">delivery_dining</span>
+<span class="text-[11px] font-bold">Free Delivery</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A steaming, vibrant plate of authentic Hyderabadi Biryani garnished with fresh cilantro and fried onions, presented in a traditional copper pot. The scene is set in a modern Indian dining room with high-key natural lighting and a clean, minimalist aesthetic. Soft morning light creates a fresh, reliable, and premium feel. The palette is dominated by gold, white, and deep terracotta, matching a professional food discovery interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJqfeeor6jdI_1NgEmYTXDuMdENPN4qE_gXU41C5LgwtjHAflomfq4jt34RKHr_DSlJZ8CKG-t5Ej4Cd8Py86K59fax0j7RI6l1CcpfgKhRMeYwZc-NAuMUUn8fQxGRUbBCxjfzvfLIasG71E1Y_i6LBYkJmiFPXc3h0RrWfM3cWBLC9SOBuz1aMxyg_QWudSrc-MzCejuyX69r6MydEH-lkFLNC3QEoiRYcfcMu3EkqI8vIuvDTDK8KcmmQnrOQcsSFdIUU4uzeyd"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.1</span>
+<span class="material-symbols-outlined text-[#f9b500] text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Biryani Knights</h3>
+<span class="text-xs font-semibold text-zinc-400">32 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Biryani, Hyderabadi, North Indian</p>
+<div class="flex justify-between items-center pt-3 border-t border-zinc-100">
+<span class="text-sm text-on-surface-variant">₹350 for two</span>
+<span class="text-[11px] font-bold text-on-secondary-container bg-secondary-fixed-dim/20 px-2 py-0.5 rounded">MUST TRY</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A juicy, stacked premium double cheeseburger with melting cheddar, fresh lettuce, and ripe tomatoes, served on a toasted brioche bun. The shot is a high-energy close-up with crisp, clear lighting that makes the textures pop. The background is a vibrant, modern city bistro with hints of industrial charcoal and bright red. The overall mood is fast-paced, exciting, and extremely appetizing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUYlXnN1aHl057d7yZHovMRVR7_5NjUDJWmfIj70S7Mb3HtswK4o5SD-_CCrOczRC3nYlF-10-ItiWiJCLT1hFwkjP5p-cA2pe5UfuwgJEE4sCKTur6eyhvemYHNkjHtpsCM1b5Cz9OSN6PJe1x440G-nI7vZADs8eUhvPfhpc1WC-62Ndthcb2Ue9PbBhvlegK0lks3w_HLqfuPNNibP35BAMYGRNpPiO6TnjLV95NG1ss1FakmTmn4I9-5ZghpvOSiQYkFMPG89X"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.6</span>
+<span class="material-symbols-outlined text-[#f9b500] text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute top-3 left-3 bg-zinc-900/80 text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]" data-icon="trending_up">trending_up</span>
+                                Trending
+                            </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Burger Boss</h3>
+<span class="text-xs font-semibold text-zinc-400">18 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Burgers, American, Fast Food</p>
+<div class="flex justify-between items-center pt-3 border-t border-zinc-100">
+<span class="text-sm text-on-surface-variant">₹500 for two</span>
+<div class="flex items-center gap-1 text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-sm" data-icon="eco">eco</span>
+<span class="text-[11px] font-bold">Eco Friendly</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A beautiful spread of fresh sushi rolls, sashimi, and nigiri arranged on a sleek slate platter. The lighting is cool-toned and professional, emphasizing the freshness of the fish and the vibrant colors of the vegetables. The environment is a contemporary, upscale Japanese lounge with minimalist black and wood accents. The mood is calm, curated, and premium, suggesting high-quality culinary discovery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB2v6ZXnOYdkkUv7t0a3_mDbDyPrmAr23lMniPM5_rE7uwujNgFgOUzpeAs3KGJw1Q9BjNUbC4uV31dk-Dn70c-jlnBcaK-9UIb-lRD4ePhTijl5lVDGP2btC6RBN-eqUMiBvmzPLKlhGTztSQxQ4sYJn9fvmVaXv7mZNAEgiHWUGsOXqWlRkWCRQB9WQuXRcqvwB5xSuK8jkBoCYE5ckSPUUu2pLXyQqOgORLi8E7z9BqyA14qukF1SJ0XL7RVv8tIFl8GM-SZQ1S"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.3</span>
+<span class="material-symbols-outlined text-[#f9b500] text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Sushi Zen</h3>
+<span class="text-xs font-semibold text-zinc-400">45 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Japanese, Seafood, Healthy</p>
+<div class="flex justify-between items-center pt-3 border-t border-zinc-100">
+<span class="text-sm text-on-surface-variant">₹1200 for two</span>
+<span class="text-[11px] font-bold text-primary bg-primary-fixed/30 px-2 py-0.5 rounded">PREMIUM</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Artistic latte art on a creamy cappuccino in a ceramic cup, paired with a flaky golden croissant on a marble counter. The lighting is soft morning sunlight through a window, creating long shadows and a cozy, inviting atmosphere. The cafe background is blurred with white brick walls and green hanging plants. The aesthetic is modern-corporate and tactile, using a palette of whites, browns, and soft grays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv27r67qIERfFb88FdR03IkXDvU2MlSFgII0Jj_frf-mKOJt50K4Pae_wewNN5PSaotVU4-t3V52KLMnLoWiTzuEjaZb6yWbrj8D0p2t5RZ7cTYyEIXsPoYwcYnjt9k1wxUQkH_SNCXRWCLPpzI4QWGt7FXCg8D-zR7VkPgp2EqiUf0yAUYhiQC2uJCIRMwICoVUme-J5JTW3J2SNcbCWw6i9fhKPvPFvnb-aSW9ErlewvxqKi8ju6LAOnLOIive4Ag1qtUSD6RVgY"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.0</span>
+<span class="material-symbols-outlined text-[#f9b500] text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Caffeine &amp; Crumbs</h3>
+<span class="text-xs font-semibold text-zinc-400">15 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Cafe, Desserts, Beverages</p>
+<div class="flex justify-between items-center pt-3 border-t border-zinc-100">
+<span class="text-sm text-on-surface-variant">₹250 for two</span>
+<div class="flex items-center gap-1 text-on-secondary-container">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span class="text-[11px] font-bold">Fast Delivery</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A lush green salad bowl filled with quinoa, avocado slices, roasted chickpeas, and fresh kale, drizzled with a light lemon dressing. The scene is bright and airy with high-clarity daylight. The food is arranged artistically in a white porcelain bowl on a light wood surface. The mood is healthy, energetic, and clean, emphasizing a food-first philosophy with vibrant greens and yellows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpWY-ZHi0iXqYgDh05zIg1JHi8xBdicl1shk8MtxJBmV0wT2WSua78Jtyw6qOOszvA6F_tBPtpHmP96MiNX8t9uNh-c3p7HPYS8tlsU2JrVvczQoj6bE6iOmLEoGvPJ3dOAHFiZM4DnxIW8zt5RkgFlyM6y6XD3PywI9neqVnVoJJIjeNCC-LmA090o58DkDa8EmA9Q8mfSMju5wQXrPIpshOFvThEwx_r-p8mIC0vN8VxQ1AkS6VmHDfVvQxhQb2JBpCtAdLXhEmW"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.5</span>
+<span class="material-symbols-outlined text-[#f9b500] text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Healthy Greens</h3>
+<span class="text-xs font-semibold text-zinc-400">28 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Salads, Healthy Food, Juices</p>
+<div class="flex justify-between items-center pt-3 border-t border-zinc-100">
+<span class="text-sm text-on-surface-variant">₹400 for two</span>
+<div class="flex items-center gap-1 text-green-600">
+<span class="material-symbols-outlined text-sm" data-icon="leafy_green" style="font-variation-settings: 'FILL' 1;">energy_savings_leaf</span>
+<span class="text-[11px] font-bold">Pure Veg</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-12 flex justify-center">
+<button class="bg-white border border-zinc-200 px-10 py-3 rounded-lg text-on-surface font-semibold hover:bg-zinc-50 transition-colors shadow-sm">
+                        Show more restaurants
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full pt-16 pb-12 mt-20 bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800">
+<div class="max-w-[1280px] mx-auto px-10">
+<div class="flex flex-col md:flex-row justify-between items-start mb-12">
+<span class="text-2xl font-black text-zinc-900 dark:text-white mb-4 block italic">Zomato</span>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 border border-zinc-300 rounded px-3 py-1 text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="language">language</span> English
+                    </button>
+<button class="flex items-center gap-2 border border-zinc-300 rounded px-3 py-1 text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="flag">flag</span> India
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div>
+<h4 class="font-bold text-zinc-900 uppercase tracking-widest text-[11px] mb-4">About Zomato</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Who We Are</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Blog</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Work With Us</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Investor Relations</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Report Fraud</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Contact Us</a>
+</nav>
+</div>
+<div>
+<h4 class="font-bold text-zinc-900 uppercase tracking-widest text-[11px] mb-4">Zomaverse</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Zomato</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Blinkit</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Feeding India</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Hyperpure</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Zomaland</a>
+</nav>
+</div>
+<div>
+<h4 class="font-bold text-zinc-900 uppercase tracking-widest text-[11px] mb-4">For Restaurants</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Partner With Us</a>
+<a class="text-zinc-500 hover:text-zinc-800 text-sm transition-colors" href="#">Apps For You</a>
+</nav>
+</div>
+<div>
+<h4 class="font-bold text-zinc-900 uppercase tracking-widest text-[11px] mb-4">Social links</h4>
+<div class="flex gap-3 mb-6">
+<div class="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-white cursor-pointer hover:bg-zinc-700 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-white cursor-pointer hover:bg-zinc-700 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="public">public</span>
+</div>
+</div>
+<img class="w-32 mb-3 rounded shadow-sm opacity-80" data-alt="A clean mockup showing the mobile application store interface with high-contrast buttons for downloading an app. The background is a sophisticated light gray gradient. The aesthetic is modern, tech-focused, and follows the sleek, minimalist design language of a premium digital service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqlGKP1nnrZdHRQ-OEZc-dSG-MQfV1YwGckv1gmIivrgcPSznGSmzbJaAWFHUWo6J6PvXr3LiEF2rqHI__MXcA2K3QHlVWCSzS3edAvEfHeAelYvwrbp9T1dsbEBBaSm6rd7mSgMwSq_9SWH85zyyif3dteP2hZXzEcjxwSZKcB0fpipXPH_eP4WPY5c_-3mSFmiBRcpxMocVphImbeHvMGMw86Re6Oak9brI3OQXsa448tMEZ9D6gsEviFoET3-PuydNoBME3XkgN"/>
+</div>
+</div>
+<div class="border-t border-zinc-200 pt-8">
+<p class="font-['Be_Vietnam_Pro'] text-sm leading-6 text-zinc-500">© 2024 Zomato™ Ltd. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- FAB for mobile responsiveness -->
+<div class="fixed bottom-6 right-6 md:hidden">
+<button class="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</body></html>

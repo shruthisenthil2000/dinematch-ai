@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zomato - Discover the best food &amp; drinks</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#684a00",
+                    "on-primary-fixed-variant": "#92001c",
+                    "surface-tint": "#bb162c",
+                    "on-tertiary-fixed": "#00174a",
+                    "surface-dim": "#dcd9d9",
+                    "outline": "#8f6f6e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "inverse-primary": "#ffb3b1",
+                    "on-secondary-fixed-variant": "#5d4200",
+                    "surface-container-high": "#eae7e7",
+                    "surface": "#fcf9f8",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#271900",
+                    "inverse-surface": "#313030",
+                    "tertiary": "#0051d4",
+                    "surface-container-highest": "#e5e2e1",
+                    "background": "#fcf9f8",
+                    "secondary-fixed": "#ffdea6",
+                    "outline-variant": "#e4bebc",
+                    "on-tertiary-fixed-variant": "#003ea7",
+                    "on-primary-fixed": "#410007",
+                    "surface-container": "#f0eded",
+                    "tertiary-container": "#2f6bf3",
+                    "primary": "#b7122a",
+                    "secondary-container": "#f9b500",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffdad8",
+                    "on-background": "#1b1b1b",
+                    "tertiary-fixed-dim": "#b3c5ff",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-container": "#fefcff",
+                    "surface-container-low": "#f6f3f2",
+                    "tertiary-fixed": "#dbe1ff",
+                    "secondary-fixed-dim": "#ffbb0c",
+                    "on-surface": "#1b1b1b",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#db313f",
+                    "surface-bright": "#fcf9f8",
+                    "secondary": "#7b5800",
+                    "on-surface-variant": "#5b403f",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "20px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "80px",
+                    "md": "24px",
+                    "margin": "24px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "beVietnamPro": ["Be Vietnam Pro", "sans-serif"]
+            },
+            "fontSize": {
+                    "headline-sm": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "label-sm": ["10px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                    "headline-md": ["22px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-800 shadow-sm">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto px-10 h-18 py-4">
+<div class="flex items-center gap-8">
+<span class="text-3xl font-black text-zinc-900 dark:text-white italic font-['Be_Vietnam_Pro'] tracking-tight">Zomato</span>
+</div>
+<div class="hidden md:flex items-center gap-8 flex-1 justify-center">
+<a class="text-red-600 font-bold border-b-2 border-red-600 pb-1 font-['Be_Vietnam_Pro'] tracking-tight" href="#">Home</a>
+<a class="text-zinc-600 dark:text-zinc-400 font-medium hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 font-['Be_Vietnam_Pro'] tracking-tight" href="#">Delivery</a>
+<a class="text-zinc-600 dark:text-zinc-400 font-medium hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 font-['Be_Vietnam_Pro'] tracking-tight" href="#">Dining Out</a>
+<a class="text-zinc-600 dark:text-zinc-400 font-medium hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 font-['Be_Vietnam_Pro'] tracking-tight" href="#">Nightlife</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4 items-center">
+<span class="material-symbols-outlined text-zinc-600 cursor-pointer" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined text-zinc-600 cursor-pointer" data-icon="notifications">notifications</span>
+</div>
+<div class="flex items-center gap-4 border-l border-zinc-200 pl-6">
+<button class="text-zinc-600 font-medium hover:text-red-600 transition-colors">Log in</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-opacity">Sign up</button>
+</div>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[500px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Gourmet Food Background" class="w-full h-full object-cover" data-alt="A sprawling top-down cinematic shot of a diverse gourmet feast laid out on a dark rustic wooden table. The lighting is warm and dramatic, highlighting vibrant colors of fresh vegetables, roasted meats, and artisanal breads. The overall mood is high-energy and inviting, with a color palette dominated by rich reds, earthy browns, and golden highlights. This food-focused photography is professional and appetizing, embodying a premium dining experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZJYVVbOeR3U7qg0qiuQFWL4eZYp-p77MaJWk0eYxoRqFF49FVZ-a771R-im32filbFVks07OL652yht7iziUwl-3w8YKQkpTQKjNj1IAFJtidJTgI9qAcIyVHBmyRI-qH-QB09phBb4z85Y4O0-4pp6TBVPW0xqixFG_-87C5x7WZAm7XvtYFpcDBCUTSSH5N35Ov4I4Dkw4bEU-egUNTvaRbAPmfIhuwt87co5ctxhY6G9Il7lnSZpv9oj8j97EKUZn_iUS081Pi"/>
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl px-6">
+<h1 class="font-beVietnamPro text-display-lg text-white mb-8">Find the best restaurants, cafes, and bars in <span class="text-secondary-container">Mumbai</span></h1>
+<div class="bg-white rounded-xl shadow-lg p-2 flex flex-col md:flex-row items-center gap-2 max-w-3xl mx-auto">
+<div class="flex items-center gap-2 px-4 py-2 w-full md:w-1/3 border-b md:border-b-0 md:border-r border-zinc-200">
+<span class="material-symbols-outlined text-primary" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<input class="w-full border-none focus:ring-0 font-beVietnamPro text-body-md text-on-background" placeholder="Mumbai" type="text"/>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 w-full md:flex-1">
+<span class="material-symbols-outlined text-zinc-400" data-icon="search">search</span>
+<input class="w-full border-none focus:ring-0 font-beVietnamPro text-body-md text-on-background" placeholder="Search for restaurant, cuisine or a dish" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Cards -->
+<section class="max-w-[1280px] mx-auto px-10 py-16">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Order Online -->
+<div class="group cursor-pointer overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-zinc-100">
+<div class="h-40 overflow-hidden">
+<img alt="Order Online" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant and crisp image of a delivery courier on a red bicycle carrying a thermal food bag through a modern urban neighborhood. The scene is bathed in bright daylight, emphasizing a clean and efficient service aesthetic. The color palette features pops of primary red against white architectural backgrounds. The lighting is even and optimistic, suggesting reliability and speed in a contemporary city setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj2L-3jezHH6fSetXH12LQhoykc1quuS3ukqGJIDncLnIpFhp9WDCEGnFhcYbwjLZghKvrwgeJdRsD2eA9P6LItNFXhdqQOjHcJQo6PDiudK75UjBvUGZvuhT4g3JxQVw7NL24bDY38s71JfArPn1dBXR8sGqCwy0O37N0FxyV08Ht-boLcdpqM_IqgjjzIk_nrBgrlJ9SHJI1Jf_U8wmj4WgIKjOHly-z6LnJ_f1ufNkl9fO6zELr60xnb-8aCUY-4EqGi1xCsY2R"/>
+</div>
+<div class="p-4">
+<h3 class="font-beVietnamPro text-headline-sm mb-1 text-on-background">Order Online</h3>
+<p class="font-beVietnamPro text-body-sm text-zinc-500">Stay home and order to your doorstep</p>
+</div>
+</div>
+<!-- Dining Out -->
+<div class="group cursor-pointer overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-zinc-100">
+<div class="h-40 overflow-hidden">
+<img alt="Dining Out" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An elegant interior view of a contemporary restaurant featuring warm amber lighting and sophisticated minimalist decor. The scene shows beautifully set tables with sparkling glassware and plush velvet seating. The atmosphere is inviting and upscale, with soft depth of field focusing on the foreground table. The color scheme is a mix of warm woods, deep charcoals, and soft gold accents, creating a luxurious dining mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6j-4ckzquIzYAeSi5DFchJEHZJG1IXWQNWXI2cHWL-Yj7pW2Q3a31oVuRYyMJo8A6ArfjJd7-o-rEgvbS9zFbndSLCfHCahDH0vJGGWK-0pHpuNAJGsz3qhEIJp5xrqa_P4caTAQJ3Q4SaJQfXc0I_HRJp5465zZKXuNtkeYq1L4exfuUTeXWeRYeO1jeFsBnRcedqkjOaQ8b3Kiz3TMpcFChw-9qM3KoWoYc1YXa2DkJAJA52cmrMnYiqZGw5N0DMs_U2DOCF5N3"/>
+</div>
+<div class="p-4">
+<h3 class="font-beVietnamPro text-headline-sm mb-1 text-on-background">Dining Out</h3>
+<p class="font-beVietnamPro text-body-sm text-zinc-500">View the city's favourite dining venues</p>
+</div>
+</div>
+<!-- Pro -->
+<div class="group cursor-pointer overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-zinc-100">
+<div class="h-40 overflow-hidden relative">
+<img alt="Zomato Pro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stylish, dimly lit lounge scene representing high-end nightlife and exclusive access. Two crystalline cocktails with garnishes are placed on a polished marble bar top, reflecting neon lights in deep blues and vibrant reds. The background is blurred, showing a sophisticated crowd in an upscale urban setting. The lighting is dramatic and moody, capturing a sense of premium excitement and professional curated nightlife experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0-3WUex83CG3bAQyhxy3J12gbRNcU2ky3lbGpi2kjlY8bzv049WRQe_BIQnoxta5F9wREL3x65BqKU1H0NYyEPCT96yJw8f6WWrvYRccoEnHd_IpLrvG9uubNt3JriBpg1D_4dNEIpieuXTNwnfObpZk8G2fxL_GYZ8OpFCePLSZT3mGt1KpuemjQ9LV4lXg5bK14WESlUPcjl8ymfADzvFDcLsDjjdFJqnDNGyXnL3syApEWEhL_nCnOimOLZPCGI71hIKMgQ0rQ"/>
+<div class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">Pro</div>
+</div>
+<div class="p-4">
+<h3 class="font-beVietnamPro text-headline-sm mb-1 text-on-background">Nightlife &amp; Clubs</h3>
+<p class="font-beVietnamPro text-body-sm text-zinc-500">Explore the city’s top nightlife outlets</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Popular Collections -->
+<section class="max-w-[1280px] mx-auto px-10 pb-20">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-beVietnamPro text-display-md text-on-background mb-2">Collections</h2>
+<p class="font-beVietnamPro text-body-lg text-zinc-500">Explore curated lists of top restaurants, cafes, pubs, and bars in Mumbai, based on trends</p>
+</div>
+<a class="text-primary font-beVietnamPro font-medium flex items-center gap-1 hover:underline" href="#">
+                    All collections in Mumbai
+                    <span class="material-symbols-outlined text-sm" data-icon="arrow_right">arrow_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Collection Card 1 -->
+<div class="relative h-[320px] rounded-xl overflow-hidden group cursor-pointer shadow-sm">
+<img alt="Newly Opened" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A modern, brightly lit cafe interior with large glass windows and minimalist furniture. Several people are seen enjoying artisanal coffee and fresh pastries in a relaxed atmosphere. The daylight is soft and natural, creating a high-key light-mode aesthetic. The color palette is composed of light oak wood, white walls, and fresh green plants, suggesting a new and trendy urban spot with an approachable vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1P0TVBfed8YkLLBMooTfGaTMeQSNKmXFfQlRsRBd_dDPXqj53DlUCj6md1Qau2Eg3pXWTZb6OzsmyB3Y-soZsHt1y3JJLnXJ0rCN8e18jTitL7nOZ358VKW7nMrf1C2s-IAgXhaLNnOyLquTyP129-o8LPUFt8UM4zCeO3Y2y1TUDAlEoq1L5VyG2xQ4UKYfCoBYYEtZO4VUxR5gS9XcDjdt_P2xMPUig9Bbx81N8wmRjiN9LQ3iDJkdvTIXVUAL8sWjxfEhAg-PB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-4 text-white">
+<p class="font-beVietnamPro text-headline-sm">Newly Opened</p>
+<p class="flex items-center gap-1 text-sm font-medium opacity-90">
+                            12 Places <span class="material-symbols-outlined text-sm" data-icon="arrow_right">arrow_right</span>
+</p>
+</div>
+</div>
+<!-- Collection Card 2 -->
+<div class="relative h-[320px] rounded-xl overflow-hidden group cursor-pointer shadow-sm">
+<img alt="Romantic Dining" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A romantic dinner setting at dusk on a balcony overlooking a sparkling city skyline. A single table is decorated with a white linen cloth, a delicate candle in a glass holder, and two glasses of sparkling wine. The lighting is low and intimate, featuring warm golden bokeh from the city lights. The color palette is sophisticated with deep indigos of the evening sky and warm oranges from the candlelight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-m-e6QfjTYg98Su-4WBddxqD1MDZpqgQ-8WvlGPYnsL5yNCqjQxOAsPX6kIuMA68Zus4DZoFH3F1mI7yQXRVCLViMSwt3GDFI3lbNaHAaMqTY62CjH5NvqYHrpnsME8xv0etzBwo-hY3at2Y3geEgHlRpuH3Y14Q564WE20u8kwseELZjplu_HsDM99BsB1wCTM8p_wtikWIaX00BfmFVPVvGry6FW1QIzCdlfDweV68qM7HrI1xqM03YEUJ6FFFEnR9qnJ5lluUX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-4 text-white">
+<p class="font-beVietnamPro text-headline-sm">Romantic Dining</p>
+<p class="flex items-center gap-1 text-sm font-medium opacity-90">
+                            18 Places <span class="material-symbols-outlined text-sm" data-icon="arrow_right">arrow_right</span>
+</p>
+</div>
+</div>
+<!-- Collection Card 3 -->
+<div class="relative h-[320px] rounded-xl overflow-hidden group cursor-pointer shadow-sm">
+<img alt="Best Bars" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A professional bartender's hands precisely pouring a cocktail into a glass, with liquid droplets caught mid-air by a high-speed camera. The bar background is stocked with various premium spirits and backlit with amber and violet neon. The mood is energetic and upscale. The color palette is vibrant, featuring rich jewel tones against a dark, sophisticated background with sharp, clear focus on the liquid motion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_c6RPSiy0S59PQg7P9LtBGepi4j74S-H9DggVKA8YQi3KJmLWMek5n2U5PJ9VcTLhzDzLUKdX_VbYoPuqWTaAnI1vvx83GDodga3kRyNhRKPP2xQ5IV99tLsKZuxFL0MT0j8qerIzkNaZ4t7u4JBHyKY3wgzH2Ej6q2LEqGpKi5qhpaCx2rzvFGcT9YCnf3iaOOechd7cPLXPewkRQ_3mxYjDhtcB9IkIhqlYIQ2o7X_5SUbX0XwBUl7pBr2h4SvUwsy24xhR7woc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-4 text-white">
+<p class="font-beVietnamPro text-headline-sm">Best Bars &amp; Pubs</p>
+<p class="flex items-center gap-1 text-sm font-medium opacity-90">
+                            24 Places <span class="material-symbols-outlined text-sm" data-icon="arrow_right">arrow_right</span>
+</p>
+</div>
+</div>
+<!-- Collection Card 4 -->
+<div class="relative h-[320px] rounded-xl overflow-hidden group cursor-pointer shadow-sm">
+<img alt="Trending This Week" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A top-down flat lay of a trendy spread of street food on a rustic metal surface. It includes colorful tacos, spicy chicken wings, and fresh dips. The lighting is high-contrast and vivid, emphasizing the textures and spices of the food. The mood is high-energy and modern. The color palette is a burst of vibrant oranges, reds, and greens, capturing the excitement of trending culinary discoveries in a city." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb1e6krTKMMek-YFL16PG56lUBeLvtdtfPLrGyru_rDca3AzdacpDHy7p8hUlxbGEXyYzOzqPGxQ7zxdDHCFWeak-E4fIe51vJbLEbxTJJ5sTuJGXS1ncZXdpqPjLaYbXOuW0332hYhTE0Yzl7rXdv1Qn7OAbFMoBHPfTERLwcx6PFSuhkLigEaReA3sN5PASDwbX6eDyRsyIlGhnwoP-PN_wXtiSbWNzNgXKLt-golLCx5JHHJ5BW6107JuYsDPtfPXyZqEsluzC4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-4 text-white">
+<p class="font-beVietnamPro text-headline-sm">Trending This Week</p>
+<p class="flex items-center gap-1 text-sm font-medium opacity-90">
+                            30 Places <span class="material-symbols-outlined text-sm" data-icon="arrow_right">arrow_right</span>
+</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Popular Localities (Bento style) -->
+<section class="max-w-[1280px] mx-auto px-10 pb-20">
+<h2 class="font-beVietnamPro text-headline-lg text-on-background mb-8">Popular localities in and around <span class="font-black">Mumbai</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 bg-white rounded-xl shadow-sm border border-zinc-100 flex items-center justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div>
+<p class="font-beVietnamPro text-headline-sm text-on-background">Lower Parel</p>
+<p class="font-beVietnamPro text-body-sm text-zinc-500">421 places</p>
+</div>
+<span class="material-symbols-outlined text-zinc-400" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="p-6 bg-white rounded-xl shadow-sm border border-zinc-100 flex items-center justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div>
+<p class="font-beVietnamPro text-headline-sm text-on-background">Powai</p>
+<p class="font-beVietnamPro text-body-sm text-zinc-500">385 places</p>
+</div>
+<span class="material-symbols-outlined text-zinc-400" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="p-6 bg-white rounded-xl shadow-sm border border-zinc-100 flex items-center justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div>
+<p class="font-beVietnamPro text-headline-sm text-on-background">Bandra West</p>
+<p class="font-beVietnamPro text-body-sm text-zinc-500">512 places</p>
+</div>
+<span class="material-symbols-outlined text-zinc-400" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="p-6 bg-white rounded-xl shadow-sm border border-zinc-100 flex items-center justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div>
+<p class="font-beVietnamPro text-headline-sm text-on-background">Colaba</p>
+<p class="font-beVietnamPro text-body-sm text-zinc-500">198 places</p>
+</div>
+<span class="material-symbols-outlined text-zinc-400" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="p-6 bg-white rounded-xl shadow-sm border border-zinc-100 flex items-center justify-between hover:shadow-md transition-shadow cursor-pointer">
+<div>
+<p class="font-beVietnamPro text-headline-sm text-on-background">Juhu</p>
+<p class="font-beVietnamPro text-body-sm text-zinc-500">247 places</p>
+</div>
+<span class="material-symbols-outlined text-zinc-400" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="p-6 bg-white rounded-xl shadow-sm border border-zinc-100 flex items-center justify-center hover:shadow-md transition-shadow cursor-pointer">
+<p class="font-beVietnamPro text-body-md text-on-background font-medium">see more</p>
+<span class="material-symbols-outlined text-on-background ml-2" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full pt-16 pb-12 mt-20 bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800">
+<div class="max-w-[1280px] mx-auto px-10">
+<div class="flex flex-col md:flex-row justify-between items-start mb-12">
+<span class="text-2xl font-black text-zinc-900 dark:text-white mb-4 block font-['Be_Vietnam_Pro'] tracking-tight">Zomato</span>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg font-beVietnamPro text-sm">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+                        English
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg font-beVietnamPro text-sm">
+                        India
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div>
+<h4 class="font-beVietnamPro font-bold uppercase tracking-widest text-xs mb-6 text-zinc-900 dark:text-white">About Zomato</h4>
+<ul class="space-y-3">
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Who We Are</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Blog</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Work With Us</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Investor Relations</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-beVietnamPro font-bold uppercase tracking-widest text-xs mb-6 text-zinc-900 dark:text-white">Zomaverse</h4>
+<ul class="space-y-3">
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Zomato</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Blinkit</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Feeding India</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Hyperpure</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Zomaland</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-beVietnamPro font-bold uppercase tracking-widest text-xs mb-6 text-zinc-900 dark:text-white">For Restaurants</h4>
+<ul class="space-y-3">
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Partner With Us</a></li>
+<li><a class="text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" href="#">Apps For You</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-beVietnamPro font-bold uppercase tracking-widest text-xs mb-6 text-zinc-900 dark:text-white">Social Links</h4>
+<div class="flex gap-4 mb-6">
+<div class="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-white cursor-pointer hover:bg-zinc-700 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-white cursor-pointer hover:bg-zinc-700 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 font-['Be_Vietnam_Pro'] text-sm leading-6">
+                © 2024 Zomato™ Ltd. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

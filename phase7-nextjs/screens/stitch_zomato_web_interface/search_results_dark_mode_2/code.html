@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#353534",
+                    "inverse-on-surface": "#313030",
+                    "error-container": "#93000a",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "tertiary": "#c8c6c5",
+                    "surface-container": "#201f1f",
+                    "outline": "#ab8987",
+                    "primary": "#ffb3b1",
+                    "on-primary": "#680011",
+                    "surface-variant": "#353534",
+                    "tertiary-fixed": "#e5e2e1",
+                    "on-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "on-surface-variant": "#e4bebc",
+                    "on-primary-fixed-variant": "#92001c",
+                    "secondary": "#c6c6c7",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "error": "#ffb4ab",
+                    "outline-variant": "#5b403f",
+                    "on-secondary-fixed-variant": "#454747",
+                    "surface-container-low": "#1c1b1b",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "on-background": "#e5e2e1",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "inverse-primary": "#bb162c",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary-container": "#454747",
+                    "secondary-fixed": "#e2e2e2",
+                    "primary-fixed": "#ffdad8",
+                    "on-tertiary-container": "#2a2a29",
+                    "primary-container": "#ff535a",
+                    "on-tertiary": "#313030",
+                    "surface-bright": "#3a3939",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-secondary-container": "#b4b5b5",
+                    "surface-tint": "#ffb3b1",
+                    "tertiary-container": "#929090",
+                    "on-primary-fixed": "#410007",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-error": "#690005",
+                    "inverse-surface": "#e5e2e1",
+                    "on-secondary": "#2f3131",
+                    "on-primary-container": "#5b000e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin": "20px",
+                    "md": "16px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "beVietnamPro": ["Be Vietnam Pro", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-surface border-b border-outline-variant shadow-sm">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto px-10 h-18 py-4">
+<div class="flex items-center gap-8">
+<span class="text-3xl font-black text-primary italic font-['Be_Vietnam_Pro'] tracking-tight">Zomato</span>
+<div class="hidden md:flex items-center bg-surface-container border border-outline-variant rounded-lg px-4 py-2 w-[500px] shadow-sm">
+<span class="material-symbols-outlined text-primary mr-2" data-icon="location_on">location_on</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-1/3 text-on-surface placeholder-on-surface-variant" placeholder="Yelahanka, Bengaluru" type="text"/>
+<div class="h-5 border-l border-outline-variant mx-3"></div>
+<span class="material-symbols-outlined text-on-surface-variant mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm flex-1 text-on-surface placeholder-on-surface-variant" placeholder="Search for restaurant, cuisine or a dish" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-6 mr-4">
+<button class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200">Log in</button>
+<button class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200">Sign up</button>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface cursor-pointer" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined text-on-surface cursor-pointer" data-icon="notifications">notifications</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-10 pt-8 pb-20">
+<!-- Breadcrumbs & Toggle -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<nav class="flex text-xs text-on-surface-variant gap-2 mb-2">
+<span class="hover:text-primary cursor-pointer">Home</span>
+<span>/</span>
+<span class="hover:text-primary cursor-pointer">India</span>
+<span>/</span>
+<span class="font-medium text-on-surface">Bengaluru Restaurants</span>
+</nav>
+<h1 class="text-2xl md:text-3xl font-bold text-on-surface">Best Food in Yelahanka, Bengaluru</h1>
+</div>
+<button class="flex items-center gap-2 bg-surface-container border border-outline-variant px-4 py-2 rounded-lg shadow-sm hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="map">map</span>
+<span class="text-sm font-semibold text-on-surface">Show Map</span>
+</button>
+</div>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="sticky top-24 space-y-8">
+<div>
+<h3 class="text-xl font-bold mb-4 text-on-surface">Filters</h3>
+<div class="space-y-6">
+<!-- Sort -->
+<section>
+<p class="text-xs font-semibold uppercase tracking-wider mb-3 text-on-surface-variant">Sort by</p>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="text-primary bg-surface-container border-outline-variant focus:ring-primary h-4 w-4" name="sort" type="radio"/>
+<span class="text-sm text-on-surface group-hover:text-primary">Popularity</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary bg-surface-container border-outline-variant focus:ring-primary h-4 w-4" name="sort" type="radio"/>
+<span class="text-sm text-on-surface group-hover:text-primary">Rating: High to Low</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary bg-surface-container border-outline-variant focus:ring-primary h-4 w-4" name="sort" type="radio"/>
+<span class="text-sm text-on-surface group-hover:text-primary">Delivery Time</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary bg-surface-container border-outline-variant focus:ring-primary h-4 w-4" name="sort" type="radio"/>
+<span class="text-sm text-on-surface group-hover:text-primary">Cost: Low to High</span>
+</label>
+</div>
+</section>
+<!-- Quick Filters -->
+<section class="space-y-3 pt-4 border-t border-outline-variant">
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm text-on-surface">Pure Veg</span>
+<input class="rounded bg-surface-container border-outline-variant text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-sm text-on-surface">Open Now</span>
+<input class="rounded bg-surface-container border-outline-variant text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</label>
+</section>
+<!-- Cuisine -->
+<section class="pt-4 border-t border-outline-variant">
+<p class="text-xs font-semibold uppercase tracking-wider mb-3 text-on-surface-variant">Cuisine</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary text-on-primary rounded-full text-xs font-medium cursor-pointer">All</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">North Indian</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">Chinese</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">Biryani</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">South Indian</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-high cursor-pointer">Pizza</span>
+</div>
+</section>
+<!-- Cost -->
+<section class="pt-4 border-t border-outline-variant">
+<p class="text-xs font-semibold uppercase tracking-wider mb-3 text-on-surface-variant">Cost for two</p>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded bg-surface-container border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm text-on-surface">Less than ₹300</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded bg-surface-container border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm text-on-surface">₹300 - ₹600</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded bg-surface-container border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="text-sm text-on-surface">₹600+</span>
+</label>
+</div>
+</section>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="group bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Gourmet Pizza" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOXOx_QG5BvA9Xza_YEJLSMyHUJ1sJyjtHo2F4ofWw4S686WWvrLyuHr0tLfAfxDZjUge4D67OvfdR7dV6sZaoL8oN3Fzwi4_TzNPlmtYQ1toyU9-KMgn3E3zZOP35A2hv59QLEzPt38Vrz6u1-6sXr9X9MXPp_4l__4cVhsL3eoFCmpo7ZSfzhkPejwQu3HFTmWfC5r1NoGbZfMhkakqKGUUZu_w0KAX2cOFI0snKxbkoaIwUtHSFJvfPT6ps46FfXO__sNu_HanQ"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.4</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute bottom-3 left-3 bg-primary-container text-on-primary-container text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">
+                            40% OFF
+                        </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold text-on-surface truncate">The Pizza Loft</h3>
+<span class="text-xs font-semibold text-on-surface-variant">24 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Pizza, Italian, Pasta</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="text-sm text-on-surface-variant">₹450 for two</span>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="delivery_dining">delivery_dining</span>
+<span class="text-[11px] font-bold uppercase">Free Delivery</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Hyderabadi Biryani" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJqfeeor6jdI_1NgEmYTXDuMdENPN4qE_gXU41C5LgwtjHAflomfq4jt34RKHr_DSlJZ8CKG-t5Ej4Cd8Py86K59fax0j7RI6l1CcpfgKhRMeYwZc-NAuMUUn8fQxGRUbBCxjfzvfLIasG71E1Y_i6LBYkJmiFPXc3h0RrWfM3cWBLC9SOBuz1aMxyg_QWudSrc-MzCejuyX69r6MydEH-lkFLNC3QEoiRYcfcMu3EkqI8vIuvDTDK8KcmmQnrOQcsSFdIUU4uzeyd"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.1</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold text-on-surface truncate">Biryani Knights</h3>
+<span class="text-xs font-semibold text-on-surface-variant">32 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Biryani, Hyderabadi, North Indian</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="text-sm text-on-surface-variant">₹350 for two</span>
+<span class="text-[11px] font-bold text-on-secondary-container bg-secondary-container/20 px-2 py-0.5 rounded">MUST TRY</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Double Cheeseburger" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUYlXnN1aHl057d7yZHovMRVR7_5NjUDJWmfIj70S7Mb3HtswK4o5SD-_CCrOczRC3nYlF-10-ItiWiJCLT1hFwkjP5p-cA2pe5UfuwgJEE4sCKTur6eyhvemYHNkjHtpsCM1b5Cz9OSN6PJe1x440G-nI7vZADs8eUhvPfhpc1WC-62Ndthcb2Ue9PbBhvlegK0lks3w_HLqfuPNNibP35BAMYGRNpPiO6TnjLV95NG1ss1FakmTmn4I9-5ZghpvOSiQYkFMPG89X"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.6</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute top-3 left-3 bg-surface-container-highest text-primary text-[10px] font-bold px-2 py-1 rounded-sm uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]" data-icon="trending_up">trending_up</span>
+                            Trending
+                        </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold text-on-surface truncate">Burger Boss</h3>
+<span class="text-xs font-semibold text-on-surface-variant">18 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Burgers, American, Fast Food</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="text-sm text-on-surface-variant">₹500 for two</span>
+<div class="flex items-center gap-1 text-on-secondary-container">
+<span class="material-symbols-outlined text-sm" data-icon="eco">eco</span>
+<span class="text-[11px] font-bold">Eco Friendly</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Sushi Platter" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB2v6ZXnOYdkkUv7t0a3_mDbDyPrmAr23lMniPM5_rE7uwujNgFgOUzpeAs3KGJw1Q9BjNUbC4uV31dk-Dn70c-jlnBcaK-9UIb-lRD4ePhTijl5lVDGP2btC6RBN-eqUMiBvmzPLKlhGTztSQxQ4sYJn9fvmVaXv7mZNAEgiHWUGsOXqWlRkWCRQB9WQuXRcqvwB5xSuK8jkBoCYE5ckSPUUu2pLXyQqOgORLi8E7z9BqyA14qukF1SJ0XL7RVv8tIFl8GM-SZQ1S"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.3</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold text-on-surface truncate">Sushi Zen</h3>
+<span class="text-xs font-semibold text-on-surface-variant">45 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Japanese, Seafood, Healthy</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="text-sm text-on-surface-variant">₹1200 for two</span>
+<span class="text-[11px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">PREMIUM</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Cafe Coffee" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv27r67qIERfFb88FdR03IkXDvU2MlSFgII0Jj_frf-mKOJt50K4Pae_wewNN5PSaotVU4-t3V52KLMnLoWiTzuEjaZb6yWbrj8D0p2t5RZ7cTYyEIXsPoYwcYnjt9k1wxUQkH_SNCXRWCLPpzI4QWGt7FXCg8D-zR7VkPgp2EqiUf0yAUYhiQC2uJCIRMwICoVUme-J5JTW3J2SNcbCWw6i9fhKPvPFvnb-aSW9ErlewvxqKi8ju6LAOnLOIive4Ag1qtUSD6RVgY"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.0</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold text-on-surface truncate">Caffeine &amp; Crumbs</h3>
+<span class="text-xs font-semibold text-on-surface-variant">15 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Cafe, Desserts, Beverages</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="text-sm text-on-surface-variant">₹250 for two</span>
+<div class="flex items-center gap-1 text-on-secondary-container">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span class="text-[11px] font-bold">Fast Delivery</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Healthy Salad" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpWY-ZHi0iXqYgDh05zIg1JHi8xBdicl1shk8MtxJBmV0wT2WSua78Jtyw6qOOszvA6F_tBPtpHmP96MiNX8t9uNh-c3p7HPYS8tlsU2JrVvczQoj6bE6iOmLEoGvPJ3dOAHFiZM4DnxIW8zt5RkgFlyM6y6XD3PywI9neqVnVoJJIjeNCC-LmA090o58DkDa8EmA9Q8mfSMju5wQXrPIpshOFvThEwx_r-p8mIC0vN8VxQ1AkS6VmHDfVvQxhQb2JBpCtAdLXhEmW"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="text-sm font-bold text-on-surface">4.5</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold text-on-surface truncate">Healthy Greens</h3>
+<span class="text-xs font-semibold text-on-surface-variant">28 min</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate mb-3">Salads, Healthy Food, Juices</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="text-sm text-on-surface-variant">₹400 for two</span>
+<div class="flex items-center gap-1 text-error">
+<span class="material-symbols-outlined text-sm" data-icon="energy_savings_leaf" style="font-variation-settings: 'FILL' 1;">energy_savings_leaf</span>
+<span class="text-[11px] font-bold">Pure Veg</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-12 flex justify-center">
+<button class="bg-surface-container border border-outline-variant px-10 py-3 rounded-lg text-on-surface font-semibold hover:bg-surface-container-high transition-colors shadow-sm">
+                    Show more restaurants
+                </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full pt-16 pb-12 mt-20 bg-surface-container border-t border-outline-variant">
+<div class="max-w-[1280px] mx-auto px-10">
+<div class="flex flex-col md:flex-row justify-between items-start mb-12">
+<span class="text-2xl font-black text-primary italic mb-4 block">Zomato</span>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 bg-surface-container-high border border-outline-variant rounded px-3 py-1 text-sm text-on-surface">
+<span class="material-symbols-outlined text-sm" data-icon="language">language</span> English
+                </button>
+<button class="flex items-center gap-2 bg-surface-container-high border border-outline-variant rounded px-3 py-1 text-sm text-on-surface">
+<span class="material-symbols-outlined text-sm" data-icon="flag">flag</span> India
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+<div>
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-[11px] mb-4">About Zomato</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Who We Are</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Blog</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Work With Us</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Investor Relations</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Report Fraud</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Contact Us</a>
+</nav>
+</div>
+<div>
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-[11px] mb-4">Zomaverse</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Zomato</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Blinkit</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Feeding India</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Hyperpure</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Zomaland</a>
+</nav>
+</div>
+<div>
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-[11px] mb-4">For Restaurants</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Partner With Us</a>
+<a class="text-on-surface-variant hover:text-primary text-sm transition-colors" href="#">Apps For You</a>
+</nav>
+</div>
+<div>
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-[11px] mb-4">Social links</h4>
+<div class="flex gap-3 mb-6">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface cursor-pointer hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface cursor-pointer hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="public">public</span>
+</div>
+</div>
+<img alt="App Store Buttons" class="w-32 mb-3 rounded shadow-sm opacity-90 invert dark:invert-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqlGKP1nnrZdHRQ-OEZc-dSG-MQfV1YwGckv1gmIivrgcPSznGSmzbJaAWFHUWo6J6PvXr3LiEF2rqHI__MXcA2K3QHlVWCSzS3edAvEfHeAelYvwrbp9T1dsbEBBaSm6rd7mSgMwSq_9SWH85zyyif3dteP2hZXzEcjxwSZKcB0fpipXPH_eP4WPY5c_-3mSFmiBRcpxMocVphImbeHvMGMw86Re6Oak9brI3OQXsa448tMEZ9D6gsEviFoET3-PuydNoBME3XkgN"/>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-8">
+<p class="font-['Be_Vietnam_Pro'] text-sm text-on-surface-variant">© 2024 Zomato™ Ltd. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- FAB for mobile responsiveness -->
+<div class="fixed bottom-6 right-6 lg:hidden">
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</body></html>

@@ -1,3 +1,7 @@
+/**
+ * Legacy list layout for recommendations (plain CSS era).
+ * The Stitch dark UI uses `RecommendationCard` in `components/stitch/RecommendationsPageClient.tsx`.
+ */
 import type { Recommendation } from "../lib/types";
 
 export function RecommendationCards({ recs }: { recs: Recommendation[] }) {
@@ -12,7 +16,7 @@ export function RecommendationCards({ recs }: { recs: Recommendation[] }) {
           <h3>#{r.rank} {r.name}</h3>
           <div className="meta">{r.cuisine} | Rating {r.rating} | {r.estimated_cost}</div>
           <p>{r.ai_rationale}</p>
-          <div className="meta">Restaurant ID: {r.restaurant_id}</div>
+          <div className="meta">Listing: {r.restaurant_id}</div>
         </article>
       ))}
     </div>

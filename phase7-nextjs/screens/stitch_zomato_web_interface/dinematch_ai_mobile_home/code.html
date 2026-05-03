@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DineMatch AI - The Discerning Concierge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#bb162c",
+                        "on-secondary": "#303030",
+                        "on-primary-container": "#5b000e",
+                        "surface-bright": "#473534",
+                        "error": "#ffb4ab",
+                        "tertiary": "#71d7cf",
+                        "on-surface": "#f9dcda",
+                        "on-primary-fixed": "#410007",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-secondary-container": "#b7b5b4",
+                        "surface-container": "#2c1b1b",
+                        "primary-fixed": "#ffdad8",
+                        "on-tertiary-container": "#00302d",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface": "#1e0f0f",
+                        "secondary-fixed": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "outline-variant": "#5b403f",
+                        "on-tertiary": "#003734",
+                        "on-surface-variant": "#e4bebc",
+                        "surface-container-high": "#372625",
+                        "secondary-container": "#474746",
+                        "surface-variant": "#423030",
+                        "surface-dim": "#1e0f0f",
+                        "surface-tint": "#ffb3b1",
+                        "on-tertiary-fixed": "#00201e",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#180a0a",
+                        "on-tertiary-fixed-variant": "#00504c",
+                        "secondary": "#c8c6c5",
+                        "surface-container-low": "#271717",
+                        "tertiary-container": "#32a099",
+                        "primary": "#ffb3b1",
+                        "on-background": "#f9dcda",
+                        "on-primary": "#680011",
+                        "surface-container-highest": "#423030",
+                        "outline": "#ab8987",
+                        "background": "#1e0f0f",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "inverse-surface": "#f9dcda",
+                        "on-secondary-fixed": "#1b1b1c",
+                        "on-primary-fixed-variant": "#92001c",
+                        "tertiary-fixed-dim": "#71d7cf",
+                        "tertiary-fixed": "#8ef4eb",
+                        "primary-container": "#ff535a",
+                        "inverse-on-surface": "#3e2c2b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "container-max": "1200px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "unit": "4px",
+                        "xs": "8px",
+                        "lg": "40px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "display-lg": ["Be Vietnam Pro"],
+                        "ai-reasoning": ["Be Vietnam Pro"],
+                        "body-base": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "ai-reasoning": ["15px", {"lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-base": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F0F0F;
+            color: #f9dcda;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .glass-card {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #E23744 0%, #ff535a 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-16 bg-[#0F0F0F]/70 backdrop-blur-2xl border-b border-white/5 shadow-2xl shadow-black/50">
+<div class="text-xl font-bold text-white tracking-tighter">DineMatch AI</div>
+<div class="hidden md:flex items-center gap-8 font-['Be_Vietnam_Pro'] text-sm tracking-tight">
+<a class="text-[#E23744] font-semibold border-b-2 border-[#E23744] pb-1" href="#">Home</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors" href="#">Dining Out</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors" href="#">Delivery</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors" href="#">Favorites</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-zinc-400 cursor-pointer hover:bg-white/5 p-2 rounded-full transition-all">search</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-white/10">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a sophisticated person in a high-end restaurant setting with soft bokeh background lights. The lighting is dramatic and moody, reflecting an obsidian and deep red aesthetic. The person has a neutral yet inviting expression, conveying a sense of curated luxury and expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFTjigZVw6IPX3TvSIOE1dpe3tImKmjf9UmUTlm8wq8anEJ-_u-mdIqNSJQs1iSCCQ7Qia8t9Fo0GpXzhNGJVQMiheIzhFrnaXgkZfYZ6slmAPuiOYdWb7VwzK4zE9lRPU7Fl0ZdCYwfynT6RuEVClq3VOQjscWeBpk9ZoyWAIOHUEnTSrWKluJ00YXrxkB2fYPlnglQGXKae-TEVoaq40hpDBKjsjvETM5KxSvFQOgdRIWick_Hv0VO9tQUmSIsjJ6lXQ3z-CD5Ay"/>
+</div>
+</div>
+</header>
+<!-- Hero Header -->
+<main class="pt-24 px-6 max-w-container-max mx-auto">
+<section class="mb-12 text-center md:text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
+<span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-primary text-label-sm font-label-sm">NEXT-GEN CULINARY AI</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-white mb-6 leading-tight max-w-2xl">
+                Find Your <span class="text-[#E23744]">Perfect</span> Meal with AI
+            </h1>
+<p class="font-body-base text-body-base text-zinc-400 max-w-lg">
+                The Discerning Concierge uses deep predictive analysis to curate dining experiences tailored to your exact mood, budget, and palette.
+            </p>
+</section>
+<!-- Conversational Search UI -->
+<section class="mb-10">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-[#E23744] to-transparent rounded-2xl blur opacity-10 group-focus-within:opacity-20 transition duration-1000"></div>
+<div class="relative h-14 glass-card rounded-xl flex items-center px-4 border-white/10">
+<span class="material-symbols-outlined text-zinc-500 mr-3">chat_bubble</span>
+<input class="bg-transparent border-none focus:ring-0 text-white font-body-base w-full placeholder-zinc-600" placeholder="I'm craving something spicy and intimate for two..." type="text"/>
+<button class="w-10 h-10 accent-gradient rounded-lg flex items-center justify-center shadow-lg shadow-red-900/20">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Preference Inputs (Bento Grid Style) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Location -->
+<div class="glass-card p-6 rounded-2xl flex flex-col gap-4 relative overflow-hidden group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#E23744]">location_on</span>
+</div>
+<div>
+<p class="text-zinc-500 text-label-sm font-label-sm">LOCATION</p>
+<p class="text-white font-headline-md text-[18px]">Current: Los Angeles, CA</p>
+</div>
+</div>
+<div class="mt-2 h-32 rounded-xl overflow-hidden grayscale contrast-125 opacity-40 group-hover:opacity-60 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="A stylized, minimalist map segment of a modern metropolitan city at night, rendered in deep obsidian blacks and vibrant neon red pathways. The lighting is low-key and high-contrast, emphasizing a sophisticated urban grid. The aesthetic is clinical and high-tech, fitting for a predictive AI dining platform." data-location="Los Angeles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7DTguLR7GvUUtGfiMoYOgjdO_hUWB4KSbTZ4Qlq2npA58BSW9VyiL6jVeTCsrscWD9Gi3r6fcpblCvh7PqhdCeac2JK-Kjqtmx1nNVOvbfLSDlWW20-nUiWkzi-vpzEweY443MDWRAM2c09MnxpQJEAnRRyjUdRU4ZjhYMVUthBweRNYUlKzCkbXEmlvB0tAm5ogTOEAc6Eg_1-GLDZAup9WprVn4u8ZL8h1TN4sIzRYPSNY-o-x2f7q2BPECSTH3XUYt74Lsm0Lr"/>
+</div>
+</div>
+<!-- Budget & Rating -->
+<div class="grid grid-rows-2 gap-4">
+<div class="glass-card p-6 rounded-2xl flex justify-between items-center">
+<div>
+<p class="text-zinc-500 text-label-sm font-label-sm">BUDGET RANGE</p>
+<div class="flex gap-2 mt-2">
+<button class="px-4 py-2 rounded-lg bg-white/5 text-white border border-white/5 hover:border-primary/50 transition-all">$$</button>
+<button class="px-4 py-2 rounded-lg accent-gradient text-white shadow-lg shadow-red-900/20">$$$</button>
+<button class="px-4 py-2 rounded-lg bg-white/5 text-white border border-white/5 hover:border-primary/50 transition-all">$$$$</button>
+</div>
+</div>
+<span class="material-symbols-outlined text-zinc-700 text-4xl">payments</span>
+</div>
+<div class="glass-card p-6 rounded-2xl flex justify-between items-center">
+<div>
+<p class="text-zinc-500 text-label-sm font-label-sm">MINIMUM RATING</p>
+<div class="flex items-center gap-1 mt-2">
+<span class="material-symbols-outlined text-[#E23744]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[#E23744]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[#E23744]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[#E23744]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-zinc-700">star</span>
+<span class="ml-2 text-white font-medium">4.0+</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-zinc-700 text-4xl">grade</span>
+</div>
+</div>
+<!-- Cuisine Selection (Longer Card) -->
+<div class="md:col-span-2 glass-card p-6 rounded-2xl">
+<p class="text-zinc-500 text-label-sm font-label-sm mb-4">FAVORITE CUISINES</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 rounded-full glass-card border-primary/40 text-primary text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">restaurant</span>Japanese
+                    </span>
+<span class="px-4 py-2 rounded-full bg-white/5 text-zinc-400 text-sm border border-white/5">Italian</span>
+<span class="px-4 py-2 rounded-full glass-card border-primary/40 text-primary text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">restaurant</span>Modern Fusion
+                    </span>
+<span class="px-4 py-2 rounded-full bg-white/5 text-zinc-400 text-sm border border-white/5">French</span>
+<span class="px-4 py-2 rounded-full bg-white/5 text-zinc-400 text-sm border border-white/5">Peruvian</span>
+<span class="px-4 py-2 rounded-full bg-white/5 text-zinc-400 text-sm border border-white/5">+ Add New</span>
+</div>
+</div>
+</section>
+<!-- AI Reason Preview -->
+<section class="mt-8 mb-20">
+<div class="glass-card p-6 rounded-2xl border-l-4 border-l-[#E23744]">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-[#E23744] text-[18px]">psychology</span>
+<p class="text-white font-semibold">AI Prediction</p>
+</div>
+<p class="text-zinc-300 font-ai-reasoning text-ai-reasoning italic">
+                    "Based on your recent interest in Omakase and high-rating preference, I'm analyzing 3 exclusive venues that recently updated their seasonal menu. Would you like to prioritize seating with a chef view?"
+                </p>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full p-6 bg-[#0F0F0F]/90 backdrop-blur-3xl border-t border-white/5 z-50">
+<button class="w-full h-14 accent-gradient rounded-xl text-white font-headline-md flex items-center justify-center gap-3 shadow-2xl shadow-red-600/40 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">magic_button</span>
+            Get Recommendations
+        </button>
+</div>
+<!-- SideNavBar (AI Insights) -->
+<aside class="hidden xl:flex fixed right-0 top-16 h-[calc(100vh-64px)] w-80 bg-[#1E1E1E]/80 backdrop-blur-3xl border-l border-white/10 z-40 flex flex-col p-6 shadow-[-20px_0_30px_rgba(0,0,0,0.5)]">
+<div class="mb-8">
+<h2 class="text-lg font-bold text-white">AI Insights</h2>
+<p class="text-zinc-500 text-sm">Why these matches?</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 p-4 rounded-xl bg-[#E23744]/10 text-[#E23744] border-l-2 border-[#E23744] font-medium transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                Match Analysis
+            </a>
+<a class="flex items-center gap-4 p-4 rounded-xl text-zinc-500 hover:text-zinc-300 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined">settings_heart</span>
+                Preferences
+            </a>
+<a class="flex items-center gap-4 p-4 rounded-xl text-zinc-500 hover:text-zinc-300 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+                History
+            </a>
+</nav>
+<div class="mt-auto p-4 glass-card rounded-xl border-dashed border-white/20">
+<p class="text-zinc-500 text-xs uppercase tracking-widest mb-2 font-bold">Predictive Power</p>
+<div class="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
+<div class="bg-[#E23744] h-full w-[85%] animate-pulse"></div>
+</div>
+<p class="text-white text-xs mt-2">85% Accuracy Confidence</p>
+</div>
+</aside>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/5 bg-[#0F0F0F]">
+<div class="font-black text-[#E23744]">DineMatch AI</div>
+<p class="font-['Be_Vietnam_Pro'] text-xs text-zinc-500">© 2024 DineMatch AI. The Discerning Concierge.</p>
+<div class="flex gap-6">
+<a class="font-['Be_Vietnam_Pro'] text-xs text-zinc-600 hover:text-[#E23744] transition-colors" href="#">Support</a>
+<a class="font-['Be_Vietnam_Pro'] text-xs text-zinc-600 hover:text-[#E23744] transition-colors" href="#">Concierge API</a>
+<a class="font-['Be_Vietnam_Pro'] text-xs text-zinc-600 hover:text-[#E23744] transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Be_Vietnam_Pro'] text-xs text-zinc-600 hover:text-[#E23744] transition-colors" href="#">Terms</a>
+</div>
+</footer>
+</body></html>

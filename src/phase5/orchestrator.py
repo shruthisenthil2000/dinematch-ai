@@ -110,7 +110,8 @@ def run_recommendation(
             return hit, metrics
 
     df = load_canonical_parquet(path)
-    candidates = retrieve_candidates(df, preferences, cap=cap)
+    retrieval_meta: dict[str, Any] = {}
+    candidates = retrieve_candidates(df, preferences, cap=cap, retrieval_meta=retrieval_meta)
     cand_count = len(candidates)
     prompt_chars = 0
     if cand_count > 0:
@@ -126,7 +127,16 @@ def run_recommendation(
         use_llm=use_llm,
     )
 
-    meta = response.get("meta") or {}
+    meta = response.setdefault("meta", {})
+    if not isinstance(meta, dict):
+        meta = {}
+        response["meta"] = meta
+    note = retrieval_meta.get("dining_match_note") if isinstance(retrieval_meta, dict) else None
+    if isinstance(note, str) and note.strip():
+        meta["dining_match_note"] = note.strip()
+    if isinstance(retrieval_meta, dict) and retrieval_meta.get("location_search_expanded") is True:
+        meta["location_search_expanded"] = True
+
     notes = str(meta.get("notes", ""))
     nrec = len(response.get("recommendations") or [])
     elapsed_ms = (time.perf_counter() - t0) * 1000.0
