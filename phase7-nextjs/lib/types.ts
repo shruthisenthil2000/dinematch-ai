@@ -21,6 +21,8 @@ export type Recommendation = {
   estimated_cost: string;
   ai_rationale: string;
   rank: number;
+  /** Neighborhood / locality for display when provided by the service */
+  area?: string;
 };
 
 export type RecommendResponse = {

@@ -55,17 +55,28 @@ def _fallback_payload(
             cuisine_str = ", ".join(str(x) for x in cuisines)
         else:
             cuisine_str = str(cuisines or "")
-        recs.append(
-            {
-                "restaurant_id": str(row["restaurant_id"]),
-                "name": str(row["name"]),
-                "cuisine": cuisine_str or "Unknown",
-                "rating": r_val,
-                "estimated_cost": _estimated_cost_row(row),
-                "ai_rationale": "Structured shortlist pick (automated fallback).",
-                "rank": i + 1,
-            }
-        )
+        loc = row.get("locality")
+        if loc is not None and not (isinstance(loc, float) and pd.isna(loc)):
+            area = str(loc).strip()
+        else:
+            area = ""
+        city = row.get("city")
+        if not area and city is not None and not (isinstance(city, float) and pd.isna(city)):
+            area = str(city).strip()
+        rec: dict[str, Any] = {
+            "restaurant_id": str(row["restaurant_id"]),
+            "name": str(row["name"]),
+            "cuisine": cuisine_str or "Unknown",
+            "rating": r_val,
+            "estimated_cost": _estimated_cost_row(row),
+            "ai_rationale": (
+                "Chosen for strong fit with your area, cuisines, and budget based on the shortlist we had on hand."
+            ),
+            "rank": i + 1,
+        }
+        if area:
+            rec["area"] = area
+        recs.append(rec)
     count = candidate_count if candidate_count is not None else len(candidates_df)
     return {
         "recommendations": recs,

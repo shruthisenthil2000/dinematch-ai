@@ -24,9 +24,12 @@ REQUIRED_COLUMNS = frozenset(
 DINING_MATCH_EXPANSION_NOTE = (
     "We expanded the search slightly to find more great matches nearby."
 )
+DINING_RELAXED_FILTERS_NOTE = (
+    "We broadened things a touch so you still get a strong shortlist of places to try."
+)
 
 # When primary (area-flex) matches fall below this count, eligible Bengaluru queries widen to metro city.
-_DEFAULT_MIN_PRIMARY = 5
+_DEFAULT_MIN_PRIMARY = 3
 
 
 def _min_primary_before_broaden() -> int:
@@ -85,6 +88,8 @@ def _alias_groups() -> tuple[frozenset[str], ...]:
         frozenset(
             {
                 "koramangala",
+                "koramngala",
+                "koramangla",
                 "koramangala 1st block",
                 "koramangala 2nd block",
                 "koramangala 3rd block",
@@ -222,31 +227,48 @@ def triggers_bengaluru_metro_broaden(needles: frozenset[str]) -> bool:
 
 def metro_bangalore_city_mask(df: pd.DataFrame) -> pd.Series:
     """Rows whose city reads as Bangalore / Bengaluru (handles minor spelling variants)."""
-    c = df["city"].astype(str).str.strip().str.casefold()
+    c = df["city"].map(_norm_geo_cell)
     return c.isin({"bangalore", "bengaluru"}) | c.str.contains("bangalore", regex=False, na=False)
+
+
+def _norm_geo_cell(value: Any) -> str:
+    """Normalize city/locality: blanks, NaN, 'nan' strings, collapse spaces, casefold."""
+    if value is None or (isinstance(value, float) and pd.isna(value)):
+        return ""
+    t = re.sub(r"\s+", " ", str(value).strip()).casefold()
+    if t in ("", "nan", "none", "null"):
+        return ""
+    return t
 
 
 def flexible_location_match_mask(df: pd.DataFrame, needles: frozenset[str]) -> pd.Series:
     """
-    True when normalized city or locality matches any needle via equality or substring
-    (literal ``contains``, ``regex=False`` for safety).
+    Partial, case-insensitive location match on ``city`` and ``locality``.
+
+    Matches when any needle equals a field, appears as a substring of ``city`` or
+    ``locality``, or when a non-empty ``city``/``locality`` appears inside a longer
+    needle (helps when the dataset uses a shorter city label than the user query).
+    Rows with only locality populated still match area-style needles.
     """
-    city = df["city"].astype(str).str.strip().str.casefold()
+    city = df["city"].map(_norm_geo_cell)
     if "locality" in df.columns:
-        loc_raw = df["locality"]
-        loc = (
-            loc_raw.where(loc_raw.notna(), "")
-            .astype(str)
-            .map(lambda x: re.sub(r"\s+", " ", str(x).strip()).casefold())
-        )
+        loc = df["locality"].map(_norm_geo_cell)
     else:
-        loc = pd.Series("", index=df.index)
+        loc = pd.Series("", index=df.index, dtype=object)
     blob = city.str.cat(loc, sep="|")
     m = pd.Series(False, index=df.index)
     for needle in needles:
         if len(needle) < 2:
             continue
-        m = m | (city == needle) | (loc == needle) | blob.str.contains(needle, regex=False, na=False)
+        in_city = city.str.contains(needle, regex=False, na=False)
+        in_loc = loc.str.contains(needle, regex=False, na=False)
+        eq = (city == needle) | (loc == needle)
+        blob_hit = blob.str.contains(needle, regex=False, na=False)
+        m = m | eq | in_city | in_loc | blob_hit
+        # Longer user/needle phrases vs shorter canonical locality (substring both ways).
+        if len(needle) >= 4:
+            m = m | city.map(lambda c: bool(c) and c in needle)
+            m = m | loc.map(lambda lo: bool(lo) and lo in needle)
     return m
 
 

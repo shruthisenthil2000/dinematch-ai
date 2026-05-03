@@ -19,11 +19,17 @@ def dataframe_to_candidate_dicts(df: pd.DataFrame) -> list[dict[str, Any]]:
         cost_band = r.get("cost_band")
         approx = r.get("approx_cost_for_two")
         votes = r.get("votes")
+        loc_val = r.get("locality")
+        if loc_val is None or (isinstance(loc_val, float) and pd.isna(loc_val)):
+            locality_str = ""
+        else:
+            locality_str = str(loc_val).strip()
         rows.append(
             {
                 "restaurant_id": str(r["restaurant_id"]),
                 "name": str(r["name"]),
                 "city": str(r.get("city", "")),
+                "locality": locality_str,
                 "cuisines": [str(c) for c in cuisines],
                 "rating": None if rating is None or (isinstance(rating, float) and pd.isna(rating)) else float(rating),
                 "cost_band": None
@@ -69,12 +75,13 @@ def build_recommendation_prompt(
 
 ## Rules
 1. Recommend at most {top_n} restaurants, ordered best-first (rank 1 = best).
-2. Each recommendation object MUST include: restaurant_id, name, cuisine (string), rating (number 0-5), estimated_cost (short human-readable string from cost_band and/or approx_cost_for_two), ai_rationale (non-empty), rank (integer >= 1).
+2. Each recommendation object MUST include: restaurant_id, name, cuisine (string), rating (number 0-5), estimated_cost (short human-readable string from cost_band and/or approx_cost_for_two), ai_rationale (non-empty, friendly for diners—no system or debug wording), rank (integer >= 1).
 3. restaurant_id and name MUST match the candidate row exactly.
 4. cuisine should summarize the candidate's cuisines field for display.
 5. estimated_cost should reflect data (e.g. band label and optional INR hint); do not invent prices not supported by the row.
-6. Output a single JSON object with key "recommendations" (array). You may include optional keys "comparative_summary" (string) and "meta" (object).
-7. Return ONLY the JSON object (no commentary), or wrap it in a ```json code block.
+6. When the candidate has a non-empty "locality" field, include optional key "area" with that locality string for on-screen display.
+7. Output a single JSON object with key "recommendations" (array). You may include optional keys "comparative_summary" (string) and "meta" (object).
+8. Return ONLY the JSON object (no commentary), or wrap it in a ```json code block.
 
 If no candidate is suitable, return {{"recommendations": []}}.
 """

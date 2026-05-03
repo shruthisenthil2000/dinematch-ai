@@ -13,6 +13,15 @@ import {
 import type { Recommendation, RecommendResponse } from "../../lib/types";
 import { InsightsAside, SiteChrome } from "./SiteChrome";
 
+function friendlyRationale(text: string | undefined): string {
+  const s = (text || "").trim();
+  if (!s) return "—";
+  if (/structured shortlist|automated fallback|llm_disabled|groq_error/i.test(s)) {
+    return "Chosen based on your preferences and what’s available in this shortlist.";
+  }
+  return s;
+}
+
 function rankBadge(rank: number): string {
   if (rank === 1) return "Top pick";
   if (rank === 2) return "Strong match";
@@ -46,17 +55,15 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
             <span className="ml-1 text-sm font-bold">{rec.rating}</span>
           </div>
         </div>
-        <p className="mb-4 text-sm text-zinc-400">
-          {rec.cuisine} · {rec.estimated_cost}
-        </p>
-        <div className="mb-4 flex flex-wrap gap-2">
-          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-zinc-300">
-            Listing {rec.restaurant_id}
-          </span>
+        <div className="mb-4 text-sm text-zinc-400">
+          <p>
+            {rec.cuisine} · {rec.estimated_cost}
+          </p>
+          {rec.area ? <p className="mt-1 text-xs font-medium text-zinc-500">{rec.area}</p> : null}
         </div>
         <div className="flex gap-3 rounded-xl border-l-2 border-[#E23744] bg-white/5 p-4">
           <span className="material-symbols-outlined text-xl text-[#E23744]">auto_awesome</span>
-          <p className="text-xs leading-relaxed text-zinc-300">{rec.ai_rationale || "—"}</p>
+          <p className="text-xs leading-relaxed text-zinc-300">{friendlyRationale(rec.ai_rationale)}</p>
         </div>
       </div>
     </article>
@@ -126,11 +133,11 @@ export function RecommendationsPageClient() {
 
   const recs = stored?.response?.response?.recommendations ?? [];
   const summary = stored?.response?.response?.comparative_summary;
-  const obs = stored?.response?.observability;
-  const candidateLine =
-    typeof obs?.candidate_count === "number"
-      ? `We reviewed ${obs.candidate_count} place${obs.candidate_count === 1 ? "" : "s"} before choosing these picks.`
-      : "Personalized dining matches from your latest search.";
+  const matchHint =
+    typeof stored?.response?.response?.meta?.dining_match_note === "string"
+      ? stored.response.response.meta.dining_match_note.trim()
+      : "";
+  const candidateLine = matchHint || "Personalized dining matches from your latest search.";
 
   if (!hydrated) {
     return (
@@ -273,21 +280,6 @@ export function RecommendationsPageClient() {
           ))}
         </div>
 
-        {obs && (
-          <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-xs text-zinc-500 sm:text-sm">
-            <span className="font-semibold text-zinc-400">How this match was built</span>
-            <span className="mx-2 text-zinc-700">·</span>
-            <span>
-              {[
-                typeof obs.candidate_count === "number" ? `${obs.candidate_count} places considered` : null,
-                `${obs.recommendation_count ?? recs.length} picks shown`,
-                typeof obs.latency_ms === "number" ? `Ready in about ${(obs.latency_ms / 1000).toFixed(1)}s` : null,
-              ]
-                .filter(Boolean)
-                .join(" · ")}
-            </span>
-          </div>
-        )}
       </main>
     </SiteChrome>
   );

@@ -44,6 +44,10 @@
             "type": "integer",
             "minimum": 1,
             "description": "1-based rank within this response."
+          },
+          "area": {
+            "type": "string",
+            "description": "Neighborhood or locality for display (optional)."
           }
         },
         "required": [

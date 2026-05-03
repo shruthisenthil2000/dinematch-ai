@@ -30,6 +30,7 @@ def test_dataframe_to_candidate_dicts_shape():
     df = pd.DataFrame([_row("a", "N", "Pune", ["italian"], 4.2, "medium")])
     rows = dataframe_to_candidate_dicts(df)
     assert rows[0]["restaurant_id"] == "a"
+    assert rows[0]["locality"] == "l"
     assert rows[0]["cuisines"] == ["italian"]
     assert rows[0]["rating"] == 4.2
 

@@ -41,7 +41,7 @@ shortlist = retrieve_candidates(df, prefs, cap=20)
 
 | Field | Rule |
 |-------|------|
-| `location` | Case-insensitive match on canonical `city`. |
+| `location` | Normalized partial match on `city` and `locality`, alias expansion for common Bengaluru areas, optional metro-wide broadening when primary matches are sparse, and (for eligible queries) small relaxations to reach a minimum candidate pool. |
 | `budget` | `cost_band` must equal `budget`; rows with null `cost_band` are excluded. |
 | `cuisines` | Empty list → no cuisine filter; else at least one overlapping cuisine token (case-insensitive). |
 | `min_rating` | `<= 0` → no floor; else require non-null `rating >= min_rating`. |

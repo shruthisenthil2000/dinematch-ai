@@ -83,8 +83,10 @@ def test_city_case_insensitive():
     assert out.iloc[0]["restaurant_id"] == "1"
 
 
-def test_location_matches_locality_when_city_differs():
+def test_location_matches_locality_when_city_differs(monkeypatch):
     """User may enter an area (locality) while canonical city is wider (e.g. Bangalore / Bellandur)."""
+    # Disable metro broadening so we only assert area-level matching for Bellandur.
+    monkeypatch.setenv("PHASE3_MIN_CANDIDATES_BEFORE_BROADEN", "1")
     df = pd.DataFrame(
         [
             {
