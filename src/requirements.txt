@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+flask
+pandas
+pyarrow
+scikit-learn
+numpy
+scipy
+pydantic
+jinja2
