@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PHASE5_API_BASE = process.env.PHASE5_API_BASE ?? "http://127.0.0.1:5055";
+const PHASE5_API_BASE =
+  process.env.PHASE5_API_BASE ?? "https://dinematch-ai.onrender.com";
 
 export async function POST(req: NextRequest) {
   let body: unknown;
