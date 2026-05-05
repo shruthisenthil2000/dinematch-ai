@@ -118,32 +118,32 @@ export function HomePageClient() {
 
   return (
     <SiteChrome activeNav="home" showFooter={false} mainClassName="bg-[#0F0F0F] md:flex md:flex-col">
-      <main className="flex w-full flex-1 flex-col max-md:min-h-0 max-md:overflow-y-auto md:min-h-0 md:max-h-[calc(100dvh-4rem)] md:justify-center md:gap-8 md:overflow-y-auto md:overflow-x-hidden md:px-5 md:py-8 lg:gap-10 lg:px-8 lg:py-10">
-        <section className="relative flex w-full shrink-0 flex-col items-center justify-center px-4 pb-4 pt-10 hero-bg sm:pb-5 sm:pt-12 md:min-h-0 md:pb-6 md:pt-4">
+      <main className="flex w-full flex-1 flex-col max-md:min-h-0 max-md:overflow-y-auto md:min-h-0 md:max-h-[calc(100dvh-4rem)] md:overflow-y-auto md:overflow-x-hidden md:px-5 md:pb-5 md:pt-5 lg:px-8 lg:pb-6 lg:pt-6">
+        <section className="relative flex w-full shrink-0 flex-col items-center justify-center px-4 pb-2 pt-8 hero-bg sm:pb-3 sm:pt-10 md:min-h-0 md:pb-3 md:pt-10 lg:pt-12">
           <div className="hero-overlay absolute inset-0" />
-          <div className="relative z-10 mx-auto w-full max-w-lg px-3 text-center sm:max-w-xl sm:px-4">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur-md sm:mb-6 sm:px-4 sm:py-2">
+          <div className="relative z-10 mx-auto w-full max-w-2xl px-3 text-center sm:px-4">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md sm:mb-3.5 sm:px-3.5 sm:py-1.5">
               <span className="material-symbols-outlined text-sm text-[#E23744]">verified</span>
-              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-400 sm:text-[11px]">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 sm:text-[11px]">
                 AI-powered dining
               </span>
             </div>
-            <h1 className="mb-4 text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-white sm:mb-5 sm:text-4xl md:mb-5 md:text-[2.375rem] md:leading-[1.14] lg:text-[2.5rem]">
+            <h1 className="mb-2 text-3xl font-bold leading-[1.1] tracking-[-0.02em] text-white sm:mb-3 sm:text-4xl md:mb-2.5 md:text-5xl md:leading-[1.08]">
               Find your perfect meal
               <br />
-              <span className="font-semibold text-[#ffb3b1]">with AI precision</span>
+              <span className="text-[#ffb3b1]">with AI precision</span>
             </h1>
-            <p className="mx-auto max-w-sm text-sm leading-relaxed text-zinc-400/95 sm:max-w-md sm:text-[0.9375rem] md:text-base">
+            <p className="mx-auto max-w-xl text-sm leading-relaxed text-zinc-300/95 sm:text-base md:text-[1.0625rem] md:leading-relaxed">
               Tell us where, your budget, and what you crave — we match you to places worth the reservation.
             </p>
           </div>
         </section>
 
-        <section className="relative z-20 w-full shrink-0 px-4 pb-10 sm:px-6 sm:pb-12 md:px-0 md:pb-8">
+        <section className="relative z-20 -mt-9 w-full shrink-0 px-4 pb-8 sm:-mt-11 sm:px-5 sm:pb-10 md:-mt-12 md:px-0 md:pb-6 lg:-mt-14">
           <div className="mx-auto w-full max-w-3xl">
-            <div className="glass-panel rounded-[1.25rem] border-white/[0.08] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.38)] sm:rounded-3xl sm:p-7 md:p-8">
+            <div className="glass-panel rounded-[1.35rem] border border-white/[0.07] p-5 shadow-[0_20px_70px_rgba(0,0,0,0.42)] sm:rounded-[1.75rem] sm:p-6 md:p-6">
             {warnings.length > 0 && (
-              <div className="mb-5 rounded-xl border border-amber-500/25 bg-amber-500/[0.08] p-4 text-left text-xs text-amber-100/95 sm:mb-6 sm:p-4 sm:text-sm">
+              <div className="mb-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.08] p-3.5 text-left text-xs text-amber-100/95 sm:p-4 sm:text-sm">
                 <p className="mb-1.5 font-semibold text-amber-200">Safety note</p>
                 <ul className="list-inside list-disc space-y-1 text-amber-100/90">
                   {warnings.map((w) => (
@@ -152,45 +152,43 @@ export function HomePageClient() {
                 </ul>
               </div>
             )}
-            <div className="mb-7 space-y-2.5 sm:mb-8 sm:space-y-3">
+            <div className="mb-5 space-y-1.5 sm:mb-5">
               <span id="optional-constraints-desc" className="sr-only">
                 Optional. Short hint in the placeholder: cuisine, occasion, or vibe. Leave blank if you prefer.
               </span>
-              <div className="flex items-center gap-2.5 px-0.5">
+              <div className="flex items-center gap-2 px-0.5">
                 <span
-                  className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/[0.06] ring-1 ring-white/10"
+                  className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/[0.05] ring-1 ring-white/[0.08]"
                   aria-hidden
                 >
-                  <span className="material-symbols-outlined text-base text-[#E23744]">edit_note</span>
+                  <span className="material-symbols-outlined text-sm text-[#E23744]">edit_note</span>
                 </span>
-                <div className="min-w-0 text-left">
-                  <label htmlFor="optional-constraints" className="text-[13px] font-medium text-zinc-300">
-                    Notes <span className="font-normal text-zinc-500">· optional</span>
-                  </label>
-                </div>
+                <label htmlFor="optional-constraints" className="text-[12px] font-medium text-zinc-400">
+                  Notes <span className="font-normal text-zinc-600">· optional</span>
+                </label>
               </div>
               <input
                 id="optional-constraints"
                 type="text"
                 autoComplete="off"
                 aria-describedby="optional-constraints-desc"
-                className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white shadow-inner placeholder:text-zinc-500 focus:border-[#E23744]/45 focus:outline-none focus:ring-2 focus:ring-[#E23744]/25 sm:h-14 sm:px-5 sm:text-base"
+                className="h-11 w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-3.5 py-2.5 text-sm text-white shadow-inner placeholder:text-zinc-500 focus:border-[#E23744]/45 focus:outline-none focus:ring-2 focus:ring-[#E23744]/22 sm:h-12 sm:px-4 sm:text-base"
                 placeholder={DINING_NOTES_PLACEHOLDER}
                 value={optionalConstraints}
                 onChange={(e) => setOptionalConstraints(e.target.value)}
               />
             </div>
 
-            <div className="mb-6 grid grid-cols-1 gap-4 md:mb-7 md:grid-cols-3 md:gap-5">
-              <div className="group rounded-2xl border border-white/5 bg-white/[0.04] p-4 transition-all hover:border-white/10 sm:p-5">
-                <div className="mb-3 flex items-center gap-2">
+            <div className="mb-5 grid grid-cols-1 gap-3 md:mb-5 md:grid-cols-3 md:gap-3">
+              <div className="group rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 sm:p-4">
+                <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">location_on</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Area</span>
                 </div>
                 <div className="relative">
                   <select
                     id="dining-location"
-                    className="w-full cursor-pointer appearance-none rounded-xl border border-white/10 bg-[#141414] py-3 pl-3 pr-10 text-sm font-semibold text-white shadow-inner focus:border-[#E23744]/50 focus:outline-none focus:ring-2 focus:ring-[#E23744]/25 sm:text-base"
+                    className="w-full cursor-pointer appearance-none rounded-xl border border-white/10 bg-[#141414] py-2.5 pl-3 pr-10 text-sm font-semibold text-white shadow-inner focus:border-[#E23744]/50 focus:outline-none focus:ring-2 focus:ring-[#E23744]/25 sm:text-base"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     aria-label="Neighborhood or area"
@@ -208,18 +206,18 @@ export function HomePageClient() {
                 <p className="mt-2 text-[10px] text-zinc-500">Pick where you’d like to dine in Bengaluru.</p>
               </div>
 
-              <div className="group rounded-2xl border border-white/5 bg-white/[0.04] p-4 transition-all hover:border-white/10 sm:p-5">
-                <div className="mb-3 flex items-center gap-2">
+              <div className="group rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 sm:p-4">
+                <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">payments</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Budget for two</span>
                 </div>
-                <div className="flex flex-col gap-2.5">
+                <div className="flex flex-col gap-2">
                   {BUDGET_OPTIONS.map((b) => (
                     <button
                       key={b.value}
                       type="button"
                       onClick={() => setBudget(b.value)}
-                      className={`flex w-full flex-col items-start rounded-xl border px-3 py-3 text-left transition-all ${
+                      className={`flex w-full flex-col items-start rounded-xl border px-3 py-2.5 text-left transition-all ${
                         budget === b.value
                           ? "border-[#E23744]/60 bg-[#E23744]/15 shadow-[0_0_0_1px_rgba(226,55,68,0.25)]"
                           : "border-white/10 bg-white/[0.04] hover:border-white/15 hover:bg-white/[0.07]"
@@ -236,8 +234,8 @@ export function HomePageClient() {
                 </p>
               </div>
 
-              <div className="group rounded-2xl border border-white/5 bg-white/[0.04] p-4 transition-all hover:border-white/10 sm:p-5">
-                <div className="mb-3 flex items-center gap-2">
+              <div className="group rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 sm:p-4">
+                <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">grade</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Min. rating</span>
                 </div>
@@ -269,8 +267,8 @@ export function HomePageClient() {
                 />
               </div>
 
-              <div className="group rounded-2xl border border-white/5 bg-white/[0.04] p-4 transition-all hover:border-white/10 md:col-span-2 sm:p-5">
-                <div className="mb-3 flex items-center gap-2">
+              <div className="group rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 md:col-span-2 sm:p-4">
+                <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">restaurant_menu</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Cuisines</span>
                 </div>
@@ -284,8 +282,8 @@ export function HomePageClient() {
                 <p className="mt-2 text-[10px] text-zinc-500">Comma-separated list; empty means any cuisine.</p>
               </div>
 
-              <div className="group flex flex-col justify-between rounded-2xl border border-white/5 bg-white/[0.04] p-4 transition-all hover:border-white/10 sm:p-5">
-                <div className="mb-3 flex items-center gap-2">
+              <div className="group flex flex-col justify-between rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 sm:p-4">
+                <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">tune</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Advanced</span>
                 </div>
@@ -300,7 +298,7 @@ export function HomePageClient() {
             </div>
 
             {showAdvanced && (
-              <div className="mb-6 grid grid-cols-1 gap-4 border-t border-white/10 pt-5 sm:grid-cols-3 sm:pt-6">
+              <div className="mb-5 grid grid-cols-1 gap-3 border-t border-white/[0.08] pt-4 sm:grid-cols-3 sm:pt-4">
                 <label className="text-xs text-zinc-400">
                   How many places to consider
                   <input
@@ -323,7 +321,7 @@ export function HomePageClient() {
                     className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white"
                   />
                 </label>
-                <label className="flex cursor-pointer items-center gap-2 pt-5 text-sm text-zinc-300 sm:pt-6">
+                <label className="flex cursor-pointer items-center gap-2 pt-4 text-sm text-zinc-300 sm:pt-4">
                   <input
                     type="checkbox"
                     checked={useLlm}
@@ -337,7 +335,7 @@ export function HomePageClient() {
 
             {inlineError && (
               <div
-                className="mb-6 rounded-xl border border-red-500/40 bg-red-950/40 px-4 py-3 text-sm text-red-100"
+                className="mb-4 rounded-xl border border-red-500/40 bg-red-950/40 px-4 py-3 text-sm text-red-100"
                 role="alert"
               >
                 {inlineError}
@@ -348,7 +346,7 @@ export function HomePageClient() {
               type="button"
               onClick={submitRecommendation}
               disabled={busy}
-              className="accent-gradient mt-1 flex min-h-[3.25rem] w-full items-center justify-center gap-2 rounded-2xl px-4 py-3.5 text-sm font-semibold text-white shadow-lg shadow-red-900/25 transition-all duration-300 hover:opacity-[0.97] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-14 sm:gap-2.5 sm:text-base"
+              className="accent-gradient flex min-h-[3rem] w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold text-white shadow-lg shadow-red-900/25 transition-all duration-300 hover:opacity-[0.96] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-12 sm:text-base"
             >
               {busy ? (
                 <>
