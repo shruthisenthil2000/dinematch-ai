@@ -118,30 +118,33 @@ export function HomePageClient() {
 
   return (
     <SiteChrome activeNav="home" showFooter={false} mainClassName="bg-[#0F0F0F] md:flex md:flex-col">
-      <main className="flex w-full flex-1 flex-col max-md:min-h-0 max-md:overflow-y-auto md:min-h-0 md:max-h-[calc(100dvh-4rem)] md:overflow-y-auto md:overflow-x-hidden md:px-5 md:pb-5 md:pt-5 lg:px-8 lg:pb-6 lg:pt-6">
-        <section className="relative flex w-full shrink-0 flex-col items-center justify-center px-4 pb-2 pt-8 hero-bg sm:pb-3 sm:pt-10 md:min-h-0 md:pb-3 md:pt-10 lg:pt-12">
+      <main className="flex w-full flex-1 flex-col max-md:min-h-0 max-md:overflow-y-auto md:min-h-0 md:max-h-[calc(100dvh-4rem)] md:overflow-y-auto md:overflow-x-hidden md:px-8 md:pb-6 md:pt-4 lg:px-12 lg:pb-7 lg:pt-5 xl:px-16">
+        <section className="relative flex w-full shrink-0 flex-col items-center justify-center px-4 pb-3 pt-7 hero-bg sm:pb-4 sm:pt-8 md:min-h-0 md:pb-4 md:pt-7 lg:pt-8">
           <div className="hero-overlay absolute inset-0" />
-          <div className="relative z-10 mx-auto w-full max-w-2xl px-3 text-center sm:px-4">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md sm:mb-3.5 sm:px-3.5 sm:py-1.5">
+          <div className="relative z-10 mx-auto w-full max-w-2xl px-3 text-center sm:px-5">
+            <div className="mb-2.5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md sm:mb-3 sm:px-3.5 sm:py-1.5">
               <span className="material-symbols-outlined text-sm text-[#E23744]">verified</span>
               <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 sm:text-[11px]">
                 AI-powered dining
               </span>
             </div>
-            <h1 className="mb-2 text-3xl font-bold leading-[1.1] tracking-[-0.02em] text-white sm:mb-3 sm:text-4xl md:mb-2.5 md:text-5xl md:leading-[1.08]">
+            <h1 className="mb-2.5 text-3xl font-bold leading-[1.1] tracking-[-0.02em] text-white sm:mb-3 sm:text-4xl md:mb-3 md:text-5xl md:leading-[1.08]">
               Find your perfect meal
               <br />
               <span className="text-[#ffb3b1]">with AI precision</span>
             </h1>
-            <p className="mx-auto max-w-xl text-sm leading-relaxed text-zinc-300/95 sm:text-base md:text-[1.0625rem] md:leading-relaxed">
+            <p className="mx-auto mb-6 max-w-xl text-sm leading-relaxed text-zinc-300/95 sm:mb-7 sm:text-base md:mb-8 md:text-[1.0625rem] md:leading-relaxed">
               Tell us where, your budget, and what you crave — we match you to places worth the reservation.
             </p>
           </div>
         </section>
 
-        <section className="relative z-20 -mt-9 w-full shrink-0 px-4 pb-8 sm:-mt-11 sm:px-5 sm:pb-10 md:-mt-12 md:px-0 md:pb-6 lg:-mt-14">
-          <div className="mx-auto w-full max-w-3xl">
-            <div className="glass-panel rounded-[1.35rem] border border-white/[0.07] p-5 shadow-[0_20px_70px_rgba(0,0,0,0.42)] sm:rounded-[1.75rem] sm:p-6 md:p-6">
+        <section className="relative z-20 w-full shrink-0 px-4 pb-8 pt-0 sm:px-6 sm:pb-10 md:px-0 md:pb-6">
+          <div className="mx-auto mb-4 flex max-w-2xl justify-center sm:mb-5 md:mb-6 lg:max-w-[42rem]" aria-hidden>
+            <div className="h-px w-14 rounded-full bg-gradient-to-r from-transparent via-white/25 to-transparent sm:w-20 md:w-24" />
+          </div>
+          <div className="mx-auto w-full max-w-2xl lg:max-w-[42rem]">
+            <div className="glass-panel rounded-[1.35rem] border border-white/[0.08] p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_64px_rgba(0,0,0,0.44)] sm:rounded-[1.65rem] sm:p-6 md:p-6">
             {warnings.length > 0 && (
               <div className="mb-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.08] p-3.5 text-left text-xs text-amber-100/95 sm:p-4 sm:text-sm">
                 <p className="mb-1.5 font-semibold text-amber-200">Safety note</p>
