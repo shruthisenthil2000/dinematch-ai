@@ -164,7 +164,7 @@ export function RecommendationsPageClient() {
   const meta = stored?.response?.response?.meta;
   const selectedArea =
     (typeof meta?.selected_area === "string" && meta.selected_area.trim()) ||
-    stored.request.preferences.location.trim() ||
+    stored?.request?.preferences?.location?.trim() ||
     "your area";
   const primaryRecs = recs.filter((r) => r.location_tier !== "nearby");
   const nearbyRecs = recs.filter((r) => r.location_tier === "nearby");
