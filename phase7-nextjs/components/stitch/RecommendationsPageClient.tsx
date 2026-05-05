@@ -30,40 +30,56 @@ function rankBadge(rank: number): string {
 }
 
 function RecommendationCard({ rec }: { rec: Recommendation }) {
-  const initial = (rec.name || "?").slice(0, 1).toUpperCase();
   return (
-    <article className="group glass-card relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#E23744]/10">
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#E23744]/30 via-zinc-900 to-black" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-5xl font-black text-white/20">{initial}</span>
-        </div>
-        <div className="absolute right-4 top-4 rounded-full bg-[#E23744] px-3 py-1 text-xs font-bold text-white shadow-lg ai-glow">
-          {rankBadge(rec.rank)}
-        </div>
-      </div>
-      <div className="p-5 sm:p-6">
-        <div className="mb-2 flex items-start justify-between gap-2">
-          <h3 className="text-lg font-semibold leading-snug text-white sm:text-xl">{rec.name}</h3>
-          <div className="flex shrink-0 items-center text-[#ffb3b1]">
+    <article className="group glass-card relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#E23744]/10">
+      <div className="flex flex-col gap-3 p-4 sm:gap-3.5 sm:p-5">
+        <header className="flex items-center justify-between gap-3">
+          <span className="rounded-full bg-[#E23744] px-2.5 py-1 text-[11px] font-bold leading-none text-white shadow-lg shadow-black/30 ai-glow sm:px-3 sm:text-xs">
+            {rankBadge(rec.rank)}
+          </span>
+          <div
+            className="flex shrink-0 items-center gap-0.5 text-[#ffb3b1]"
+            aria-label={`Rating ${rec.rating} out of 5`}
+          >
             <span
-              className="material-symbols-outlined text-sm"
+              className="material-symbols-outlined text-base"
               style={{ fontVariationSettings: "'FILL' 1" }}
+              aria-hidden
             >
               star
             </span>
-            <span className="ml-1 text-sm font-bold">{rec.rating}</span>
+            <span className="text-sm font-bold tabular-nums">{rec.rating}</span>
+          </div>
+        </header>
+
+        <div className="min-w-0 space-y-2">
+          <h3 className="text-lg font-semibold leading-snug text-white sm:text-xl">{rec.name}</h3>
+          <div className="space-y-1 text-sm leading-snug text-zinc-400">
+            <p className="break-words">{rec.cuisine}</p>
+            <p className="break-words text-zinc-500">
+              {rec.estimated_cost}
+              {rec.area ? (
+                <>
+                  <span className="mx-1.5 text-zinc-600" aria-hidden>
+                    ·
+                  </span>
+                  {rec.area}
+                </>
+              ) : null}
+            </p>
           </div>
         </div>
-        <div className="mb-4 text-sm text-zinc-400">
-          <p>
-            {rec.cuisine} · {rec.estimated_cost}
-          </p>
-          {rec.area ? <p className="mt-1 text-xs font-medium text-zinc-500">{rec.area}</p> : null}
-        </div>
-        <div className="flex gap-3 rounded-xl border-l-2 border-[#E23744] bg-white/5 p-4">
-          <span className="material-symbols-outlined text-xl text-[#E23744]">auto_awesome</span>
-          <p className="text-xs leading-relaxed text-zinc-300">{friendlyRationale(rec.ai_rationale)}</p>
+
+        <div className="flex gap-2.5 rounded-xl border-l-2 border-[#E23744] bg-white/5 p-3 sm:p-3.5">
+          <span className="material-symbols-outlined mt-0.5 shrink-0 text-lg text-[#E23744]" aria-hidden>
+            auto_awesome
+          </span>
+          <div className="min-w-0 space-y-1">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-[#E23744] sm:text-[11px]">
+              Why it matches
+            </p>
+            <p className="text-xs leading-relaxed text-zinc-300">{friendlyRationale(rec.ai_rationale)}</p>
+          </div>
         </div>
       </div>
     </article>
@@ -274,7 +290,7 @@ export function RecommendationsPageClient() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:gap-5 xl:grid-cols-3 xl:gap-6">
           {recs.map((rec) => (
             <RecommendationCard key={`${rec.rank}-${rec.restaurant_id}`} rec={rec} />
           ))}
