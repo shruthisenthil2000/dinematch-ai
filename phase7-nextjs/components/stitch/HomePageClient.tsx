@@ -128,12 +128,12 @@ export function HomePageClient() {
                 AI-powered dining
               </span>
             </div>
-            <h1 className="mb-2.5 text-3xl font-bold leading-[1.1] tracking-[-0.02em] themed-text sm:mb-3 sm:text-4xl md:mb-3 md:text-5xl md:leading-[1.08]">
+            <h1 className="hero-title-ink mb-2.5 text-3xl font-bold leading-[1.1] tracking-[-0.02em] themed-text sm:mb-3 sm:text-4xl md:mb-3 md:text-5xl md:leading-[1.08]">
               Find your perfect meal
               <br />
-              <span className="text-[#ffb3b1]">with AI precision</span>
+              <span className="hero-gradient-ink">with AI precision</span>
             </h1>
-            <p className="themed-text-secondary mx-auto mb-6 max-w-xl text-sm leading-relaxed sm:mb-7 sm:text-base md:mb-8 md:text-[1.0625rem] md:leading-relaxed">
+            <p className="hero-subtitle-ink mx-auto mb-6 max-w-xl text-sm leading-relaxed sm:mb-7 sm:text-base md:mb-8 md:text-[1.0625rem] md:leading-relaxed">
               Tell us where, your budget, and what you crave — we match you to places worth the reservation.
             </p>
           </div>
@@ -144,7 +144,7 @@ export function HomePageClient() {
             <div className="h-px w-14 rounded-full bg-gradient-to-r from-transparent via-white/25 to-transparent sm:w-20 md:w-24" />
           </div>
           <div className="mx-auto w-full max-w-2xl lg:max-w-[42rem]">
-            <div className="glass-panel rounded-[1.35rem] border themed-border p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04),0_22px_64px_rgba(0,0,0,0.18)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_64px_rgba(0,0,0,0.44)] sm:rounded-[1.65rem] sm:p-6 md:p-6">
+            <div className="glass-panel rounded-[1.35rem] border themed-border p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.24),0_22px_64px_rgba(88,69,46,0.16)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_64px_rgba(0,0,0,0.44)] sm:rounded-[1.65rem] sm:p-6 md:p-6">
             {warnings.length > 0 && (
               <div className="mb-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.08] p-3.5 text-left text-xs text-amber-100/95 sm:p-4 sm:text-sm">
                 <p className="mb-1.5 font-semibold text-amber-200">Safety note</p>
