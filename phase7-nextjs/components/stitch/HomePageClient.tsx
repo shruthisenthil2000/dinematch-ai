@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { checkRecommendationIntegrity } from "../../lib/checks";
 import { writeStoredRecommend } from "../../lib/recommendSession";
 import { safetyWarnings } from "../../lib/safety";
 import type { RecommendRequest, RecommendResponse } from "../../lib/types";
-import { InsightsAside, SiteChrome } from "./SiteChrome";
+import { SiteChrome } from "./SiteChrome";
 
 const LOCATION_OPTIONS = [
   "Bellandur",
@@ -115,69 +114,41 @@ export function HomePageClient() {
   const filledStars = Math.min(5, Math.round(minRating));
 
   return (
-    <SiteChrome
-      activeNav="home"
-      aside={
-        <InsightsAside>
-          <div className="rounded-lg border-l-2 border-[#E23744] bg-[#E23744]/10 p-3 font-medium text-[#E23744]">
-            <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined">psychology</span>
-              <span className="text-sm">Match analysis</span>
+    <SiteChrome activeNav="home">
+      <main className="w-full">
+        <section className="relative flex min-h-[380px] w-full items-center justify-center px-4 pb-8 pt-6 hero-bg sm:min-h-[440px] sm:pb-10 sm:pt-8 md:min-h-[480px]">
+          <div className="hero-overlay absolute inset-0" />
+          <div className="relative z-10 mx-auto w-full max-w-2xl px-2 text-center">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md sm:mb-6 sm:px-4">
+              <span className="material-symbols-outlined text-sm text-[#E23744]">verified</span>
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400 sm:text-xs">
+                AI-powered dining
+              </span>
             </div>
+            <h1 className="mb-3 text-3xl font-bold leading-[1.15] tracking-tight text-white sm:mb-4 sm:text-4xl md:text-5xl">
+              Find your perfect meal
+              <br />
+              <span className="text-[#ffb3b1]">with AI precision</span>
+            </h1>
+            <p className="mx-auto max-w-md text-sm leading-relaxed text-zinc-400 sm:max-w-lg sm:text-base">
+              Tell us where, your budget, and what you crave — we match you to places worth the reservation.
+            </p>
           </div>
-          <div className="rounded-lg p-3 text-zinc-500 transition-all hover:bg-white/5 hover:text-zinc-300">
-            <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined">settings_heart</span>
-              <span className="text-sm">Preferences</span>
-            </div>
-          </div>
-          <Link
-            href="/eval"
-            className="rounded-lg p-3 text-zinc-500 transition-all hover:bg-white/5 hover:text-zinc-300"
-          >
-            <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined">history</span>
-              <span className="text-sm">Sample scenarios</span>
-            </div>
-          </Link>
-          {warnings.length > 0 && (
-            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-100">
-              <p className="mb-1 font-semibold text-amber-200">Safety soft-check</p>
-              <ul className="list-inside list-disc space-y-1 text-amber-100/90">
-                {warnings.map((w) => (
-                  <li key={w}>{w}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </InsightsAside>
-      }
-    >
-      <main>
-      <section className="relative flex h-[420px] items-center justify-center px-4 hero-bg sm:h-[520px] md:h-[614px] md:px-8">
-        <div className="hero-overlay absolute inset-0" />
-        <div className="relative z-10 max-w-3xl px-2 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
-            <span className="material-symbols-outlined text-sm text-[#E23744]">verified</span>
-            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
-              AI-powered gastronomy
-            </span>
-          </div>
-          <h1 className="mb-4 text-3xl font-bold leading-tight tracking-[-0.02em] text-white sm:text-4xl md:text-5xl lg:text-[48px] lg:leading-[1.1]">
-            Find your perfect meal
-            <br />
-            <span className="text-[#ffb3b1]">with AI precision</span>
-          </h1>
-          <p className="mx-auto mb-6 max-w-xl text-base text-zinc-400 sm:text-lg">
-            Personalized dining matches from your location, budget, cuisines, and notes — refined by AI around what you
-            care about most.
-          </p>
-        </div>
-      </section>
+        </section>
 
-      <section className="relative z-20 -mt-16 px-4 pb-16 sm:-mt-20 md:-mt-24 md:px-8 md:pb-20">
-        <div className="mx-auto max-w-4xl">
-          <div className="glass-panel rounded-[28px] border-white/10 p-6 shadow-2xl sm:rounded-[32px] sm:p-8">
+        <section className="relative z-20 -mt-12 px-4 pb-20 sm:-mt-16 sm:px-6 md:pb-24">
+          <div className="mx-auto w-full max-w-3xl">
+            <div className="glass-panel rounded-2xl border-white/[0.08] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:rounded-3xl sm:p-8">
+            {warnings.length > 0 && (
+              <div className="mb-6 rounded-xl border border-amber-500/25 bg-amber-500/[0.08] p-4 text-left text-xs text-amber-100/95 sm:text-sm">
+                <p className="mb-2 font-semibold text-amber-200">Safety note</p>
+                <ul className="list-inside list-disc space-y-1.5 text-amber-100/90">
+                  {warnings.map((w) => (
+                    <li key={w}>{w}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="relative mb-8 sm:mb-10">
               <div className="absolute -left-1 -top-2 sm:-left-3 sm:-top-3">
                 <span className="relative flex h-6 w-6">
@@ -385,57 +356,7 @@ export function HomePageClient() {
             </button>
           </div>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-[1200px] px-4 py-12 md:px-8 md:py-20">
-        <h2 className="mb-8 flex items-center gap-4 text-xl font-semibold text-white md:mb-12 md:text-2xl">
-          <span className="h-px flex-grow bg-white/10" />
-          Curated experiences
-          <span className="h-px flex-grow bg-white/10" />
-        </h2>
-        <div className="grid h-auto grid-cols-1 gap-6 md:h-[480px] lg:h-[600px] lg:grid-cols-12">
-          <div className="group relative min-h-[240px] overflow-hidden rounded-3xl lg:col-span-8 lg:min-h-0">
-            {/* eslint-disable-next-line @next/next/no-img-element -- static Stitch mood imagery */}
-            <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx2bBZJ7ZODGKPCHWaAaZu2q_J18Bdggc1jUdNWhktvwoE0dw1YpZGLW2Pxis-A346dA59pZHgWkJbyQ0YOJ_isMLHzOQmYmx0WOo4HOCkAnpVbTzdCJ4k0CGzxOabKg48BEOmgnLTkVHmo2BJUpds3C1ZhTqRYMQE8elywLOYMJOD5_wDWOxH-C0zds2AW8EB5JDnVsWzd1EKbcrluwKg1KTO-AL6Dxn1SSsRPTQFcejT8lxP5MlsYI4Z7iHQgjrwckiRaLKjTbC5"
-              alt="Moody upscale restaurant interior"
-              className="h-full min-h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-110 lg:min-h-0"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8">
-              <span className="mb-2 inline-block rounded-full bg-[#E23744] px-3 py-1 text-[10px] font-bold text-white">
-                Editorial
-              </span>
-              <h3 className="text-2xl font-bold text-white md:text-3xl">The Obsidian Lounge</h3>
-              <p className="text-sm text-zinc-300 md:text-base">Molecular gastronomy • mood-led discovery</p>
-            </div>
-          </div>
-          <div className="grid min-h-[200px] grid-rows-2 gap-6 lg:col-span-4 lg:min-h-0">
-            <div className="group relative min-h-[140px] overflow-hidden rounded-3xl lg:min-h-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ094qYCv2mEwDzTyEauMibDnYfM5rXns1A2sZqylHcFZ08hlRK-mSHEe6tXNa-n5Yw2IqpLzH4TCkKhgIwlzS0OfVH34GTYk9WWK6pN_ue1SQ2rz8npsrcegzTs4hdME59KiAlwbNeVBiPb7dmKeNSLprgYCrzrXk_Zm_YstNBTE9KyUUkHa6TQqH51WPEBVlgvDU6bzrLAS69hzrOhHuOZXKF3yVMDNaZ9FsaZtXh34hxPftxyR-h9o9FmF9mQTk1fqHscGIGavV"
-                alt="Gourmet plated dish"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                <span className="border-b-2 border-[#E23744] font-bold text-white">Artisanal fusion</span>
-              </div>
-            </div>
-            <div className="group relative min-h-[140px] overflow-hidden rounded-3xl lg:min-h-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnC-mVlq-KkPsVNUk8oQouIAswAo-v3f0OJ0BKnthxi7eUgal2aRaRIwlrDRDLqDsQhXUBs6nWLRZsuAFhEVCDe9oi_J4jhe58WIO4Jy4dra-SuNFAwicm5WKtyoq6UbOKsd9H7Bd_G0LOKT78yOLmrQDQgpJM6y-NT8LfuYrc1czVTTULsHsqWXNHzECCCvCrrjvo_S2x2CHSiaShaW-R-Gm0LhpVJPWj9h8hDKHX9cakqGH3mx1wbzwqjJq0_9B1oSTpxWUHI9RR"
-                alt="Signature cocktails"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                <span className="border-b-2 border-[#E23744] font-bold text-white">Mixology masters</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
       </main>
     </SiteChrome>
   );

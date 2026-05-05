@@ -68,7 +68,7 @@ export default function EvalPage() {
 
   return (
     <SiteChrome activeNav="eval" mainClassName="bg-[#0F0F0F]">
-      <main className="mx-auto max-w-3xl px-4 py-10 md:px-8 md:py-14">
+      <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 md:py-14">
         <div className="glass-panel mb-8 rounded-2xl border border-white/10 p-6 sm:p-8">
           <h1 className="mb-2 text-2xl font-bold text-white md:text-3xl">Try saved sample searches</h1>
           <p className="text-sm leading-relaxed text-zinc-400">

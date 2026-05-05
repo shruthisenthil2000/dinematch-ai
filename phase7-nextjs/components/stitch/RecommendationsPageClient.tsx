@@ -11,7 +11,7 @@ import {
   type StoredRecommendResult,
 } from "../../lib/recommendSession";
 import type { Recommendation, RecommendResponse } from "../../lib/types";
-import { InsightsAside, SiteChrome } from "./SiteChrome";
+import { SiteChrome } from "./SiteChrome";
 
 function friendlyRationale(text: string | undefined): string {
   const s = (text || "").trim();
@@ -157,7 +157,7 @@ export function RecommendationsPageClient() {
 
   if (!hydrated) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#0F0F0F] pt-16 text-zinc-400">
+      <div className="flex min-h-screen items-center justify-center bg-[#0F0F0F] pt-14 text-zinc-400 sm:pt-16">
         <span className="material-symbols-outlined animate-spin text-3xl text-[#E23744]">progress_activity</span>
       </div>
     );
@@ -166,7 +166,7 @@ export function RecommendationsPageClient() {
   if (!stored) {
     return (
       <SiteChrome activeNav="recommendations" mainClassName="bg-[#0F0F0F]">
-        <div className="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center px-6 py-24 text-center">
+        <div className="mx-auto flex min-h-[60vh] max-w-md flex-col items-center justify-center px-6 py-24 text-center sm:max-w-lg">
           <span className="material-symbols-outlined mb-4 text-5xl text-zinc-600">travel_explore</span>
           <h1 className="mb-3 text-2xl font-bold text-white">No recommendations yet</h1>
           <p className="mb-8 text-zinc-400">
@@ -185,37 +185,14 @@ export function RecommendationsPageClient() {
   }
 
   return (
-    <SiteChrome
-      activeNav="recommendations"
-      aside={
-        <InsightsAside>
-          <div className="rounded-lg border-l-2 border-[#E23744] bg-[#E23744]/10 p-3 font-medium text-[#E23744]">
-            <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined">psychology</span>
-              <span className="text-sm">Fresh results</span>
-            </div>
+    <SiteChrome activeNav="recommendations" mainClassName="bg-[#0F0F0F]">
+      <main className="mx-auto max-w-5xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10 md:pb-24">
+        <header className="mb-10 flex flex-col items-center gap-6 text-center sm:mb-12">
+          <div className="max-w-2xl space-y-2">
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">Curated matches</h1>
+            <p className="text-sm leading-relaxed text-zinc-400 sm:text-base">{candidateLine}</p>
           </div>
-          {summary && (
-            <p className="rounded-xl border border-white/10 bg-white/5 p-3 text-sm leading-relaxed text-zinc-300">
-              {summary}
-            </p>
-          )}
-          {!summary && recs[0]?.ai_rationale && (
-            <p className="rounded-xl border border-white/10 bg-white/5 p-3 text-sm leading-relaxed text-zinc-300">
-              {recs[0].ai_rationale}
-            </p>
-          )}
-        </InsightsAside>
-      }
-      mainClassName="bg-[#0F0F0F]"
-    >
-      <main className="mx-auto max-w-[1600px] px-4 pb-16 pt-8 md:px-8 md:pt-10">
-        <header className="mb-10 flex flex-col gap-4 sm:mb-12 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h1 className="mb-2 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">Curated matches</h1>
-            <p className="max-w-2xl text-sm text-zinc-400 sm:text-base">{candidateLine}</p>
-          </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={refreshFromApi}
@@ -249,7 +226,7 @@ export function RecommendationsPageClient() {
 
         {stored.statusKind !== "ok" && (
           <div
-            className={`mb-6 rounded-2xl border px-4 py-3 text-sm whitespace-pre-wrap ${
+            className={`mx-auto mb-6 max-w-3xl rounded-2xl border px-4 py-3 text-left text-sm whitespace-pre-wrap ${
               stored.statusKind === "error"
                 ? "border-red-500/40 bg-red-950/50 text-red-100"
                 : "border-amber-500/40 bg-amber-950/40 text-amber-100"
@@ -261,27 +238,30 @@ export function RecommendationsPageClient() {
         )}
 
         {error && (
-          <div className="mb-6 rounded-2xl border border-red-500/40 bg-red-950/50 px-4 py-3 text-sm text-red-100" role="alert">
+          <div
+            className="mx-auto mb-6 max-w-3xl rounded-2xl border border-red-500/40 bg-red-950/50 px-4 py-3 text-left text-sm text-red-100"
+            role="alert"
+          >
             {error}
           </div>
         )}
 
         {busy && (
-          <div className="mb-6 flex items-center gap-2 text-sm text-zinc-400">
+          <div className="mx-auto mb-6 flex max-w-3xl items-center justify-center gap-2 text-sm text-zinc-400">
             <span className="material-symbols-outlined animate-spin text-[#E23744]">progress_activity</span>
             Refreshing recommendations…
           </div>
         )}
 
         {summary && (
-          <div className="glass-panel mb-10 rounded-2xl border border-[#E23744]/20 p-5 sm:p-6">
+          <div className="glass-panel mx-auto mb-10 max-w-3xl rounded-2xl border border-[#E23744]/20 p-5 text-center sm:p-6">
             <h2 className="mb-2 text-sm font-bold uppercase tracking-wider text-[#E23744]">At a glance</h2>
-            <p className="text-sm leading-relaxed text-zinc-200 sm:text-base">{summary}</p>
+            <p className="text-left text-sm leading-relaxed text-zinc-200 sm:text-base">{summary}</p>
           </div>
         )}
 
         {!busy && recs.length === 0 && (
-          <div className="glass-panel mb-10 rounded-2xl border border-white/10 p-8 text-center">
+          <div className="glass-panel mx-auto mb-10 max-w-xl rounded-2xl border border-white/10 p-8 text-center">
             <span className="material-symbols-outlined mb-3 text-4xl text-zinc-500">restaurant</span>
             <p className="text-lg font-semibold text-white">No venues matched these filters</p>
             <p className="mt-2 text-sm text-zinc-400">
@@ -290,12 +270,11 @@ export function RecommendationsPageClient() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-2 lg:gap-5 xl:grid-cols-3 xl:gap-6">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-5 sm:gap-6 md:max-w-5xl md:grid-cols-2 md:gap-6 lg:max-w-6xl lg:grid-cols-3">
           {recs.map((rec) => (
             <RecommendationCard key={`${rec.rank}-${rec.restaurant_id}`} rec={rec} />
           ))}
         </div>
-
       </main>
     </SiteChrome>
   );
