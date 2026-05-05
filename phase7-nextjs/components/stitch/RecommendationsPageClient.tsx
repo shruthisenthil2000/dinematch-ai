@@ -61,10 +61,10 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
         </header>
 
         <div className="min-w-0 space-y-2">
-          <h3 className="text-lg font-semibold leading-snug text-white sm:text-xl">{rec.name}</h3>
-          <div className="space-y-1 text-sm leading-snug text-zinc-400">
+          <h3 className="text-lg font-semibold leading-snug themed-text sm:text-xl">{rec.name}</h3>
+          <div className="space-y-1 text-sm leading-snug text-zinc-600 dark:text-zinc-400">
             <p className="break-words">{rec.cuisine}</p>
-            <p className="break-words text-zinc-500">
+            <p className="break-words text-zinc-500 dark:text-zinc-500">
               {rec.estimated_cost}
               {rec.area ? (
                 <>
@@ -78,7 +78,7 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
           </div>
         </div>
 
-        <div className="flex gap-2.5 rounded-xl border-l-2 border-[#E23744] bg-white/5 p-3 sm:p-3.5">
+        <div className="flex gap-2.5 rounded-xl border-l-2 border-[#E23744] bg-black/5 p-3 dark:bg-white/5 sm:p-3.5">
           <span className="material-symbols-outlined mt-0.5 shrink-0 text-lg text-[#E23744]" aria-hidden>
             auto_awesome
           </span>
@@ -86,7 +86,7 @@ function RecommendationCard({ rec }: { rec: Recommendation }) {
             <p className="text-[10px] font-bold uppercase tracking-wider text-[#E23744] sm:text-[11px]">
               Why it matches
             </p>
-            <p className="text-xs leading-relaxed text-zinc-300">{friendlyRationale(rec.ai_rationale)}</p>
+            <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">{friendlyRationale(rec.ai_rationale)}</p>
           </div>
         </div>
       </div>
@@ -176,7 +176,7 @@ export function RecommendationsPageClient() {
 
   if (!hydrated) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#0F0F0F] pt-14 text-zinc-400 sm:pt-16">
+      <div className="themed-bg flex min-h-screen items-center justify-center pt-14 text-zinc-600 dark:text-zinc-400 sm:pt-16">
         <span className="material-symbols-outlined animate-spin text-3xl text-[#E23744]">progress_activity</span>
       </div>
     );
@@ -184,11 +184,11 @@ export function RecommendationsPageClient() {
 
   if (!stored) {
     return (
-      <SiteChrome activeNav="recommendations" mainClassName="bg-[#0F0F0F]">
+      <SiteChrome activeNav="recommendations" mainClassName="themed-bg">
         <div className="mx-auto flex min-h-[60vh] max-w-md flex-col items-center justify-center px-6 py-24 text-center sm:max-w-lg">
           <span className="material-symbols-outlined mb-4 text-5xl text-zinc-600">travel_explore</span>
-          <h1 className="mb-3 text-2xl font-bold text-white">No recommendations yet</h1>
-          <p className="mb-8 text-zinc-400">
+          <h1 className="mb-3 text-2xl font-bold themed-text">No recommendations yet</h1>
+          <p className="mb-8 text-zinc-600 dark:text-zinc-400">
             Run a search from the home preferences screen. Your curated matches appear here after each successful
             search.
           </p>
@@ -204,19 +204,19 @@ export function RecommendationsPageClient() {
   }
 
   return (
-    <SiteChrome activeNav="recommendations" mainClassName="bg-[#0F0F0F]">
+    <SiteChrome activeNav="recommendations" mainClassName="themed-bg">
       <main className="mx-auto max-w-5xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10 md:pb-24">
         <header className="mb-10 flex flex-col items-center gap-6 text-center sm:mb-12">
           <div className="max-w-2xl space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">Curated matches</h1>
-            <p className="text-sm leading-relaxed text-zinc-400 sm:text-base">{candidateLine}</p>
+            <h1 className="text-3xl font-bold tracking-tight themed-text sm:text-4xl md:text-5xl">Curated matches</h1>
+            <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-base">{candidateLine}</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={refreshFromApi}
               disabled={busy}
-              className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 disabled:opacity-50"
+              className="flex items-center gap-2 rounded-xl border themed-border bg-black/5 px-4 py-2.5 text-sm font-semibold themed-text transition-colors hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 disabled:opacity-50"
             >
               <span className={`material-symbols-outlined text-lg ${busy ? "animate-spin" : ""}`}>
                 {busy ? "progress_activity" : "refresh"}
@@ -236,7 +236,7 @@ export function RecommendationsPageClient() {
                 clearStoredRecommend();
                 router.push("/");
               }}
-              className="rounded-xl border border-white/10 px-4 py-2.5 text-sm text-zinc-400 hover:text-white"
+              className="rounded-xl border themed-border px-4 py-2.5 text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
             >
               Clear saved results
             </button>
@@ -266,7 +266,7 @@ export function RecommendationsPageClient() {
         )}
 
         {busy && (
-          <div className="mx-auto mb-6 flex max-w-3xl items-center justify-center gap-2 text-sm text-zinc-400">
+          <div className="mx-auto mb-6 flex max-w-3xl items-center justify-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
             <span className="material-symbols-outlined animate-spin text-[#E23744]">progress_activity</span>
             Refreshing recommendations…
           </div>
@@ -280,10 +280,10 @@ export function RecommendationsPageClient() {
         )}
 
         {!busy && recs.length === 0 && (
-          <div className="glass-panel mx-auto mb-10 max-w-xl rounded-2xl border border-white/10 p-8 text-center">
+          <div className="glass-panel mx-auto mb-10 max-w-xl rounded-2xl border themed-border p-8 text-center">
             <span className="material-symbols-outlined mb-3 text-4xl text-zinc-500">restaurant</span>
-            <p className="text-lg font-semibold text-white">No venues matched these filters</p>
-            <p className="mt-2 text-sm text-zinc-400">
+            <p className="text-lg font-semibold themed-text">No venues matched these filters</p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
               Try lowering minimum rating, broadening cuisines, or switching budget on the home screen.
             </p>
           </div>
@@ -291,7 +291,7 @@ export function RecommendationsPageClient() {
 
         {primaryRecs.length > 0 && (
           <div className="mx-auto mb-8 max-w-4xl md:max-w-5xl lg:max-w-6xl">
-            <h2 className="mb-4 text-center text-xs font-bold uppercase tracking-wider text-zinc-500">
+            <h2 className="mb-4 text-center text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-500">
               In {selectedArea}
             </h2>
             <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
@@ -307,7 +307,7 @@ export function RecommendationsPageClient() {
             <h2 className="mb-2 text-center text-sm font-bold uppercase tracking-wider text-amber-200/90">
               Nearby alternatives
             </h2>
-            <p className="mb-4 text-center text-xs leading-relaxed text-zinc-500">
+            <p className="mb-4 text-center text-xs leading-relaxed text-zinc-600 dark:text-zinc-500">
               Just outside {selectedArea} — same filters, shown because picks in your area were limited.
             </p>
             <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3">

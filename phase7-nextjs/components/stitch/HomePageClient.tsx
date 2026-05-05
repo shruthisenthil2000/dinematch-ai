@@ -117,23 +117,23 @@ export function HomePageClient() {
   const filledStars = Math.min(5, Math.round(minRating));
 
   return (
-    <SiteChrome activeNav="home" showFooter={false} mainClassName="bg-[#0F0F0F] md:flex md:flex-col">
+    <SiteChrome activeNav="home" showFooter={false} mainClassName="themed-bg md:flex md:flex-col">
       <main className="flex w-full flex-1 flex-col max-md:min-h-0 max-md:overflow-y-auto md:min-h-0 md:max-h-[calc(100dvh-4rem)] md:overflow-y-auto md:overflow-x-hidden md:px-8 md:pb-6 md:pt-4 lg:px-12 lg:pb-7 lg:pt-5 xl:px-16">
         <section className="relative flex w-full shrink-0 flex-col items-center justify-center px-4 pb-3 pt-7 hero-bg sm:pb-4 sm:pt-8 md:min-h-0 md:pb-4 md:pt-7 lg:pt-8">
           <div className="hero-overlay absolute inset-0" />
           <div className="relative z-10 mx-auto w-full max-w-2xl px-3 text-center sm:px-5">
-            <div className="mb-2.5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md sm:mb-3 sm:px-3.5 sm:py-1.5">
+            <div className="mb-2.5 inline-flex items-center gap-2 rounded-full border themed-border bg-black/5 px-3 py-1.5 backdrop-blur-md dark:bg-white/5 sm:mb-3 sm:px-3.5 sm:py-1.5">
               <span className="material-symbols-outlined text-sm text-[#E23744]">verified</span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 sm:text-[11px]">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 sm:text-[11px]">
                 AI-powered dining
               </span>
             </div>
-            <h1 className="mb-2.5 text-3xl font-bold leading-[1.1] tracking-[-0.02em] text-white sm:mb-3 sm:text-4xl md:mb-3 md:text-5xl md:leading-[1.08]">
+            <h1 className="mb-2.5 text-3xl font-bold leading-[1.1] tracking-[-0.02em] themed-text sm:mb-3 sm:text-4xl md:mb-3 md:text-5xl md:leading-[1.08]">
               Find your perfect meal
               <br />
               <span className="text-[#ffb3b1]">with AI precision</span>
             </h1>
-            <p className="mx-auto mb-6 max-w-xl text-sm leading-relaxed text-zinc-300/95 sm:mb-7 sm:text-base md:mb-8 md:text-[1.0625rem] md:leading-relaxed">
+            <p className="mx-auto mb-6 max-w-xl text-sm leading-relaxed text-zinc-700/95 dark:text-zinc-300/95 sm:mb-7 sm:text-base md:mb-8 md:text-[1.0625rem] md:leading-relaxed">
               Tell us where, your budget, and what you crave — we match you to places worth the reservation.
             </p>
           </div>
@@ -144,7 +144,7 @@ export function HomePageClient() {
             <div className="h-px w-14 rounded-full bg-gradient-to-r from-transparent via-white/25 to-transparent sm:w-20 md:w-24" />
           </div>
           <div className="mx-auto w-full max-w-2xl lg:max-w-[42rem]">
-            <div className="glass-panel rounded-[1.35rem] border border-white/[0.08] p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_64px_rgba(0,0,0,0.44)] sm:rounded-[1.65rem] sm:p-6 md:p-6">
+            <div className="glass-panel rounded-[1.35rem] border themed-border p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04),0_22px_64px_rgba(0,0,0,0.18)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_22px_64px_rgba(0,0,0,0.44)] sm:rounded-[1.65rem] sm:p-6 md:p-6">
             {warnings.length > 0 && (
               <div className="mb-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.08] p-3.5 text-left text-xs text-amber-100/95 sm:p-4 sm:text-sm">
                 <p className="mb-1.5 font-semibold text-amber-200">Safety note</p>
@@ -160,14 +160,11 @@ export function HomePageClient() {
                 Optional. Short hint in the placeholder: cuisine, occasion, or vibe. Leave blank if you prefer.
               </span>
               <div className="flex items-center gap-2 px-0.5">
-                <span
-                  className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/[0.05] ring-1 ring-white/[0.08]"
-                  aria-hidden
-                >
+                <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black/[0.05] ring-1 ring-black/[0.08] dark:bg-white/[0.05] dark:ring-white/[0.08]" aria-hidden>
                   <span className="material-symbols-outlined text-sm text-[#E23744]">edit_note</span>
                 </span>
-                <label htmlFor="optional-constraints" className="text-[12px] font-medium text-zinc-400">
-                  Notes <span className="font-normal text-zinc-600">· optional</span>
+                <label htmlFor="optional-constraints" className="text-[12px] font-medium text-zinc-600 dark:text-zinc-400">
+                  Notes <span className="font-normal text-zinc-500 dark:text-zinc-600">· optional</span>
                 </label>
               </div>
               <input
@@ -175,7 +172,7 @@ export function HomePageClient() {
                 type="text"
                 autoComplete="off"
                 aria-describedby="optional-constraints-desc"
-                className="h-11 w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-3.5 py-2.5 text-sm text-white shadow-inner placeholder:text-zinc-500 focus:border-[#E23744]/45 focus:outline-none focus:ring-2 focus:ring-[#E23744]/22 sm:h-12 sm:px-4 sm:text-base"
+                className="h-11 w-full rounded-xl border themed-border bg-black/[0.03] px-3.5 py-2.5 text-sm themed-text shadow-inner placeholder:text-zinc-500 focus:border-[#E23744]/45 focus:outline-none focus:ring-2 focus:ring-[#E23744]/22 dark:bg-white/[0.04] sm:h-12 sm:px-4 sm:text-base"
                 placeholder={DINING_NOTES_PLACEHOLDER}
                 value={optionalConstraints}
                 onChange={(e) => setOptionalConstraints(e.target.value)}
@@ -183,21 +180,21 @@ export function HomePageClient() {
             </div>
 
             <div className="mb-5 grid grid-cols-1 gap-3 md:mb-5 md:grid-cols-3 md:gap-3">
-              <div className="group rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 sm:p-4">
+              <div className="group rounded-xl border themed-border bg-black/[0.02] p-3.5 transition-colors hover:border-zinc-400/50 dark:bg-white/[0.03] dark:hover:border-white/10 sm:p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">location_on</span>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Area</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-500">Area</span>
                 </div>
                 <div className="relative">
                   <select
                     id="dining-location"
-                    className="w-full cursor-pointer appearance-none rounded-xl border border-white/10 bg-[#141414] py-2.5 pl-3 pr-10 text-sm font-semibold text-white shadow-inner focus:border-[#E23744]/50 focus:outline-none focus:ring-2 focus:ring-[#E23744]/25 sm:text-base"
+                    className="w-full cursor-pointer appearance-none rounded-xl border themed-border bg-white/70 py-2.5 pl-3 pr-10 text-sm font-semibold text-zinc-800 shadow-inner focus:border-[#E23744]/50 focus:outline-none focus:ring-2 focus:ring-[#E23744]/25 dark:bg-[#141414] dark:text-white sm:text-base"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     aria-label="Neighborhood or area"
                   >
                     {LOCATION_OPTIONS.map((opt) => (
-                      <option key={opt} value={opt} className="bg-[#141414] text-white">
+                      <option key={opt} value={opt} className="bg-white text-zinc-900 dark:bg-[#141414] dark:text-white">
                         {opt}
                       </option>
                     ))}
@@ -206,10 +203,10 @@ export function HomePageClient() {
                     <span className="material-symbols-outlined text-[22px]">expand_more</span>
                   </span>
                 </div>
-                <p className="mt-2 text-[10px] text-zinc-500">Pick where you’d like to dine in Bengaluru.</p>
+                <p className="mt-2 text-[10px] text-zinc-500 dark:text-zinc-500">Pick where you’d like to dine in Bengaluru.</p>
               </div>
 
-              <div className="group rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 sm:p-4">
+              <div className="group rounded-xl border themed-border bg-black/[0.02] p-3.5 transition-colors hover:border-zinc-400/50 dark:bg-white/[0.03] dark:hover:border-white/10 sm:p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">payments</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Budget for two</span>
@@ -223,12 +220,12 @@ export function HomePageClient() {
                       className={`flex w-full flex-col items-start rounded-xl border px-3 py-2.5 text-left transition-all ${
                         budget === b.value
                           ? "border-[#E23744]/60 bg-[#E23744]/15 shadow-[0_0_0_1px_rgba(226,55,68,0.25)]"
-                          : "border-white/10 bg-white/[0.04] hover:border-white/15 hover:bg-white/[0.07]"
+                          : "border-zinc-300/70 bg-black/[0.03] hover:border-zinc-400 hover:bg-black/[0.05] dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-white/15 dark:hover:bg-white/[0.07]"
                       }`}
                       aria-pressed={budget === b.value}
                     >
-                      <span className="text-xs font-bold text-white sm:text-sm">{b.title}</span>
-                      <span className="text-[10px] font-medium text-zinc-400 sm:text-[11px]">{b.range}</span>
+                      <span className="text-xs font-bold themed-text sm:text-sm">{b.title}</span>
+                      <span className="text-[10px] font-medium text-zinc-600 dark:text-zinc-400 sm:text-[11px]">{b.range}</span>
                     </button>
                   ))}
                 </div>
@@ -237,13 +234,13 @@ export function HomePageClient() {
                 </p>
               </div>
 
-              <div className="group rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 sm:p-4">
+              <div className="group rounded-xl border themed-border bg-black/[0.02] p-3.5 transition-colors hover:border-zinc-400/50 dark:bg-white/[0.03] dark:hover:border-white/10 sm:p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">grade</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Min. rating</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="text-lg font-bold text-white">{minRating.toFixed(1)}+</span>
+                  <span className="text-lg font-bold themed-text">{minRating.toFixed(1)}+</span>
                   <div className="flex text-amber-400">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <span
@@ -270,13 +267,13 @@ export function HomePageClient() {
                 />
               </div>
 
-              <div className="group rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 md:col-span-2 sm:p-4">
+              <div className="group rounded-xl border themed-border bg-black/[0.02] p-3.5 transition-colors hover:border-zinc-400/50 dark:bg-white/[0.03] dark:hover:border-white/10 md:col-span-2 sm:p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">restaurant_menu</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Cuisines</span>
                 </div>
                 <input
-                  className="w-full border-none bg-transparent p-0 text-sm font-medium text-white placeholder:text-zinc-600 focus:outline-none focus:ring-0"
+                  className="w-full border-none bg-transparent p-0 text-sm font-medium themed-text placeholder:text-zinc-500 focus:outline-none focus:ring-0 dark:placeholder:text-zinc-600"
                   placeholder="Italian, Chinese, North Indian…"
                   value={cuisines}
                   onChange={(e) => setCuisines(e.target.value)}
@@ -285,7 +282,7 @@ export function HomePageClient() {
                 <p className="mt-2 text-[10px] text-zinc-500">Comma-separated list; empty means any cuisine.</p>
               </div>
 
-              <div className="group flex flex-col justify-between rounded-xl border border-white/[0.06] bg-white/[0.03] p-3.5 transition-colors hover:border-white/10 sm:p-4">
+              <div className="group flex flex-col justify-between rounded-xl border themed-border bg-black/[0.02] p-3.5 transition-colors hover:border-zinc-400/50 dark:bg-white/[0.03] dark:hover:border-white/10 sm:p-4">
                 <div className="mb-2 flex items-center gap-2">
                   <span className="material-symbols-outlined text-xl text-[#E23744]">tune</span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Advanced</span>
@@ -301,8 +298,8 @@ export function HomePageClient() {
             </div>
 
             {showAdvanced && (
-              <div className="mb-5 grid grid-cols-1 gap-3 border-t border-white/[0.08] pt-4 sm:grid-cols-3 sm:pt-4">
-                <label className="text-xs text-zinc-400">
+              <div className="mb-5 grid grid-cols-1 gap-3 border-t themed-border pt-4 sm:grid-cols-3 sm:pt-4">
+                <label className="text-xs text-zinc-600 dark:text-zinc-400">
                   How many places to consider
                   <input
                     type="number"
@@ -310,10 +307,10 @@ export function HomePageClient() {
                     max={100}
                     value={cap}
                     onChange={(e) => setCap(Number(e.target.value))}
-                    className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white"
+                    className="mt-1 w-full rounded-lg border themed-border bg-black/5 px-3 py-2 text-sm themed-text dark:bg-white/5"
                   />
                 </label>
-                <label className="text-xs text-zinc-400">
+                <label className="text-xs text-zinc-600 dark:text-zinc-400">
                   How many picks to show
                   <input
                     type="number"
@@ -321,10 +318,10 @@ export function HomePageClient() {
                     max={20}
                     value={topN}
                     onChange={(e) => setTopN(Number(e.target.value))}
-                    className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white"
+                    className="mt-1 w-full rounded-lg border themed-border bg-black/5 px-3 py-2 text-sm themed-text dark:bg-white/5"
                   />
                 </label>
-                <label className="flex cursor-pointer items-center gap-2 pt-4 text-sm text-zinc-300 sm:pt-4">
+                <label className="flex cursor-pointer items-center gap-2 pt-4 text-sm text-zinc-700 dark:text-zinc-300 sm:pt-4">
                   <input
                     type="checkbox"
                     checked={useLlm}

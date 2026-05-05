@@ -2,31 +2,68 @@
 
 @theme {
   --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
-  --color-dm-bg: #0f0f0f;
-  --color-dm-surface: #1e1e1e;
   --color-dm-rose: #e23744;
   --color-dm-rose-soft: #ff535a;
 }
 
 @layer base {
+  :root {
+    --dm-bg: #f4f2ee;
+    --dm-bg-soft: #ece8e2;
+    --dm-surface: #f8f6f2cc;
+    --dm-card: #ffffffa6;
+    --dm-border: #d6d2cc;
+    --dm-text: #262522;
+    --dm-text-muted: #5f5b54;
+    --dm-hero-overlay-top: rgba(244, 241, 236, 0.56);
+    --dm-hero-overlay-bottom: #f4f2ee;
+  }
+  html.dark {
+    --dm-bg: #0f0f0f;
+    --dm-bg-soft: #151515;
+    --dm-surface: #1e1e1eb3;
+    --dm-card: #1e1e1e99;
+    --dm-border: rgba(255, 255, 255, 0.08);
+    --dm-text: #f7f6f4;
+    --dm-text-muted: #a3a3a3;
+    --dm-hero-overlay-top: rgba(15, 15, 15, 0.4);
+    --dm-hero-overlay-bottom: #0f0f0f;
+  }
   html {
     @apply antialiased;
   }
   body {
-    @apply overflow-x-hidden bg-[#0F0F0F] text-zinc-100;
+    @apply overflow-x-hidden;
+    background: radial-gradient(circle at 15% 0%, var(--dm-bg-soft) 0%, var(--dm-bg) 45%, var(--dm-bg) 100%);
+    color: var(--dm-text);
   }
 }
 
 @layer utilities {
+  .themed-bg {
+    background: var(--dm-bg);
+  }
+  .themed-bg-soft {
+    background: var(--dm-bg-soft);
+  }
+  .themed-text {
+    color: var(--dm-text);
+  }
+  .themed-text-muted {
+    color: var(--dm-text-muted);
+  }
+  .themed-border {
+    border-color: var(--dm-border);
+  }
   .glass-panel {
-    background: rgba(30, 30, 30, 0.7);
+    background: var(--dm-surface);
     backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--dm-border);
   }
   .glass-card {
-    background: rgba(30, 30, 30, 0.6);
+    background: var(--dm-card);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--dm-border);
   }
   .accent-gradient {
     background: linear-gradient(135deg, #e23744 0%, #ff535a 100%);
@@ -44,7 +81,7 @@
     }
   }
   .hero-overlay {
-    background: linear-gradient(to bottom, rgba(15, 15, 15, 0.4) 0%, #0f0f0f 100%);
+    background: linear-gradient(to bottom, var(--dm-hero-overlay-top) 0%, var(--dm-hero-overlay-bottom) 100%);
   }
   .ai-glow {
     box-shadow: 0 0 20px rgba(226, 55, 68, 0.1);
