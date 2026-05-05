@@ -68,7 +68,9 @@ def run_pipeline(
         "row_counts": {
             "raw": raw_count,
             "after_drop_unusable": len(after_drop),
+            "dropped_unusable": int(raw_count - len(after_drop)),
             "canonical_after_dedupe": len(canonical),
+            "dropped_duplicates": int(len(after_drop) - len(canonical)),
         },
         "dedupe_policy": "subset name+city+locality; keep highest rating then votes",
         "budget_bands": band_meta,

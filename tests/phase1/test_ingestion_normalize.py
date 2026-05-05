@@ -112,6 +112,31 @@ def test_drop_unusable_rows_removes_empty_name_or_city():
     assert set(out["name"]) == {"A", "C"}
 
 
+def test_drop_unusable_rows_removes_null_heavy_rows():
+    df = pd.DataFrame(
+        [
+            {
+                "name": "KeptByRating",
+                "city": "Bengaluru",
+                "locality": "",
+                "cuisines": [],
+                "rating": 4.1,
+                "approx_cost_for_two": None,
+            },
+            {
+                "name": "DropMe",
+                "city": "Bengaluru",
+                "locality": "",
+                "cuisines": [],
+                "rating": None,
+                "approx_cost_for_two": None,
+            },
+        ]
+    )
+    out = drop_unusable_rows(df)
+    assert list(out["name"]) == ["KeptByRating"]
+
+
 def test_deduplicate_restaurants_keeps_higher_rating_then_votes():
     df = pd.DataFrame(
         [

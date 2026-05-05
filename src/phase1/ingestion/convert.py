@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from typing import Any
 
 import pandas as pd
@@ -15,6 +16,64 @@ from phase1.ingestion.normalize import (
     split_cuisines,
 )
 
+_WS = re.compile(r"\s+")
+_BENGALURU_CITY_LABELS = frozenset({"bangalore", "bengaluru", "bengaluru urban"})
+_BENGALURU_AREA_HINTS = (
+    "btm",
+    "hsr",
+    "koramangala",
+    "jayanagar",
+    "jp nagar",
+    "indiranagar",
+    "whitefield",
+    "bellandur",
+    "marathahalli",
+    "electronic city",
+    "mg road",
+    "church street",
+    "brigade road",
+    "banashankari",
+    "bannerghatta",
+    "sarjapur",
+    "ulsoor",
+    "rajajinagar",
+    "malleshwaram",
+    "basavanagudi",
+    "frazer town",
+)
+
+
+def _norm_geo_text(raw: Any) -> str:
+    return _WS.sub(" ", _strip(raw).casefold()).strip()
+
+
+def _looks_like_bengaluru_area(raw: Any) -> bool:
+    norm = _norm_geo_text(raw)
+    if not norm:
+        return False
+    if norm in _BENGALURU_CITY_LABELS:
+        return True
+    if norm in {"ec", "e city"}:
+        return True
+    if " road" in norm or " block" in norm:
+        return True
+    if " block" in norm and "koramangala" in norm:
+        return True
+    if "block" in norm and "jayanagar" in norm:
+        return True
+    return any(h in norm for h in _BENGALURU_AREA_HINTS)
+
+
+def canonical_city_locality(raw_city: Any, raw_locality: Any) -> tuple[str, str]:
+    raw_city_s = _strip(raw_city)
+    raw_locality_s = _strip(raw_locality)
+    city_norm = _norm_geo_text(raw_city_s)
+
+    inferred_bengaluru = city_norm in _BENGALURU_CITY_LABELS or _looks_like_bengaluru_area(city_norm)
+    city = "Bengaluru" if inferred_bengaluru else (raw_city_s.title() if raw_city_s else "")
+    locality = raw_locality_s or raw_city_s
+    return city, locality
+
 
 def restaurant_id(url: Any, name: str, city: str, locality: str) -> str:
     u = _strip(url)
@@ -25,9 +84,10 @@ def restaurant_id(url: Any, name: str, city: str, locality: str) -> str:
 def raw_to_canonical(df: pd.DataFrame) -> pd.DataFrame:
     """Map raw Hugging Face / CSV rows to canonical columns (dataset_contract.md)."""
     out = pd.DataFrame()
+    city_locality_pairs = [canonical_city_locality(df[RAW_CITY_COL].iloc[i], df[RAW_LOCALITY_COL].iloc[i]) for i in range(len(df))]
     out["name"] = df["name"].map(lambda x: _strip(x))
-    out["city"] = df[RAW_CITY_COL].map(lambda x: _strip(x).title() if _strip(x) else "")
-    out["locality"] = df[RAW_LOCALITY_COL].map(lambda x: _strip(x))
+    out["city"] = [c for c, _ in city_locality_pairs]
+    out["locality"] = [l for _, l in city_locality_pairs]
     out["cuisines"] = df["cuisines"].map(split_cuisines)
     out["rating"] = df["rate"].map(parse_rating)
     out["votes"] = df["votes"].map(parse_votes)

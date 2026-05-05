@@ -91,9 +91,31 @@ def validate_and_order_raw_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def drop_unusable_rows(df: pd.DataFrame) -> pd.DataFrame:
-    """Remove rows without name or city (cannot satisfy user location matching)."""
+    """Remove rows without core identity fields or with null-heavy recommendation fields."""
     mask = df["name"].str.len() > 0
     mask &= df["city"].str.len() > 0
+    locality_ok = (
+        df["locality"].astype(str).str.len() > 0
+        if "locality" in df.columns
+        else pd.Series(False, index=df.index)
+    )
+    cuisines_ok = (
+        df["cuisines"].map(lambda xs: isinstance(xs, list) and len(xs) > 0)
+        if "cuisines" in df.columns
+        else pd.Series(False, index=df.index)
+    )
+    rating_ok = (
+        pd.to_numeric(df["rating"], errors="coerce").notna()
+        if "rating" in df.columns
+        else pd.Series(False, index=df.index)
+    )
+    cost_ok = (
+        pd.to_numeric(df["approx_cost_for_two"], errors="coerce").notna()
+        if "approx_cost_for_two" in df.columns
+        else pd.Series(False, index=df.index)
+    )
+    # Keep rows that have at least one recommendation-useful non-null field.
+    mask &= locality_ok | cuisines_ok | rating_ok | cost_ok
     return df.loc[mask].reset_index(drop=True)
 
 

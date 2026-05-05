@@ -24,6 +24,9 @@ PYTHONPATH=src python -m phase1.run_etl --source huggingface --format parquet
 
 # Local CSV
 PYTHONPATH=src python -m phase1.run_etl --source csv --csv /path/to/zomato.csv
+
+# Project dataset shortcut (writes parquet + csv + manifest)
+PYTHONPATH=src python scripts/regenerate_phase1_data.py --csv data/zomato.csv
 ```
 
 ## Layout

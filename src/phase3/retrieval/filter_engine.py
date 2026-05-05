@@ -18,7 +18,12 @@ from phase3.retrieval.filtering import (
     user_cuisine_tokens,
     validate_canonical_frame,
 )
-from phase3.retrieval.ranking import apply_candidate_cap, retrieval_score_series, sort_candidates_mergesort
+from phase3.retrieval.ranking import (
+    apply_candidate_cap,
+    diversify_by_locality,
+    retrieval_score_series,
+    sort_candidates_mergesort,
+)
 
 # Backward compatibility: public constants and helpers used by other modules/tests.
 _cuisine_cell_to_sequence = cuisine_cell_to_sequence
@@ -107,4 +112,5 @@ def retrieve_candidates(
     tier = loc_primary.loc[filtered.index].astype(float)
     filtered["retrieval_score"] = filtered["retrieval_score"] + tier * 8.0
     filtered = sort_candidates_mergesort(filtered)
+    filtered = diversify_by_locality(filtered)
     return apply_candidate_cap(filtered, cap)

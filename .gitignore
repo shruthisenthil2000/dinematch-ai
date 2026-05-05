@@ -20,3 +20,5 @@ node_modules/
 .next/
 .env
 .DS_Store
+data/zomato.csv
+data/zomato.csv

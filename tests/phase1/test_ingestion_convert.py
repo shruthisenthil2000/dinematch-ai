@@ -11,7 +11,7 @@ from phase1.ingestion.constants import (
     RAW_CITY_COL,
     RAW_LOCALITY_COL,
 )
-from phase1.ingestion.convert import assign_cost_bands, raw_to_canonical, restaurant_id
+from phase1.ingestion.convert import assign_cost_bands, canonical_city_locality, raw_to_canonical, restaurant_id
 
 
 def _minimal_raw_df(rows: list[dict]) -> pd.DataFrame:
@@ -46,7 +46,7 @@ def test_raw_to_canonical_maps_fields_and_title_cases_city():
     canon = raw_to_canonical(df)
     assert len(canon) == 1
     assert canon.iloc[0]["name"] == "Cafe"
-    assert canon.iloc[0]["city"] == "Bangalore"
+    assert canon.iloc[0]["city"] == "Bengaluru"
     assert canon.iloc[0]["locality"] == "koramangala"
     assert canon.iloc[0]["cuisines"] == ["italian", "thai"]
     assert canon.iloc[0]["rating"] == 4.0
@@ -92,6 +92,18 @@ def test_raw_to_canonical_null_rating_and_cost_become_none():
     assert canon.iloc[0]["rating"] is None
     assert canon.iloc[0]["approx_cost_for_two"] is None
     assert canon.iloc[0]["votes"] is None
+
+
+def test_canonical_city_locality_maps_bengaluru_area_labels_safely():
+    city, locality = canonical_city_locality("Koramangala 5th Block", "HSR")
+    assert city == "Bengaluru"
+    assert locality == "HSR"
+
+
+def test_canonical_city_locality_preserves_non_bengaluru_city():
+    city, locality = canonical_city_locality("Pune", "Baner")
+    assert city == "Pune"
+    assert locality == "Baner"
 
 
 def test_raw_to_canonical_ignores_extra_columns_without_error():

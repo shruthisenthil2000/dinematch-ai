@@ -341,6 +341,53 @@ def test_cap_limits_rows():
     assert len(out) == 2
 
 
+def test_diversify_by_locality_interleaves_dense_top_bucket():
+    rows = [
+        {
+            **_minimal_row(
+                restaurant_id="a1",
+                name="A1",
+                city="Bangalore",
+                cuisines=["italian"],
+                rating=4.9,
+                votes=100,
+                cost_band="medium",
+            ),
+            "locality": "Bellandur",
+        },
+        {
+            **_minimal_row(
+                restaurant_id="a2",
+                name="A2",
+                city="Bangalore",
+                cuisines=["italian"],
+                rating=4.8,
+                votes=99,
+                cost_band="medium",
+            ),
+            "locality": "Bellandur",
+        },
+        {
+            **_minimal_row(
+                restaurant_id="b1",
+                name="B1",
+                city="Bangalore",
+                cuisines=["italian"],
+                rating=4.7,
+                votes=98,
+                cost_band="medium",
+            ),
+            "locality": "Marathahalli",
+        },
+    ]
+    out = retrieve_candidates(
+        pd.DataFrame(rows),
+        _prefs(location="Bangalore", budget="medium", cuisines=["italian"], min_rating=0.0),
+        cap=3,
+    )
+    assert list(out["restaurant_id"])[:2] == ["a1", "b1"]
+
+
 def test_hsr_alias_matches_hsr_layout_locality():
     df = pd.DataFrame(
         [

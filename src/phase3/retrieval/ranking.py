@@ -57,3 +57,43 @@ def sort_candidates_mergesort(df: pd.DataFrame) -> pd.DataFrame:
 
 def apply_candidate_cap(df: pd.DataFrame, cap: int) -> pd.DataFrame:
     return df.head(cap).reset_index(drop=True)
+
+
+def diversify_by_locality(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Light deterministic diversification pass over a pre-sorted frame.
+
+    Keeps the original relative ranking inside each locality bucket, then interleaves
+    buckets round-robin so a single dense area does not dominate the first page.
+    """
+    if "locality" not in df.columns or len(df) <= 1:
+        return df
+    localities = (
+        df["locality"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .replace("", "__unknown__")
+    )
+    work = df.copy()
+    work["_loc_bucket"] = localities
+
+    groups: dict[str, list[int]] = {}
+    order: list[str] = []
+    for idx, bucket in zip(work.index.tolist(), work["_loc_bucket"].tolist()):
+        if bucket not in groups:
+            groups[bucket] = []
+            order.append(bucket)
+        groups[bucket].append(idx)
+
+    picks: list[int] = []
+    progressed = True
+    while progressed:
+        progressed = False
+        for bucket in order:
+            rows = groups[bucket]
+            if rows:
+                picks.append(rows.pop(0))
+                progressed = True
+
+    return work.loc[picks].drop(columns=["_loc_bucket"])
