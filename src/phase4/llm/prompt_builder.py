@@ -24,25 +24,24 @@ def dataframe_to_candidate_dicts(df: pd.DataFrame) -> list[dict[str, Any]]:
             locality_str = ""
         else:
             locality_str = str(loc_val).strip()
-        rows.append(
-            {
-                "restaurant_id": str(r["restaurant_id"]),
-                "name": str(r["name"]),
-                "city": str(r.get("city", "")),
-                "locality": locality_str,
-                "cuisines": [str(c) for c in cuisines],
-                "rating": None if rating is None or (isinstance(rating, float) and pd.isna(rating)) else float(rating),
-                "cost_band": None
-                if cost_band is None or (isinstance(cost_band, float) and pd.isna(cost_band))
-                else str(cost_band),
-                "approx_cost_for_two": None
-                if approx is None or (isinstance(approx, float) and pd.isna(approx))
-                else float(approx),
-                "votes": None
-                if votes is None or (isinstance(votes, float) and pd.isna(votes))
-                else int(votes),
-            }
-        )
+        row_dict: dict[str, Any] = {
+            "restaurant_id": str(r["restaurant_id"]),
+            "name": str(r["name"]),
+            "city": str(r.get("city", "")),
+            "locality": locality_str,
+            "cuisines": [str(c) for c in cuisines],
+            "rating": None if rating is None or (isinstance(rating, float) and pd.isna(rating)) else float(rating),
+            "cost_band": None
+            if cost_band is None or (isinstance(cost_band, float) and pd.isna(cost_band))
+            else str(cost_band),
+            "approx_cost_for_two": None
+            if approx is None or (isinstance(approx, float) and pd.isna(approx))
+            else float(approx),
+            "votes": None if votes is None or (isinstance(votes, float) and pd.isna(votes)) else int(votes),
+        }
+        if "location_match_tier" in df.columns:
+            row_dict["location_tier"] = str(r.get("location_match_tier", "primary"))
+        rows.append(row_dict)
     return rows
 
 
@@ -74,14 +73,15 @@ def build_recommendation_prompt(
 {cand_json}
 
 ## Rules
-1. Recommend at most {top_n} restaurants, ordered best-first (rank 1 = best).
-2. Each recommendation object MUST include: restaurant_id, name, cuisine (string), rating (number 0-5), estimated_cost (short human-readable string from cost_band and/or approx_cost_for_two), ai_rationale (non-empty, friendly for diners—no system or debug wording), rank (integer >= 1).
+1. Recommend at most {top_n} restaurants, ordered best-first (rank 1 = best). Strongly prefer candidates whose "location_tier" is "primary" (exact selected area) before any with "nearby".
+2. Each recommendation object MUST include: restaurant_id, name, cuisine (string), rating (number 0-5), estimated_cost (short human-readable string from cost_band and/or approx_cost_for_two), ai_rationale (non-empty, friendly for diners—no system or debug wording), rank (integer >= 1). When the candidate row includes "location_tier", repeat the same value on each recommendation object.
 3. restaurant_id and name MUST match the candidate row exactly.
 4. cuisine should summarize the candidate's cuisines field for display.
 5. estimated_cost should reflect data (e.g. band label and optional INR hint); do not invent prices not supported by the row.
 6. When the candidate has a non-empty "locality" field, include optional key "area" with that locality string for on-screen display.
-7. Output a single JSON object with key "recommendations" (array). You may include optional keys "comparative_summary" (string) and "meta" (object).
-8. Return ONLY the JSON object (no commentary), or wrap it in a ```json code block.
+7. comparative_summary must refer to the user's selected location from preferences (the "location" field). If you include any "nearby" tier picks, say clearly they are just outside that area.
+8. Output a single JSON object with key "recommendations" (array). You may include optional keys "comparative_summary" (string) and "meta" (object).
+9. Return ONLY the JSON object (no commentary), or wrap it in a ```json code block.
 
 If no candidate is suitable, return {{"recommendations": []}}.
 """

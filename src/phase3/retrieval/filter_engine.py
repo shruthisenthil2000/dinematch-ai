@@ -14,7 +14,7 @@ from phase3.retrieval.filtering import (
     cuisine_cell_to_sequence,
     expand_location_needles,
     normalize_location_input,
-    triggers_bengaluru_metro_broaden,
+    triggers_bengaluru_nearby_supplement,
     user_cuisine_tokens,
     validate_canonical_frame,
 )
@@ -52,7 +52,8 @@ def retrieve_candidates(
     Apply structured filters, rank deterministically, return at most ``cap`` rows.
 
     Location uses partial, case-insensitive matching on ``city`` and ``locality`` with
-    Bengaluru alias expansion. If matches are sparse, metro-wide broadening may apply.
+    Bengaluru alias expansion. If matches are sparse, adjacent-area supplement may apply
+    (never whole-metro widening). Rows carry ``location_match_tier`` ``primary`` or ``nearby``.
     If the candidate pool is still below ``PHASE3_TARGET_MIN_CANDIDATES`` (default 3),
     ``min_rating`` is stepped down and then cuisine filters are cleared—without
     changing the original request object passed in by callers.
@@ -66,7 +67,7 @@ def retrieve_candidates(
     target_min = _target_min_candidates()
     relax_rounds = 0
     needles = expand_location_needles(normalize_location_input(str(preferences.get("location", ""))))
-    can_relax = triggers_bengaluru_metro_broaden(needles)
+    can_relax = triggers_bengaluru_nearby_supplement(needles)
     mask, loc_primary = build_retrieval_location_mask(work, prefs_eff, retrieval_meta=retrieval_meta)
     while can_relax and int(mask.sum()) < target_min and relax_rounds < 16:
         changed = False
@@ -91,6 +92,8 @@ def retrieve_candidates(
         retrieval_meta["filters_relaxed"] = True
 
     filtered = work[mask].copy()
+    is_primary = loc_primary.reindex(filtered.index, fill_value=False).astype(bool)
+    filtered["location_match_tier"] = ["primary" if p else "nearby" for p in is_primary]
     if len(filtered) == 0:
         if retrieval_meta is not None:
             note = str(retrieval_meta.get("dining_match_note") or "").strip()

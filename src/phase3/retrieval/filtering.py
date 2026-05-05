@@ -20,9 +20,9 @@ REQUIRED_COLUMNS = frozenset(
     }
 )
 
-# Friendly copy surfaced to clients when metro-wide broadening is applied (no technical jargon).
-DINING_MATCH_EXPANSION_NOTE = (
-    "We expanded the search slightly to find more great matches nearby."
+# Friendly copy when we add venues from adjacent areas (never whole-city metro widening).
+DINING_NEARBY_ALTERNATIVES_NOTE = (
+    "We added nearby alternatives just outside your selected area — see the “Nearby alternatives” section."
 )
 DINING_RELAXED_FILTERS_NOTE = (
     "We broadened things a touch so you still get a strong shortlist of places to try."
@@ -195,7 +195,7 @@ def expand_location_needles(norm: str) -> frozenset[str]:
 
 
 def _bengaluru_broaden_trigger_roots() -> frozenset[str]:
-    """If the query needles intersect this set, metro-wide broadening is allowed when primary is thin."""
+    """If the query needles intersect this set, nearby-cluster supplement is allowed when primary is thin."""
     parts: set[str] = set()
     for g in _alias_groups():
         parts |= set(g)
@@ -218,7 +218,7 @@ def _bengaluru_broaden_trigger_roots() -> frozenset[str]:
     return frozenset(parts)
 
 
-def triggers_bengaluru_metro_broaden(needles: frozenset[str]) -> bool:
+def triggers_bengaluru_nearby_supplement(needles: frozenset[str]) -> bool:
     if not needles:
         return False
     roots = _bengaluru_broaden_trigger_roots()
@@ -231,10 +231,45 @@ def triggers_bengaluru_metro_broaden(needles: frozenset[str]) -> bool:
     return False
 
 
-def metro_bangalore_city_mask(df: pd.DataFrame) -> pd.Series:
-    """Rows whose city reads as Bangalore / Bengaluru (handles minor spelling variants)."""
-    c = df["city"].map(_norm_geo_cell)
-    return c.isin({"bangalore", "bengaluru"}) | c.str.contains("bangalore", regex=False, na=False)
+def _nearby_cluster_union_needles() -> tuple[frozenset[str], ...]:
+    """
+    Bengaluru clusters used only when primary (alias-aware) matches are sparse.
+
+    Each tuple entry is the union of expand_location_needles for a few anchor roots
+    in the same commute band so we never fall back to unrelated parts of the city.
+    """
+    roots_groups: tuple[tuple[str, ...], ...] = (
+        ("marathahalli", "bellandur", "whitefield"),
+        ("koramangala", "indiranagar", "mg road", "hsr layout", "jayanagar"),
+        ("electronic city",),
+    )
+    out: list[frozenset[str]] = []
+    for roots in roots_groups:
+        needles: set[str] = set()
+        for r in roots:
+            needles |= set(expand_location_needles(normalize_location_input(r)))
+        out.append(frozenset(needles))
+    return tuple(out)
+
+
+def nearby_supplement_needles(user_norm: str) -> frozenset[str]:
+    """
+    Extra locality needles for sparse-primary expansion, excluding anything already
+    matched by the user's primary alias set.
+    """
+    primary = set(expand_location_needles(user_norm))
+    extra: set[str] = set()
+    for cluster in _nearby_cluster_union_needles():
+        if primary & cluster:
+            extra |= cluster
+    extra -= primary
+    safe: set[str] = set()
+    for n in extra:
+        if len(n) >= 3:
+            safe.add(n)
+        elif n in {"ec", "hsr"}:
+            safe.add(n)
+    return frozenset(safe)
 
 
 def _norm_geo_cell(value: Any) -> str:
@@ -352,7 +387,7 @@ def preference_filter_mask(df: pd.DataFrame, preferences: Mapping[str, Any]) -> 
     """
     Boolean mask: flexible location + budget + cuisine + rating.
 
-    Does **not** apply metro-wide broadening; use ``retrieve_candidates`` for that.
+    Does **not** apply sparse-area nearby supplement; use ``retrieve_candidates`` for that.
     """
     loc_norm = normalize_location_input(str(preferences["location"]))
     needles = expand_location_needles(loc_norm)
@@ -369,11 +404,13 @@ def build_retrieval_location_mask(
     """
     Return ``(combined_mask, primary_location_mask)``.
 
-    When primary matches are fewer than ``PHASE3_MIN_CANDIDATES_BEFORE_BROADEN`` (default 5)
-    and the query looks like a Bengaluru area, the combined mask widens to all metro
-    Bangalore rows that still satisfy budget / cuisine / rating.
+    When primary (alias-aware) area matches are fewer than
+    ``PHASE3_MIN_CANDIDATES_BEFORE_BROADEN`` (default 3) and the query looks like a
+    Bengaluru neighborhood we recognize, the combined mask may add rows from the same
+    **nearby cluster** only (never all of metro Bangalore).
 
-    ``primary_location_mask`` is True only on rows matched by flexible area needles (used for ranking boost).
+    ``primary_location_mask`` is True only on rows matched by the user's primary needles
+    (used for ranking boost and ``location_match_tier``).
     """
     loc_norm = normalize_location_input(str(preferences["location"]))
     needles = expand_location_needles(loc_norm)
@@ -381,18 +418,22 @@ def build_retrieval_location_mask(
     loc_primary = flexible_location_match_mask(df, needles)
     primary = nl & loc_primary
     min_n = _min_primary_before_broaden()
-    expanded = False
-    if int(primary.sum()) < min_n and triggers_bengaluru_metro_broaden(needles):
-        bluru = metro_bangalore_city_mask(df)
-        combined = nl & (loc_primary | bluru)
-        if int(combined.sum()) > int(primary.sum()):
-            expanded = True
-        mask = combined
+    supplemented = False
+    if int(primary.sum()) < min_n and triggers_bengaluru_nearby_supplement(needles):
+        sup = nearby_supplement_needles(loc_norm)
+        if sup:
+            loc_nearby = flexible_location_match_mask(df, sup)
+            combined = nl & (loc_primary | loc_nearby)
+            if int(combined.sum()) > int(primary.sum()):
+                supplemented = True
+            mask = combined
+        else:
+            mask = primary
     else:
         mask = primary
 
     if retrieval_meta is not None:
-        retrieval_meta["location_search_expanded"] = expanded
-        retrieval_meta["dining_match_note"] = DINING_MATCH_EXPANSION_NOTE if expanded else ""
+        retrieval_meta["location_search_expanded"] = supplemented
+        retrieval_meta["dining_match_note"] = DINING_NEARBY_ALTERNATIVES_NOTE if supplemented else ""
 
     return mask, loc_primary

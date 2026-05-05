@@ -94,7 +94,11 @@ def run_recommendation(
         key = cache_key(preferences, dataset_fp=ds_fp, cap=cap, top_n=top_n, use_llm=use_llm)
         hit = active_cache.get(key)
         if hit is not None:
-            meta = hit.get("meta") or {}
+            meta = dict(hit.get("meta") or {})
+            sel_hit = str(preferences.get("location", "")).strip()
+            if sel_hit:
+                meta["selected_area"] = sel_hit
+            hit_out = {**hit, "meta": meta}
             notes = str(meta.get("notes", "cache_hit"))
             nrec = len(hit.get("recommendations") or [])
             metrics = OrchestrationMetrics(
@@ -107,7 +111,7 @@ def run_recommendation(
                 dataset_fingerprint=ds_fp,
             )
             _observability_log(metrics)
-            return hit, metrics
+            return hit_out, metrics
 
     df = load_canonical_parquet(path)
     retrieval_meta: dict[str, Any] = {}
@@ -131,6 +135,9 @@ def run_recommendation(
     if not isinstance(meta, dict):
         meta = {}
         response["meta"] = meta
+    sel = str(preferences.get("location", "")).strip()
+    if sel:
+        meta["selected_area"] = sel
     note = retrieval_meta.get("dining_match_note") if isinstance(retrieval_meta, dict) else None
     if isinstance(note, str) and note.strip():
         meta["dining_match_note"] = note.strip()

@@ -20,6 +20,21 @@ def _rating_safe_candidate_frame(candidates_df: pd.DataFrame) -> pd.DataFrame:
     return candidates_df[s.notna() & (s > 0.0) & (s <= 5.0)].copy()
 
 
+def _finalize_recommendation_list(recs: list[dict[str, Any]], candidates_df: pd.DataFrame) -> None:
+    """Attach ``location_tier`` from Phase 3 retrieval and order primary matches before nearby."""
+    tier_by_id: dict[str, str] = {}
+    if "location_match_tier" in candidates_df.columns:
+        for _, row in candidates_df.iterrows():
+            tier_by_id[str(row["restaurant_id"])] = str(row["location_match_tier"])
+    tier_order = {"primary": 0, "nearby": 1}
+    for r in recs:
+        tid = str(r.get("restaurant_id", ""))
+        r["location_tier"] = tier_by_id.get(tid, "primary")
+    recs.sort(key=lambda x: (tier_order.get(str(x.get("location_tier")), 0), int(x.get("rank") or 999)))
+    for i, r in enumerate(recs, start=1):
+        r["rank"] = i
+
+
 def _sanitize_recommendations(
     recs: Any,
     *,
@@ -116,6 +131,8 @@ def _fallback_payload(
         if area:
             rec["area"] = area
         recs.append(rec)
+    if recs:
+        _finalize_recommendation_list(recs, candidates_df)
     count = candidate_count if candidate_count is not None else len(candidates_df)
     if not recs:
         return {
@@ -225,6 +242,7 @@ def recommend_with_groq(
                     notes="llm_ratings_failed_validation",
                     candidate_count=len(candidates_df),
                 )
+            _finalize_recommendation_list(sanitized, candidates_df)
             payload["recommendations"] = sanitized
             return payload
 

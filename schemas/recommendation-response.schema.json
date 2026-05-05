@@ -48,6 +48,11 @@
           "area": {
             "type": "string",
             "description": "Neighborhood or locality for display (optional)."
+          },
+          "location_tier": {
+            "type": "string",
+            "enum": ["primary", "nearby"],
+            "description": "Whether the venue sits in the user's selected area (primary) or was included as an adjacent-area supplement (nearby)."
           }
         },
         "required": [

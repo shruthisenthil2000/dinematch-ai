@@ -23,6 +23,8 @@ export type Recommendation = {
   rank: number;
   /** Neighborhood / locality for display when provided by the service */
   area?: string;
+  /** From retrieval: exact selected area vs adjacent-cluster supplement */
+  location_tier?: "primary" | "nearby";
 };
 
 export type RecommendResponse = {

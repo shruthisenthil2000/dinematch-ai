@@ -30,12 +30,20 @@ function rankBadge(rank: number): string {
 }
 
 function RecommendationCard({ rec }: { rec: Recommendation }) {
+  const isNearby = rec.location_tier === "nearby";
   return (
     <article className="group glass-card relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#E23744]/10">
       <div className="flex flex-col gap-3 p-4 sm:gap-3.5 sm:p-5">
         <header className="flex items-center justify-between gap-3">
-          <span className="rounded-full bg-[#E23744] px-2.5 py-1 text-[11px] font-bold leading-none text-white shadow-lg shadow-black/30 ai-glow sm:px-3 sm:text-xs">
-            {rankBadge(rec.rank)}
+          <span className="flex flex-wrap items-center gap-1.5">
+            <span className="rounded-full bg-[#E23744] px-2.5 py-1 text-[11px] font-bold leading-none text-white shadow-lg shadow-black/30 ai-glow sm:px-3 sm:text-xs">
+              {rankBadge(rec.rank)}
+            </span>
+            {isNearby ? (
+              <span className="rounded-full border border-amber-500/35 bg-amber-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-100/95 sm:text-[11px]">
+                Nearby
+              </span>
+            ) : null}
           </span>
           <div
             className="flex shrink-0 items-center gap-0.5 text-[#ffb3b1]"
@@ -153,7 +161,18 @@ export function RecommendationsPageClient() {
     typeof stored?.response?.response?.meta?.dining_match_note === "string"
       ? stored.response.response.meta.dining_match_note.trim()
       : "";
-  const candidateLine = matchHint || "Personalized dining matches from your latest search.";
+  const meta = stored?.response?.response?.meta;
+  const selectedArea =
+    (typeof meta?.selected_area === "string" && meta.selected_area.trim()) ||
+    stored.request.preferences.location.trim() ||
+    "your area";
+  const primaryRecs = recs.filter((r) => r.location_tier !== "nearby");
+  const nearbyRecs = recs.filter((r) => r.location_tier === "nearby");
+  const hasOnlyNearby = nearbyRecs.length > 0 && primaryRecs.length === 0;
+  const primaryHeadline = hasOnlyNearby
+    ? `No strict matches in ${selectedArea} — see nearby alternatives below.`
+    : `Top matches in ${selectedArea}`;
+  const candidateLine = [primaryHeadline, matchHint || null].filter(Boolean).join(" · ");
 
   if (!hydrated) {
     return (
@@ -270,11 +289,34 @@ export function RecommendationsPageClient() {
           </div>
         )}
 
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-5 sm:gap-6 md:max-w-5xl md:grid-cols-2 md:gap-6 lg:max-w-6xl lg:grid-cols-3">
-          {recs.map((rec) => (
-            <RecommendationCard key={`${rec.rank}-${rec.restaurant_id}`} rec={rec} />
-          ))}
-        </div>
+        {primaryRecs.length > 0 && (
+          <div className="mx-auto mb-8 max-w-4xl md:max-w-5xl lg:max-w-6xl">
+            <h2 className="mb-4 text-center text-xs font-bold uppercase tracking-wider text-zinc-500">
+              In {selectedArea}
+            </h2>
+            <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+              {primaryRecs.map((rec) => (
+                <RecommendationCard key={`${rec.rank}-${rec.restaurant_id}`} rec={rec} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {nearbyRecs.length > 0 && (
+          <div className="mx-auto max-w-4xl md:max-w-5xl lg:max-w-6xl">
+            <h2 className="mb-2 text-center text-sm font-bold uppercase tracking-wider text-amber-200/90">
+              Nearby alternatives
+            </h2>
+            <p className="mb-4 text-center text-xs leading-relaxed text-zinc-500">
+              Just outside {selectedArea} — same filters, shown because picks in your area were limited.
+            </p>
+            <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+              {nearbyRecs.map((rec) => (
+                <RecommendationCard key={`${rec.rank}-${rec.restaurant_id}`} rec={rec} />
+              ))}
+            </div>
+          </div>
+        )}
       </main>
     </SiteChrome>
   );

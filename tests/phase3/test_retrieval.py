@@ -85,7 +85,7 @@ def test_city_case_insensitive():
 
 def test_location_matches_locality_when_city_differs(monkeypatch):
     """User may enter an area (locality) while canonical city is wider (e.g. Bangalore / Bellandur)."""
-    # Disable metro broadening so we only assert area-level matching for Bellandur.
+    # Set a high enough floor so sparse-area supplement does not run for this small frame.
     monkeypatch.setenv("PHASE3_MIN_CANDIDATES_BEFORE_BROADEN", "1")
     df = pd.DataFrame(
         [
@@ -393,7 +393,7 @@ def test_electronics_city_typo_matches_electronic_city_locality():
     assert out.iloc[0]["restaurant_id"] == "ec1"
 
 
-def test_metro_broadening_adds_candidates_when_area_sparse(monkeypatch):
+def test_nearby_cluster_supplement_adds_candidates_when_area_sparse(monkeypatch):
     monkeypatch.setenv("PHASE3_MIN_CANDIDATES_BEFORE_BROADEN", "3")
     rows = [
         {
@@ -434,7 +434,81 @@ def test_metro_broadening_adds_candidates_when_area_sparse(monkeypatch):
     )
     assert len(out) >= 4
     assert meta.get("location_search_expanded") is True
-    assert "nearby" in (meta.get("dining_match_note") or "").lower()
+    assert "nearby alternatives" in (meta.get("dining_match_note") or "").lower()
+    assert out.iloc[0]["locality"] == "Bellandur"
+    assert out.iloc[0]["location_match_tier"] == "primary"
+    assert (out["location_match_tier"] == "nearby").any()
+
+
+def test_marathahalli_sparse_does_not_pull_koramangala(monkeypatch):
+    """Koramangala is not in the east-ring cluster used to supplement Marathahalli."""
+    monkeypatch.setenv("PHASE3_MIN_CANDIDATES_BEFORE_BROADEN", "3")
+    rows = []
+    for i in range(5):
+        rows.append(
+            {
+                **_minimal_row(
+                    restaurant_id=f"k{i}",
+                    name=f"K{i}",
+                    city="Bangalore",
+                    cuisines=["italian"],
+                    rating=4.5,
+                    votes=20,
+                    cost_band="medium",
+                ),
+                "locality": "Koramangala",
+            }
+        )
+    df = pd.DataFrame(rows)
+    out = retrieve_candidates(
+        df,
+        _prefs(location="Marathahalli", budget="medium", cuisines=["Italian"], min_rating=0.0),
+        cap=25,
+    )
+    assert len(out) == 0
+
+
+def test_primary_area_only_when_enough_matches(monkeypatch):
+    monkeypatch.setenv("PHASE3_MIN_CANDIDATES_BEFORE_BROADEN", "3")
+    rows = []
+    for i in range(4):
+        rows.append(
+            {
+                **_minimal_row(
+                    restaurant_id=f"m{i}",
+                    name=f"M{i}",
+                    city="Bangalore",
+                    cuisines=["italian"],
+                    rating=4.0 + i * 0.1,
+                    votes=10 + i,
+                    cost_band="medium",
+                ),
+                "locality": "Marathahalli",
+            }
+        )
+    rows.append(
+        {
+            **_minimal_row(
+                restaurant_id="b1",
+                name="Bellandur Spot",
+                city="Bangalore",
+                cuisines=["italian"],
+                rating=5.0,
+                votes=99,
+                cost_band="medium",
+            ),
+            "locality": "Bellandur",
+        },
+    )
+    df = pd.DataFrame(rows)
+    out = retrieve_candidates(
+        df,
+        _prefs(location="Marathahalli", budget="medium", cuisines=["Italian"], min_rating=0.0),
+        cap=25,
+    )
+    assert len(out) == 4
+    assert set(out["locality"].unique()) == {"Marathahalli"}
+    assert (out["location_match_tier"] == "primary").all()
 
 
 def test_parquet_round_trip(tmp_path):
