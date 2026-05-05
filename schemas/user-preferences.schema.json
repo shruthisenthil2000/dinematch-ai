@@ -29,7 +29,7 @@
       "type": "number",
       "minimum": 0,
       "maximum": 5,
-      "description": "Minimum acceptable rating; inclusive lower bound (>=). Use 0 for no minimum if the product allows."
+      "description": "Minimum acceptable rating; inclusive lower bound (>=) on numeric ratings. Matches the Phase 3 / Next.js range (0–5). Use 0 to impose no minimum among venues that already have a real rating; rows with missing, null, or zero ratings are excluded in retrieval before this filter is applied."
     },
     "optional_constraints": {
       "type": "string",

@@ -141,6 +141,75 @@ def test_falls_back_after_exhausted_retries():
     assert out["recommendations"][0]["restaurant_id"] == "r1"
 
 
+def test_llm_zero_rating_dropped_then_deterministic_fallback():
+    bad_rating = {
+        "recommendations": [
+            {
+                "restaurant_id": "r1",
+                "name": "One",
+                "cuisine": "italian",
+                "rating": 0,
+                "estimated_cost": "medium",
+                "ai_rationale": "x",
+                "rank": 1,
+            }
+        ],
+        "meta": {"notes": "from_model"},
+    }
+    client = ScriptedGroq([json.dumps(bad_rating)])
+    out = recommend_with_groq(
+        _prefs(),
+        _df(),
+        top_n=2,
+        client=client,
+        use_llm=True,
+        max_parse_retries=0,
+    )
+    get_response_validator().validate(out)
+    assert out["meta"]["notes"] == "llm_ratings_failed_validation"
+    assert out["recommendations"][0]["restaurant_id"] == "r1"
+    assert out["recommendations"][0]["rating"] == 4.5
+
+
+def test_llm_below_min_rating_dropped_and_reranked():
+    prefs = {"location": "Pune", "budget": "medium", "cuisines": [], "min_rating": 4.3}
+    payload = {
+        "recommendations": [
+            {
+                "restaurant_id": "r2",
+                "name": "Two",
+                "cuisine": "chinese",
+                "rating": 4.0,
+                "estimated_cost": "medium",
+                "ai_rationale": "low",
+                "rank": 1,
+            },
+            {
+                "restaurant_id": "r1",
+                "name": "One",
+                "cuisine": "italian",
+                "rating": 4.5,
+                "estimated_cost": "medium",
+                "ai_rationale": "high",
+                "rank": 2,
+            },
+        ],
+        "meta": {"notes": "from_model"},
+    }
+    client = ScriptedGroq([json.dumps(payload)])
+    out = recommend_with_groq(
+        prefs,
+        _df(),
+        top_n=5,
+        client=client,
+        use_llm=True,
+        max_parse_retries=0,
+    )
+    assert len(out["recommendations"]) == 1
+    assert out["recommendations"][0]["restaurant_id"] == "r1"
+    assert out["recommendations"][0]["rank"] == 1
+
+
 def test_missing_restaurant_id_column_raises():
     bad = pd.DataFrame([{"name": "x"}])
     with pytest.raises(ValueError, match="restaurant_id"):

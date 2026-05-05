@@ -214,7 +214,7 @@ def test_min_rating_excludes_null_and_low():
     assert list(out["restaurant_id"]) == ["3"]
 
 
-def test_min_rating_zero_includes_null_rating():
+def test_min_rating_zero_excludes_null_rating():
     df = pd.DataFrame(
         [
             _minimal_row(
@@ -228,8 +228,37 @@ def test_min_rating_zero_includes_null_rating():
             ),
         ]
     )
+    meta: dict = {}
+    out = retrieve_candidates(df, _prefs(budget="low", min_rating=0.0), cap=10, retrieval_meta=meta)
+    assert len(out) == 0
+    assert "rating" in meta.get("dining_match_note", "").lower()
+
+
+def test_min_rating_zero_excludes_numeric_zero_rating():
+    df = pd.DataFrame(
+        [
+            _minimal_row(
+                restaurant_id="1",
+                name="A",
+                city="Pune",
+                cuisines=[],
+                rating=0.0,
+                votes=1,
+                cost_band="low",
+            ),
+            _minimal_row(
+                restaurant_id="2",
+                name="B",
+                city="Pune",
+                cuisines=[],
+                rating=4.2,
+                votes=2,
+                cost_band="low",
+            ),
+        ]
+    )
     out = retrieve_candidates(df, _prefs(budget="low", min_rating=0.0), cap=10)
-    assert len(out) == 1
+    assert list(out["restaurant_id"]) == ["2"]
 
 
 def test_deterministic_order_same_inputs():

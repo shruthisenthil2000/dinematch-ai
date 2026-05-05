@@ -9,6 +9,7 @@ import pandas as pd
 
 from phase3.retrieval.filtering import (
     DINING_RELAXED_FILTERS_NOTE,
+    EMPTY_SHORTLIST_AFTER_FILTERING_NOTE,
     build_retrieval_location_mask,
     cuisine_cell_to_sequence,
     expand_location_needles,
@@ -91,6 +92,11 @@ def retrieve_candidates(
 
     filtered = work[mask].copy()
     if len(filtered) == 0:
+        if retrieval_meta is not None:
+            note = str(retrieval_meta.get("dining_match_note") or "").strip()
+            retrieval_meta["dining_match_note"] = (
+                f"{note} {EMPTY_SHORTLIST_AFTER_FILTERING_NOTE}".strip() if note else EMPTY_SHORTLIST_AFTER_FILTERING_NOTE
+            )
         return apply_candidate_cap(filtered, cap)
 
     user_tokens = user_cuisine_tokens(preferences)

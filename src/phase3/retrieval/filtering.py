@@ -28,6 +28,12 @@ DINING_RELAXED_FILTERS_NOTE = (
     "We broadened things a touch so you still get a strong shortlist of places to try."
 )
 
+# Shown when filters leave no rows (including all-null / zero ratings removed before ranking).
+EMPTY_SHORTLIST_AFTER_FILTERING_NOTE = (
+    "No restaurants with a dependable rating matched these filters. "
+    "Try a wider area, a lower minimum rating, fewer cuisines, or a different budget."
+)
+
 # When primary (area-flex) matches fall below this count, eligible Bengaluru queries widen to metro city.
 _DEFAULT_MIN_PRIMARY = 3
 
@@ -308,19 +314,37 @@ def cuisine_overlap_mask(series: pd.Series, user_tokens: set[str]) -> pd.Series:
     return series.map(hit)
 
 
+def numeric_rating_series(df: pd.DataFrame) -> pd.Series:
+    """Coerce ``rating`` to float; invalid cells become NaN (matches ``pd.to_numeric(..., errors='coerce')``)."""
+    return pd.to_numeric(df["rating"], errors="coerce")
+
+
+def valid_service_rating_mask(df: pd.DataFrame) -> pd.Series:
+    """
+    Rows usable for recommendations: finite rating strictly between 0 and 5 (inclusive upper bound).
+
+    Excludes null, NaN, non-numeric, zero, and out-of-range values so they never enter ranking or Phase 4.
+    """
+    s = numeric_rating_series(df)
+    return s.notna() & (s > 0.0) & (s <= 5.0)
+
+
 def non_location_preference_mask(df: pd.DataFrame, preferences: Mapping[str, Any]) -> pd.Series:
-    """Budget, cuisines, min_rating — same semantics as before."""
+    """Budget, cuisines, and rating: requires a real rating (>0, ≤5) and ``rating >= min_rating`` (inclusive).
+
+    Matches the Next.js home screen: ``min_rating`` is 0–5 from a range input; 0 means no minimum *among
+    rated venues*, but rows without a positive rating are still excluded.
+    """
     budget = str(preferences["budget"]).strip().casefold()
     band_ok = df["cost_band"].notna() & (
         df["cost_band"].astype(str).str.strip().str.casefold() == budget
     )
     user_tokens = user_cuisine_tokens(preferences)
     cuisine_ok = cuisine_overlap_mask(df["cuisines"], user_tokens)
+    s = numeric_rating_series(df)
     min_rating = float(preferences["min_rating"])
-    if min_rating <= 0:
-        rating_ok = pd.Series(True, index=df.index)
-    else:
-        rating_ok = df["rating"].notna() & (df["rating"].astype(float) >= min_rating)
+    min_rating = max(0.0, min(5.0, min_rating))
+    rating_ok = valid_service_rating_mask(df) & (s >= min_rating)
     return band_ok & cuisine_ok & rating_ok
 
 

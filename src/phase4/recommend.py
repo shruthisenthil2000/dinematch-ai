@@ -14,6 +14,44 @@ from phase4.llm.response_parse import get_response_validator, parse_and_validate
 logger = logging.getLogger(__name__)
 
 
+def _rating_safe_candidate_frame(candidates_df: pd.DataFrame) -> pd.DataFrame:
+    """Drop rows without a usable numeric rating in (0, 5] before deterministic fallback."""
+    s = pd.to_numeric(candidates_df["rating"], errors="coerce")
+    return candidates_df[s.notna() & (s > 0.0) & (s <= 5.0)].copy()
+
+
+def _sanitize_recommendations(
+    recs: Any,
+    *,
+    preferences: Mapping[str, Any],
+    allowed_ids: Set[str],
+) -> list[dict[str, Any]]:
+    """Keep only in-shortlist rows with finite rating in (0, 5] and ``rating >= min_rating`` (matches Phase 3 / UI)."""
+    if not isinstance(recs, list):
+        return []
+    min_rating = max(0.0, min(5.0, float(preferences.get("min_rating") or 0.0)))
+    kept: list[dict[str, Any]] = []
+    for item in recs:
+        if not isinstance(item, dict):
+            continue
+        rid = item.get("restaurant_id")
+        if rid is None or str(rid) not in allowed_ids:
+            continue
+        raw = item.get("rating")
+        if raw is None or (isinstance(raw, float) and pd.isna(raw)):
+            continue
+        try:
+            rv = float(raw)
+        except (TypeError, ValueError):
+            continue
+        if not (rv > 0.0 and rv <= 5.0 and rv >= min_rating):
+            continue
+        kept.append(dict(item))
+    for i, row in enumerate(kept, start=1):
+        row["rank"] = i
+    return kept
+
+
 def _allowed_ids_from_frame(df: pd.DataFrame) -> Set[str]:
     return {str(x) for x in df["restaurant_id"].tolist()}
 
@@ -37,10 +75,11 @@ def _fallback_payload(
     candidate_count: Optional[int] = None,
 ) -> dict[str, Any]:
     """Deterministic schema-valid response when LLM is skipped or unusable."""
-    n = max(0, min(int(top_n), len(candidates_df)))
+    safe_df = _rating_safe_candidate_frame(candidates_df)
+    n = max(0, min(int(top_n), len(safe_df)))
     recs: list[dict[str, Any]] = []
     for i in range(n):
-        row = candidates_df.iloc[i]
+        row = safe_df.iloc[i]
         rating = row.get("rating")
         r_val = 0.0
         if rating is not None and not (isinstance(rating, float) and pd.isna(rating)):
@@ -78,6 +117,14 @@ def _fallback_payload(
             rec["area"] = area
         recs.append(rec)
     count = candidate_count if candidate_count is not None else len(candidates_df)
+    if not recs:
+        return {
+            "recommendations": [],
+            "meta": {
+                "candidate_count": count,
+                "notes": notes,
+            },
+        }
     return {
         "recommendations": recs,
         "meta": {
@@ -168,6 +215,17 @@ def recommend_with_groq(
             meta = payload["meta"]
             meta.setdefault("candidate_count", len(candidates_df))
             meta.setdefault("notes", "groq_ok")
+            raw_recs = payload.get("recommendations")
+            sanitized = _sanitize_recommendations(raw_recs, preferences=preferences, allowed_ids=allowed)
+            if not sanitized and len(candidates_df) > 0:
+                logger.warning("LLM payload had no rating-safe recommendations; using deterministic fallback")
+                return _fallback_payload(
+                    candidates_df,
+                    top_n=top_n,
+                    notes="llm_ratings_failed_validation",
+                    candidate_count=len(candidates_df),
+                )
+            payload["recommendations"] = sanitized
             return payload
 
         last_err = err
