@@ -133,7 +133,7 @@ export function HomePageClient() {
               <br />
               <span className="text-[#ffb3b1]">with AI precision</span>
             </h1>
-            <p className="mx-auto mb-6 max-w-xl text-sm leading-relaxed text-zinc-700/95 dark:text-zinc-300/95 sm:mb-7 sm:text-base md:mb-8 md:text-[1.0625rem] md:leading-relaxed">
+            <p className="themed-text-secondary mx-auto mb-6 max-w-xl text-sm leading-relaxed sm:mb-7 sm:text-base md:mb-8 md:text-[1.0625rem] md:leading-relaxed">
               Tell us where, your budget, and what you crave — we match you to places worth the reservation.
             </p>
           </div>
@@ -163,8 +163,8 @@ export function HomePageClient() {
                 <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black/[0.05] ring-1 ring-black/[0.08] dark:bg-white/[0.05] dark:ring-white/[0.08]" aria-hidden>
                   <span className="material-symbols-outlined text-sm text-[#E23744]">edit_note</span>
                 </span>
-                <label htmlFor="optional-constraints" className="text-[12px] font-medium text-zinc-600 dark:text-zinc-400">
-                  Notes <span className="font-normal text-zinc-500 dark:text-zinc-600">· optional</span>
+                <label htmlFor="optional-constraints" className="themed-text-label text-[12px] font-medium">
+                  Notes <span className="themed-text-muted font-normal">· optional</span>
                 </label>
               </div>
               <input
@@ -172,7 +172,7 @@ export function HomePageClient() {
                 type="text"
                 autoComplete="off"
                 aria-describedby="optional-constraints-desc"
-                className="h-11 w-full rounded-xl border themed-border bg-black/[0.03] px-3.5 py-2.5 text-sm themed-text shadow-inner placeholder:text-zinc-500 focus:border-[#E23744]/45 focus:outline-none focus:ring-2 focus:ring-[#E23744]/22 dark:bg-white/[0.04] sm:h-12 sm:px-4 sm:text-base"
+                className="themed-text-placeholder h-11 w-full rounded-xl border themed-border bg-black/[0.03] px-3.5 py-2.5 text-sm themed-text shadow-inner focus:border-[#E23744]/45 focus:outline-none focus:ring-2 focus:ring-[#E23744]/22 dark:bg-white/[0.04] sm:h-12 sm:px-4 sm:text-base"
                 placeholder={DINING_NOTES_PLACEHOLDER}
                 value={optionalConstraints}
                 onChange={(e) => setOptionalConstraints(e.target.value)}
@@ -203,7 +203,7 @@ export function HomePageClient() {
                     <span className="material-symbols-outlined text-[22px]">expand_more</span>
                   </span>
                 </div>
-                <p className="mt-2 text-[10px] text-zinc-500 dark:text-zinc-500">Pick where you’d like to dine in Bengaluru.</p>
+                <p className="themed-text-muted mt-2 text-[10px]">Pick where you’d like to dine in Bengaluru.</p>
               </div>
 
               <div className="group rounded-xl border themed-border bg-black/[0.02] p-3.5 transition-colors hover:border-zinc-400/50 dark:bg-white/[0.03] dark:hover:border-white/10 sm:p-4">
@@ -225,11 +225,11 @@ export function HomePageClient() {
                       aria-pressed={budget === b.value}
                     >
                       <span className="text-xs font-bold themed-text sm:text-sm">{b.title}</span>
-                      <span className="text-[10px] font-medium text-zinc-600 dark:text-zinc-400 sm:text-[11px]">{b.range}</span>
+                      <span className="themed-text-muted text-[10px] font-medium sm:text-[11px]">{b.range}</span>
                     </button>
                   ))}
                 </div>
-                <p className="mt-2 text-[10px] text-zinc-500">
+                <p className="themed-text-muted mt-2 text-[10px]">
                   Approximate meal spend for two (drinks and taxes extra).
                 </p>
               </div>
@@ -279,7 +279,7 @@ export function HomePageClient() {
                   onChange={(e) => setCuisines(e.target.value)}
                   aria-label="Cuisines, comma separated"
                 />
-                <p className="mt-2 text-[10px] text-zinc-500">Comma-separated list; empty means any cuisine.</p>
+                <p className="themed-text-muted mt-2 text-[10px]">Comma-separated list; empty means any cuisine.</p>
               </div>
 
               <div className="group flex flex-col justify-between rounded-xl border themed-border bg-black/[0.02] p-3.5 transition-colors hover:border-zinc-400/50 dark:bg-white/[0.03] dark:hover:border-white/10 sm:p-4">
@@ -299,7 +299,7 @@ export function HomePageClient() {
 
             {showAdvanced && (
               <div className="mb-5 grid grid-cols-1 gap-3 border-t themed-border pt-4 sm:grid-cols-3 sm:pt-4">
-                <label className="text-xs text-zinc-600 dark:text-zinc-400">
+                <label className="themed-text-label text-xs">
                   How many places to consider
                   <input
                     type="number"
@@ -310,7 +310,7 @@ export function HomePageClient() {
                     className="mt-1 w-full rounded-lg border themed-border bg-black/5 px-3 py-2 text-sm themed-text dark:bg-white/5"
                   />
                 </label>
-                <label className="text-xs text-zinc-600 dark:text-zinc-400">
+                <label className="themed-text-label text-xs">
                   How many picks to show
                   <input
                     type="number"
@@ -321,7 +321,7 @@ export function HomePageClient() {
                     className="mt-1 w-full rounded-lg border themed-border bg-black/5 px-3 py-2 text-sm themed-text dark:bg-white/5"
                   />
                 </label>
-                <label className="flex cursor-pointer items-center gap-2 pt-4 text-sm text-zinc-700 dark:text-zinc-300 sm:pt-4">
+                <label className="themed-text-secondary flex cursor-pointer items-center gap-2 pt-4 text-sm sm:pt-4">
                   <input
                     type="checkbox"
                     checked={useLlm}
