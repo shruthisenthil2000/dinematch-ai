@@ -22,8 +22,15 @@ export async function POST(req: NextRequest) {
     const payload = await r.json().catch(() => ({ error: "invalid_backend_json" }));
     return NextResponse.json(payload, { status: r.status });
   } catch (err) {
+    console.error("PHASE5 FETCH ERROR:", err);
+
     return NextResponse.json(
-      { error: "phase5_unreachable", detail: err instanceof Error ? err.message : String(err) },
+      {
+        error: "phase5_unreachable",
+        detail: err instanceof Error
+          ? `${err.name}: ${err.message}`
+          : String(err),
+      },
       { status: 503 }
     );
   }
